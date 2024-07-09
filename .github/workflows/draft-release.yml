@@ -23,6 +23,7 @@ jobs:
         with:
           node-version: "20.x"
       - name: Build and Bundle
+        working-directory: ./packages/stencil-library
         id: build-and-bundle
         run: |
           npm install
