@@ -1,5 +1,5 @@
 {
-  "name": "root",
+  "name": "stencil-react-export",
   "workspaces": [
     "packages/*"
   ],
