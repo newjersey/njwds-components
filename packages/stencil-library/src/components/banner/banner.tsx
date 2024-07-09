@@ -3,6 +3,7 @@ import { Component, getAssetPath, h } from '@stencil/core';
 @Component({
     tag: 'njwds-banner',
     styleUrl: "../../../../njwds/css/styles.css",
+    assetsDirs: ['../../../njwds/img']
 })
 export class Banner {
 
