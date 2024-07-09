@@ -8,11 +8,8 @@ import { Component, getAssetPath, h } from '@stencil/core';
 export class Banner {
 
     render() {
-        // const spriteSrc = getAssetPath("./assets/sprite.svg");
-        // const sealSrc = getAssetPath("./assets/nj_state_seal.png");
-
-        const spriteSrc = "../assets/sprite.svg";
-        const sealSrc = "../assets/nj_state_seal.png";
+        const spriteSrc = getAssetPath("./assets/sprite.svg");
+        const sealSrc = getAssetPath("./assets/nj_state_seal.png");
 
         console.log({ spriteSrc })
 
