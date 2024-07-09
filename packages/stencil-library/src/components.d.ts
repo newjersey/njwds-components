@@ -20,6 +20,8 @@ export namespace Components {
          */
         "middle": string;
     }
+    interface NjwdsBanner {
+    }
 }
 declare global {
     interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
@@ -28,8 +30,15 @@ declare global {
         prototype: HTMLMyComponentElement;
         new (): HTMLMyComponentElement;
     };
+    interface HTMLNjwdsBannerElement extends Components.NjwdsBanner, HTMLStencilElement {
+    }
+    var HTMLNjwdsBannerElement: {
+        prototype: HTMLNjwdsBannerElement;
+        new (): HTMLNjwdsBannerElement;
+    };
     interface HTMLElementTagNameMap {
         "my-component": HTMLMyComponentElement;
+        "njwds-banner": HTMLNjwdsBannerElement;
     }
 }
 declare namespace LocalJSX {
@@ -47,8 +56,11 @@ declare namespace LocalJSX {
          */
         "middle"?: string;
     }
+    interface NjwdsBanner {
+    }
     interface IntrinsicElements {
         "my-component": MyComponent;
+        "njwds-banner": NjwdsBanner;
     }
 }
 export { LocalJSX as JSX };
@@ -56,6 +68,7 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
+            "njwds-banner": LocalJSX.NjwdsBanner & JSXBase.HTMLAttributes<HTMLNjwdsBannerElement>;
         }
     }
 }
