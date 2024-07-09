@@ -1,5 +1,5 @@
 {
-  "name": "stencil-react-export",
+  "name": "@newjersey/stencil-react-export",
   "workspaces": [
     "packages/*"
   ],
