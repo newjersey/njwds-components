@@ -16,13 +16,6 @@ export const config: Config = {
       type: 'dist-custom-elements',
       customElementsExportBehavior: 'auto-define-custom-elements',
       externalRuntime: false,
-      copy: [
-        {
-          src: '../../njwds/img/',
-          dest: 'dist/stencil-library/assets',
-          warn: true,
-        },
-      ],
     },
     {
       type: 'docs-readme',
