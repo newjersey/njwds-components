@@ -1,10 +1,6 @@
 {
   "name": "stencil-react-export-react-library",
   "version": "0.0.0",
-  "description": "> TODO: description",
-  "author": "elizabeth zhang <elizabeth.zhangey@gmail.com>",
-  "homepage": "",
-  "license": "ISC",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "dist/types/index.d.ts",
@@ -19,12 +15,5 @@
     "test": "node ./__tests__/react-library.test.js",
     "build": "npm run tsc",
     "tsc": "tsc -p . --outDir ./dist"
-  },
-  "publishConfig": {
-    "access": "public"
-  }, 
-  "dependencies": {
-    "stencil-library": "*",
-    "react-library": "*"
   }
 }
