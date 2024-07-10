@@ -8,11 +8,11 @@
   "collection": "packages/stencil-library/dist/collection/collection-manifest.json",
   "collection:main": "packages/stencil-library/dist/collection/index.js",
   "main": "packages/stencil-library/dist/index.cjs.js",
-  "unpkg": "packages/stencil-library/dist/njwds-stencil-components/njwds-stencil-components.esm.js",
+  "unpkg": "packages/stencil-library/dist/stencil-library/stencil-library.esm.js",
   "exports": {
     ".": {
       "import": "./packages/stencil-library/dist/stencil-library/stencil-library.esm.js",
-      "require": "./packages/stencil-library/dist/stencil-library/njwds-stencil-components.cjs.js"
+      "require": "./packages/stencil-library/dist/stencil-library/stencil-library.cjs.js"
     },
     "./my-component": {
       "import": "./packages/stencil-library/dist/components/my-component.js",
