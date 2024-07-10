@@ -23,6 +23,10 @@
     "type": "git",
     "url": "https://github.com/newjersey/stencil-react-export.git"
   },
+  "files": [
+    "packages/stencil-library/dist/**",
+    "packages/stencil-library/loader/**"
+  ],
   "devDependencies": {
     "@types/node": "^20.14.10",
     "@types/react": "^18.3.3",
