@@ -3,22 +3,9 @@
   "workspaces": [
     "packages/*"
   ],
-  "module": "packages/stencil-library/dist/index.js",
-  "types": "packages/stencil-library/dist/types/index.d.ts",
-  "collection": "packages/stencil-library/dist/collection/collection-manifest.json",
-  "collection:main": "packages/stencil-library/dist/collection/index.js",
-  "main": "packages/stencil-library/dist/index.cjs.js",
-  "unpkg": "packages/stencil-library/dist/stencil-library/stencil-library.esm.js",
-  "exports": {
-    ".": {
-      "import": "./packages/stencil-library/dist/stencil-library/stencil-library.esm.js",
-      "require": "./packages/stencil-library/dist/stencil-library/stencil-library.cjs.js"
-    },
-    "./my-component": {
-      "import": "./packages/stencil-library/dist/components/my-component.js",
-      "types": "./packages/stencil-library/dist/components/my-component.d.ts"
-    }
-  },
+  "module": "packages/react-library/dist/index.js",
+  "types": "packages/react-library/dist/types/index.d.ts",
+  "main": "packages/react-library/dist/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/newjersey/stencil-react-export.git"
