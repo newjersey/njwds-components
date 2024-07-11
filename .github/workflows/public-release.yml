@@ -10,6 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Setup npm to publish to npmjs
+        working-directory: ./packages/stencil-library
         uses: actions/setup-node@v3
         with:
           node-version: "20.x"
