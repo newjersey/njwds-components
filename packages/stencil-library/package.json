@@ -1,6 +1,6 @@
 {
   "name": "@newjersey/stencil-react-export",
-  "version": "0.0.1",
+  "version": "0.0.16",
   "main": "dist/index.cjs.js",
   "module": "dist/index.js",
   "types": "dist/types/index.d.ts",

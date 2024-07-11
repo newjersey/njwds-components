@@ -17,9 +17,9 @@ jobs:
           registry-url: "https://registry.npmjs.org"
 
       - run: npm ci
-        working-directory: ./packages/stencil-library
+        working-directory: ./packages/react-library
 
       - run: npm publish --access public
-        working-directory: ./packages/stencil-library
+        working-directory: ./packages/react-library
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
