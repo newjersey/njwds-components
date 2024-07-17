@@ -7,6 +7,12 @@ export const config: Config = {
     {
       type: 'dist',
       esmLoaderPath: '../loader',
+      copy: [
+        { src: '../njwds/img', dest: 'img' },
+        { src: '../njwds/fonts', dest: 'fonts' },
+        { src: '../njwds/js', dest: 'js' },
+        { src: '../njwds/css', dest: 'css' },
+      ],
     },
     reactOutputTarget({
       componentCorePackage: 'stencil-library',
@@ -23,9 +29,16 @@ export const config: Config = {
     {
       type: 'www',
       serviceWorker: null, // disable service workers
+      copy: [
+        { src: '../njwds/img', dest: 'build/img' },
+        { src: '../njwds/fonts', dest: 'build/fonts' },
+        { src: '../njwds/js', dest: 'build/js' },
+        { src: '../njwds/css', dest: 'build/css' },
+      ],
     },
   ],
   testing: {
     browserHeadless: 'new',
   },
+  enableCache: false,
 };

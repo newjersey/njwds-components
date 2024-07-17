@@ -5,6 +5,8 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "./stencil-public-runtime";
+import { ButtonVariant } from "./components/button/button";
+export { ButtonVariant } from "./components/button/button";
 export namespace Components {
     interface MyComponent {
         /**
@@ -20,6 +22,16 @@ export namespace Components {
          */
         "middle": string;
     }
+    interface NjwdsAlert {
+        "headerText"?: string;
+        "isSlim": boolean;
+        "type": "default" | "info" | "warning" | "error" | "emergency";
+    }
+    interface NjwdsBanner {
+    }
+    interface NjwdsButton {
+        "variant": ButtonVariant;
+    }
 }
 declare global {
     interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
@@ -28,8 +40,29 @@ declare global {
         prototype: HTMLMyComponentElement;
         new (): HTMLMyComponentElement;
     };
+    interface HTMLNjwdsAlertElement extends Components.NjwdsAlert, HTMLStencilElement {
+    }
+    var HTMLNjwdsAlertElement: {
+        prototype: HTMLNjwdsAlertElement;
+        new (): HTMLNjwdsAlertElement;
+    };
+    interface HTMLNjwdsBannerElement extends Components.NjwdsBanner, HTMLStencilElement {
+    }
+    var HTMLNjwdsBannerElement: {
+        prototype: HTMLNjwdsBannerElement;
+        new (): HTMLNjwdsBannerElement;
+    };
+    interface HTMLNjwdsButtonElement extends Components.NjwdsButton, HTMLStencilElement {
+    }
+    var HTMLNjwdsButtonElement: {
+        prototype: HTMLNjwdsButtonElement;
+        new (): HTMLNjwdsButtonElement;
+    };
     interface HTMLElementTagNameMap {
         "my-component": HTMLMyComponentElement;
+        "njwds-alert": HTMLNjwdsAlertElement;
+        "njwds-banner": HTMLNjwdsBannerElement;
+        "njwds-button": HTMLNjwdsButtonElement;
     }
 }
 declare namespace LocalJSX {
@@ -47,8 +80,21 @@ declare namespace LocalJSX {
          */
         "middle"?: string;
     }
+    interface NjwdsAlert {
+        "headerText"?: string;
+        "isSlim"?: boolean;
+        "type"?: "default" | "info" | "warning" | "error" | "emergency";
+    }
+    interface NjwdsBanner {
+    }
+    interface NjwdsButton {
+        "variant"?: ButtonVariant;
+    }
     interface IntrinsicElements {
         "my-component": MyComponent;
+        "njwds-alert": NjwdsAlert;
+        "njwds-banner": NjwdsBanner;
+        "njwds-button": NjwdsButton;
     }
 }
 export { LocalJSX as JSX };
@@ -56,6 +102,9 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
+            "njwds-alert": LocalJSX.NjwdsAlert & JSXBase.HTMLAttributes<HTMLNjwdsAlertElement>;
+            "njwds-banner": LocalJSX.NjwdsBanner & JSXBase.HTMLAttributes<HTMLNjwdsBannerElement>;
+            "njwds-button": LocalJSX.NjwdsButton & JSXBase.HTMLAttributes<HTMLNjwdsButtonElement>;
         }
     }
 }

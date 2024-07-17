@@ -1,5 +1,8 @@
 {
   "entries": [
+    "components/button/button.js",
+    "components/alert/alert.js",
+    "components/banner/banner.js",
     "components/my-component/my-component.js"
   ],
   "compiler": {
