@@ -1,9 +1,7 @@
 import { Component, Prop, h } from "@stencil/core";
-import { setCSSAssetPathByCustomProperty } from "../utils";
 
 @Component({
     tag: "njwds-alert",
-    styleUrl: "../../../njwds/css/styles.css",
 })
 export class Alert {
     @Prop() type: "default" | "info" | "warning" | "error" | "emergency" = "default";
@@ -11,7 +9,6 @@ export class Alert {
     @Prop() headerText?: string;
 
     render() {
-        setCSSAssetPathByCustomProperty("--warning-svg-url", "img/usa-icons/warning.svg")
         const alertTypeClass = this.type === "default" ? "" : `usa-alert--${this.type}`
 
         // TODO: What if h4 isn't the appropriate heading level?

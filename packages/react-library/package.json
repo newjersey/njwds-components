@@ -1,4 +1,6 @@
 {
+  "main": "dist/index.js",
+  "module": "dist/index.js",
   "types": "dist/types/index.d.ts",
   "directories": {
     "lib": "lib",
@@ -8,5 +10,8 @@
     "test": "node ./__tests__/react-library.test.js",
     "build": "npm run tsc",
     "tsc": "tsc -p . --outDir ./dist"
+  },
+  "dependencies": {
+    "react-library": "*"
   }
 }

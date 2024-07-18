@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Static Web Components Example</title>
+  <script type="module" src="../stencil-library/dist/stencil-library/stencil-library.esm.js"></script>
+  <link rel="stylesheet" href="../stencil-library/dist/stencil-library/css/styles.css" />
+</head>
+
+<body>
+  <h1>Static Web Components Example</h1>
+  <h2>My-Component</h2>
+  <my-component 
+    first="{Test First Name}" 
+    last="{Test Last Name}"
+  ></my-component>
+
+  <h2>Banner</h2>
+    <njwds-banner></njwds-banner>
+    <h2>Alert</h2>
+    <njwds-alert type="warning" header-text="Warning">
+      <span>Lorem ipsum dolor sit amet, <a href="javascript:void(0);">consectetur adipiscing</a> elit, sed do eiusmod.</span>
+    </njwds-alert>
+    <h2>Button</h2>
+    <njwds-button>
+      Default
+    </njwds-button>
+    <njwds-button variant="secondary">
+      Secondary
+    </njwds-button>
+</body>
+
+</html>
