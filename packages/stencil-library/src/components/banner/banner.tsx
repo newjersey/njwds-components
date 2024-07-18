@@ -3,12 +3,12 @@ import { Component, getAssetPath, h } from '@stencil/core';
 
 @Component({
     tag: 'njwds-banner',
+    styleUrl: "../../../njwds/css/styles.css",
 })
 export class Banner {
     render() {
         const spriteSrc = getAssetPath("img/sprite.svg");
         const sealSrc = getAssetPath("img/nj_state_seal.png");
-
 
         return (
             <div class="nj-banner blue-bg">
