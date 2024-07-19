@@ -13,7 +13,7 @@ export class MyComponent {
         return h("div", { key: '69870481d23433a6c44c6411b88bff00c3a50e6f' }, "Hello, World! I'm ", this.getText());
     }
     static get is() { return "my-component"; }
-    static get encapsulation() { return "scoped"; }
+    static get encapsulation() { return "shadow"; }
     static get originalStyleUrls() {
         return {
             "$": ["my-component.css"]

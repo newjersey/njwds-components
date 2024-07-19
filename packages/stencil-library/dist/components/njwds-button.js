@@ -1,4 +1,4 @@
-import { p as proxyCustomElement, H, h } from './p-85d73f65.js';
+import { p as proxyCustomElement, H, h } from './index2.js';
 
 const Button = /*@__PURE__*/ proxyCustomElement(class Button extends H {
     constructor() {
@@ -26,7 +26,7 @@ function defineCustomElement$1() {
             break;
     } });
 }
-defineCustomElement$1();
+defineCustomElement$1(Button);
 
 const NjwdsButton = Button;
 const defineCustomElement = defineCustomElement$1;

@@ -6,7 +6,6 @@
   "module": "packages/react-library/dist/index.js",
   "types": "packages/react-library/dist/types/index.d.ts",
   "main": "packages/react-library/dist/index.js",
-  "unpkg": "packages/stencil-library/dist/stencil-library/stencil-library.esm.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/newjersey/stencil-react-export.git"

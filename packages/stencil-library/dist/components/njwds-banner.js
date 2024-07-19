@@ -1,4 +1,4 @@
-import { p as proxyCustomElement, H, g as getAssetPath, h } from './p-85d73f65.js';
+import { p as proxyCustomElement, H, g as getAssetPath, h } from './index2.js';
 
 const Banner = /*@__PURE__*/ proxyCustomElement(class Banner extends H {
     constructor() {
@@ -24,7 +24,7 @@ function defineCustomElement$1() {
             break;
     } });
 }
-defineCustomElement$1();
+defineCustomElement$1(Banner);
 
 const NjwdsBanner = Banner;
 const defineCustomElement = defineCustomElement$1;
