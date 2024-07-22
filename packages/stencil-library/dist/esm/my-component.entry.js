@@ -1,7 +1,8 @@
-import { r as registerInstance, h } from './index-66b3c03e.js';
+import { r as registerInstance, h } from './index-6909cb90.js';
 import { f as format } from './utils-11fcde98.js';
 
 const myComponentCss = ":host{display:block}";
+const MyComponentStyle0 = myComponentCss;
 
 const MyComponent = class {
     constructor(hostRef) {
@@ -17,7 +18,7 @@ const MyComponent = class {
         return h("div", { key: '69870481d23433a6c44c6411b88bff00c3a50e6f' }, "Hello, World! I'm ", this.getText());
     }
 };
-MyComponent.style = myComponentCss;
+MyComponent.style = MyComponentStyle0;
 
 export { MyComponent as my_component };
 

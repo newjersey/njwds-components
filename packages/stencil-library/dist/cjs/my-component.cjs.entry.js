@@ -2,10 +2,11 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-const index = require('./index-8569154d.js');
+const index = require('./index-ce9791f5.js');
 const utils = require('./utils-bcad3386.js');
 
 const myComponentCss = ":host{display:block}";
+const MyComponentStyle0 = myComponentCss;
 
 const MyComponent = class {
     constructor(hostRef) {
@@ -21,7 +22,7 @@ const MyComponent = class {
         return index.h("div", { key: '69870481d23433a6c44c6411b88bff00c3a50e6f' }, "Hello, World! I'm ", this.getText());
     }
 };
-MyComponent.style = myComponentCss;
+MyComponent.style = MyComponentStyle0;
 
 exports.my_component = MyComponent;
 

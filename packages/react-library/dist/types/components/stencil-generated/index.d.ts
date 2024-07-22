@@ -1,5 +1,4 @@
-import type { JSX } from 'stencil-library';
-export declare const MyComponent: import("react").ForwardRefExoticComponent<JSX.MyComponent & Omit<import("react").HTMLAttributes<HTMLMyComponentElement>, "style"> & import("./react-component-lib/interfaces").StyleReactProps & import("react").RefAttributes<HTMLMyComponentElement>>;
-export declare const NjwdsAlert: import("react").ForwardRefExoticComponent<JSX.NjwdsAlert & Omit<import("react").HTMLAttributes<HTMLNjwdsAlertElement>, "style"> & import("./react-component-lib/interfaces").StyleReactProps & import("react").RefAttributes<HTMLNjwdsAlertElement>>;
-export declare const NjwdsBanner: import("react").ForwardRefExoticComponent<JSX.NjwdsBanner & Omit<import("react").HTMLAttributes<HTMLNjwdsBannerElement>, "style"> & import("./react-component-lib/interfaces").StyleReactProps & import("react").RefAttributes<HTMLNjwdsBannerElement>>;
-export declare const NjwdsButton: import("react").ForwardRefExoticComponent<JSX.NjwdsButton & Omit<import("react").HTMLAttributes<HTMLNjwdsButtonElement>, "style"> & import("./react-component-lib/interfaces").StyleReactProps & import("react").RefAttributes<HTMLNjwdsButtonElement>>;
+export declare const MyComponent: import("react").ForwardRefExoticComponent<any>;
+export declare const NjwdsAlert: import("react").ForwardRefExoticComponent<any>;
+export declare const NjwdsBanner: import("react").ForwardRefExoticComponent<any>;
+export declare const NjwdsButton: import("react").ForwardRefExoticComponent<any>;

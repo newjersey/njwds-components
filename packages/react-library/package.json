@@ -12,6 +12,6 @@
     "tsc": "tsc -p . --outDir ./dist"
   },
   "dependencies": {
-    "react-library": "*"
+     "stencil-library": "*"
   }
 }

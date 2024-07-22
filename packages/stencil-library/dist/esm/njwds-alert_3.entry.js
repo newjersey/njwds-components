@@ -1,4 +1,4 @@
-import { r as registerInstance, h, g as getAssetPath } from './index-151c70b8.js';
+import { r as registerInstance, h, g as getAssetPath } from './index-6909cb90.js';
 
 const Alert = class {
     constructor(hostRef) {
