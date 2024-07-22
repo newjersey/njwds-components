@@ -22,8 +22,18 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: "20.x"
-      - name: Build and Bundle
+      - name: Build and Bundle Static Exports
         working-directory: ./packages/stencil-library
+        id: build-and-bundle
+        run: |
+          npm install
+          npm run build
+      #      - name: Run Tests
+      #        id: run-tests
+      #        run: |
+      #          npm test
+      - name: Build and Bundle React Exports
+        working-directory: ./packages/react-library
         id: build-and-bundle
         run: |
           npm install
