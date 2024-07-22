@@ -12,10 +12,8 @@
   },
   "files": [
     "packages/stencil-library/dist/",
-    "packages/stencil-library/package.json",
     "packages/stencil-library/loader/",
-    "packages/react-library/dist/",
-    "packages/react-library/package.json"
+    "packages/react-library/dist/"
   ],
   "devDependencies": {
     "@types/node": "^20.14.10",
