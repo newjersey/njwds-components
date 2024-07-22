@@ -24,7 +24,7 @@ jobs:
           node-version: "20.x"
       - name: Build and Bundle Static Exports
         working-directory: ./packages/stencil-library
-        id: build-and-bundle
+        id: build-and-bundle-static
         run: |
           npm install
           npm run build
@@ -34,7 +34,7 @@ jobs:
       #          npm test
       - name: Build and Bundle React Exports
         working-directory: ./packages/react-library
-        id: build-and-bundle
+        id: build-and-bundle-react
         run: |
           npm install
           npm run build
