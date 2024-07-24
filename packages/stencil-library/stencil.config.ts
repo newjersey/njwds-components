@@ -6,7 +6,6 @@ export const config: Config = {
   outputTargets: [
     {
       type: 'dist',
-      esmLoaderPath: '../loader',
       copy: [
         { src: '../njwds/img', dest: 'img' },
         { src: '../njwds/fonts', dest: 'fonts' },
@@ -15,7 +14,7 @@ export const config: Config = {
       ],
     },
     reactOutputTarget({
-      componentCorePackage: '../../../../stencil-library/dist',
+      componentCorePackage: '../../../../stencil-library',
       proxiesFile: '../react-library/lib/components/stencil-generated/index.ts',
     }),
     {

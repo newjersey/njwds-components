@@ -19,7 +19,7 @@ export class Button {
                     "references": {
                         "ButtonVariant": {
                             "location": "local",
-                            "path": "/home/runner/work/stencil-react-export/stencil-react-export/packages/stencil-library/src/components/button/button.tsx",
+                            "path": "/Users/elizabethzhang/nj-innovation/stencil-react-export/packages/stencil-library/src/components/button/button.tsx",
                             "id": "src/components/button/button.tsx::ButtonVariant"
                         }
                     }

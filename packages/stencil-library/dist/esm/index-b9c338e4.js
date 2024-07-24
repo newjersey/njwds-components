@@ -1,5 +1,5 @@
 const NAMESPACE = 'stencil-library';
-const BUILD = /* stencil-library */ { allRenderFn: true, appendChildSlotFix: false, asyncLoading: true, asyncQueue: false, attachStyles: true, cloneNodeFix: false, cmpDidLoad: false, cmpDidRender: false, cmpDidUnload: false, cmpDidUpdate: false, cmpShouldUpdate: false, cmpWillLoad: false, cmpWillRender: false, cmpWillUpdate: false, connectedCallback: false, constructableCSS: true, cssAnnotations: true, devTools: false, disconnectedCallback: false, element: false, event: false, experimentalScopedSlotChanges: false, experimentalSlotFixes: false, formAssociated: false, hasRenderFn: true, hostListener: false, hostListenerTarget: false, hostListenerTargetBody: false, hostListenerTargetDocument: false, hostListenerTargetParent: false, hostListenerTargetWindow: false, hotModuleReplacement: false, hydrateClientSide: false, hydrateServerSide: false, hydratedAttribute: false, hydratedClass: true, hydratedSelectorName: "hydrated", initializeNextTick: false, invisiblePrehydration: true, isDebug: false, isDev: false, isTesting: false, lazyLoad: true, lifecycle: false, lifecycleDOMEvents: false, member: true, method: false, mode: false, observeAttribute: true, profile: false, prop: true, propBoolean: true, propMutable: false, propNumber: false, propString: true, reflect: false, scoped: false, scopedSlotTextContentFix: false, scriptDataOpts: false, shadowDelegatesFocus: false, shadowDom: true, slot: true, slotChildNodesFix: false, slotRelocation: true, state: false, style: true, svg: true, taskQueue: true, transformTagName: false, updatable: true, vdomAttribute: true, vdomClass: true, vdomFunctional: false, vdomKey: true, vdomListener: false, vdomPropOrAttr: true, vdomRef: false, vdomRender: true, vdomStyle: false, vdomText: true, vdomXlink: true, watchCallback: false };
+const BUILD = /* stencil-library */ { allRenderFn: true, appendChildSlotFix: false, asyncLoading: true, asyncQueue: false, attachStyles: true, cloneNodeFix: false, cmpDidLoad: false, cmpDidRender: false, cmpDidUnload: false, cmpDidUpdate: false, cmpShouldUpdate: false, cmpWillLoad: false, cmpWillRender: false, cmpWillUpdate: false, connectedCallback: false, constructableCSS: true, cssAnnotations: true, devTools: false, disconnectedCallback: false, element: false, event: false, experimentalScopedSlotChanges: false, experimentalSlotFixes: false, formAssociated: false, hasRenderFn: true, hostListener: false, hostListenerTarget: false, hostListenerTargetBody: false, hostListenerTargetDocument: false, hostListenerTargetParent: false, hostListenerTargetWindow: false, hotModuleReplacement: false, hydrateClientSide: true, hydrateServerSide: false, hydratedAttribute: false, hydratedClass: true, hydratedSelectorName: "hydrated", initializeNextTick: false, invisiblePrehydration: true, isDebug: false, isDev: false, isTesting: false, lazyLoad: true, lifecycle: false, lifecycleDOMEvents: false, member: true, method: false, mode: false, observeAttribute: true, profile: false, prop: true, propBoolean: true, propMutable: false, propNumber: false, propString: true, reflect: false, scoped: false, scopedSlotTextContentFix: false, scriptDataOpts: false, shadowDelegatesFocus: false, shadowDom: true, slot: true, slotChildNodesFix: false, slotRelocation: true, state: false, style: true, svg: true, taskQueue: true, transformTagName: false, updatable: true, vdomAttribute: true, vdomClass: true, vdomFunctional: false, vdomKey: true, vdomListener: false, vdomPropOrAttr: true, vdomRef: false, vdomRender: true, vdomStyle: false, vdomText: true, vdomXlink: true, watchCallback: false };
 
 /*
  Stencil Client Platform v4.19.2 | MIT Licensed | https://stenciljs.com
@@ -58,6 +58,15 @@ var loadModule = (cmpMeta, hostRef, hmrVersionId) => {
 
 // src/client/client-style.ts
 var styles = /* @__PURE__ */ new Map();
+
+// src/runtime/runtime-constants.ts
+var CONTENT_REF_ID = "r";
+var ORG_LOCATION_ID = "o";
+var SLOT_NODE_ID = "s";
+var TEXT_NODE_ID = "t";
+var HYDRATE_ID = "s-id";
+var HYDRATED_STYLE_ID = "sty-id";
+var HYDRATE_CHILD_ID = "c-id";
 var HYDRATED_CSS = "{visibility:hidden}.hydrated{visibility:inherit}";
 var SLOT_FB_CSS = "slot-fb{display:contents}slot-fb[hidden]{display:none}";
 var XLINK_NS = "http://www.w3.org/1999/xlink";
@@ -72,6 +81,7 @@ var plt = {
   rel: (el, eventName, listener, opts) => el.removeEventListener(eventName, listener, opts),
   ce: (eventName, opts) => new CustomEvent(eventName, opts)
 };
+var supportsShadow = BUILD.shadowDom;
 var promiseResolve = (v) => Promise.resolve(v);
 var supportsConstructableStylesheets = /* @__PURE__ */ (() => {
   try {
@@ -278,6 +288,200 @@ var newVNode = (tag, text) => {
 };
 var Host = {};
 var isHost = (node) => node && node.$tag$ === Host;
+
+// src/runtime/client-hydrate.ts
+var initializeClientHydrate = (hostElm, tagName, hostId, hostRef) => {
+  const endHydrate = createTime("hydrateClient", tagName);
+  const shadowRoot = hostElm.shadowRoot;
+  const childRenderNodes = [];
+  const slotNodes = [];
+  const shadowRootNodes = shadowRoot ? [] : null;
+  const vnode = hostRef.$vnode$ = newVNode(tagName, null);
+  if (!plt.$orgLocNodes$) {
+    initializeDocumentHydrate(doc.body, plt.$orgLocNodes$ = /* @__PURE__ */ new Map());
+  }
+  hostElm[HYDRATE_ID] = hostId;
+  hostElm.removeAttribute(HYDRATE_ID);
+  clientHydrate(vnode, childRenderNodes, slotNodes, shadowRootNodes, hostElm, hostElm, hostId);
+  childRenderNodes.map((c) => {
+    const orgLocationId = c.$hostId$ + "." + c.$nodeId$;
+    const orgLocationNode = plt.$orgLocNodes$.get(orgLocationId);
+    const node = c.$elm$;
+    if (orgLocationNode && supportsShadow && orgLocationNode["s-en"] === "") {
+      orgLocationNode.parentNode.insertBefore(node, orgLocationNode.nextSibling);
+    }
+    if (!shadowRoot) {
+      node["s-hn"] = tagName;
+      if (orgLocationNode) {
+        node["s-ol"] = orgLocationNode;
+        node["s-ol"]["s-nr"] = node;
+      }
+    }
+    plt.$orgLocNodes$.delete(orgLocationId);
+  });
+  if (shadowRoot) {
+    shadowRootNodes.map((shadowRootNode) => {
+      if (shadowRootNode) {
+        shadowRoot.appendChild(shadowRootNode);
+      }
+    });
+  }
+  endHydrate();
+};
+var clientHydrate = (parentVNode, childRenderNodes, slotNodes, shadowRootNodes, hostElm, node, hostId) => {
+  let childNodeType;
+  let childIdSplt;
+  let childVNode;
+  let i2;
+  if (node.nodeType === 1 /* ElementNode */) {
+    childNodeType = node.getAttribute(HYDRATE_CHILD_ID);
+    if (childNodeType) {
+      childIdSplt = childNodeType.split(".");
+      if (childIdSplt[0] === hostId || childIdSplt[0] === "0") {
+        childVNode = {
+          $flags$: 0,
+          $hostId$: childIdSplt[0],
+          $nodeId$: childIdSplt[1],
+          $depth$: childIdSplt[2],
+          $index$: childIdSplt[3],
+          $tag$: node.tagName.toLowerCase(),
+          $elm$: node,
+          $attrs$: null,
+          $children$: null,
+          $key$: null,
+          $name$: null,
+          $text$: null
+        };
+        childRenderNodes.push(childVNode);
+        node.removeAttribute(HYDRATE_CHILD_ID);
+        if (!parentVNode.$children$) {
+          parentVNode.$children$ = [];
+        }
+        parentVNode.$children$[childVNode.$index$] = childVNode;
+        parentVNode = childVNode;
+        if (shadowRootNodes && childVNode.$depth$ === "0") {
+          shadowRootNodes[childVNode.$index$] = childVNode.$elm$;
+        }
+      }
+    }
+    for (i2 = node.childNodes.length - 1; i2 >= 0; i2--) {
+      clientHydrate(
+        parentVNode,
+        childRenderNodes,
+        slotNodes,
+        shadowRootNodes,
+        hostElm,
+        node.childNodes[i2],
+        hostId
+      );
+    }
+    if (node.shadowRoot) {
+      for (i2 = node.shadowRoot.childNodes.length - 1; i2 >= 0; i2--) {
+        clientHydrate(
+          parentVNode,
+          childRenderNodes,
+          slotNodes,
+          shadowRootNodes,
+          hostElm,
+          node.shadowRoot.childNodes[i2],
+          hostId
+        );
+      }
+    }
+  } else if (node.nodeType === 8 /* CommentNode */) {
+    childIdSplt = node.nodeValue.split(".");
+    if (childIdSplt[1] === hostId || childIdSplt[1] === "0") {
+      childNodeType = childIdSplt[0];
+      childVNode = {
+        $flags$: 0,
+        $hostId$: childIdSplt[1],
+        $nodeId$: childIdSplt[2],
+        $depth$: childIdSplt[3],
+        $index$: childIdSplt[4],
+        $elm$: node,
+        $attrs$: null,
+        $children$: null,
+        $key$: null,
+        $name$: null,
+        $tag$: null,
+        $text$: null
+      };
+      if (childNodeType === TEXT_NODE_ID) {
+        childVNode.$elm$ = node.nextSibling;
+        if (childVNode.$elm$ && childVNode.$elm$.nodeType === 3 /* TextNode */) {
+          childVNode.$text$ = childVNode.$elm$.textContent;
+          childRenderNodes.push(childVNode);
+          node.remove();
+          if (!parentVNode.$children$) {
+            parentVNode.$children$ = [];
+          }
+          parentVNode.$children$[childVNode.$index$] = childVNode;
+          if (shadowRootNodes && childVNode.$depth$ === "0") {
+            shadowRootNodes[childVNode.$index$] = childVNode.$elm$;
+          }
+        }
+      } else if (childVNode.$hostId$ === hostId) {
+        if (childNodeType === SLOT_NODE_ID) {
+          childVNode.$tag$ = "slot";
+          if (childIdSplt[5]) {
+            node["s-sn"] = childVNode.$name$ = childIdSplt[5];
+          } else {
+            node["s-sn"] = "";
+          }
+          node["s-sr"] = true;
+          if (shadowRootNodes) {
+            childVNode.$elm$ = doc.createElement(childVNode.$tag$);
+            if (childVNode.$name$) {
+              childVNode.$elm$.setAttribute("name", childVNode.$name$);
+            }
+            node.parentNode.insertBefore(childVNode.$elm$, node);
+            node.remove();
+            if (childVNode.$depth$ === "0") {
+              shadowRootNodes[childVNode.$index$] = childVNode.$elm$;
+            }
+          }
+          slotNodes.push(childVNode);
+          if (!parentVNode.$children$) {
+            parentVNode.$children$ = [];
+          }
+          parentVNode.$children$[childVNode.$index$] = childVNode;
+        } else if (childNodeType === CONTENT_REF_ID) {
+          if (shadowRootNodes) {
+            node.remove();
+          } else {
+            hostElm["s-cr"] = node;
+            node["s-cn"] = true;
+          }
+        }
+      }
+    }
+  } else if (parentVNode && parentVNode.$tag$ === "style") {
+    const vnode = newVNode(null, node.textContent);
+    vnode.$elm$ = node;
+    vnode.$index$ = "0";
+    parentVNode.$children$ = [vnode];
+  }
+};
+var initializeDocumentHydrate = (node, orgLocNodes) => {
+  if (node.nodeType === 1 /* ElementNode */) {
+    let i2 = 0;
+    for (; i2 < node.childNodes.length; i2++) {
+      initializeDocumentHydrate(node.childNodes[i2], orgLocNodes);
+    }
+    if (node.shadowRoot) {
+      for (i2 = 0; i2 < node.shadowRoot.childNodes.length; i2++) {
+        initializeDocumentHydrate(node.shadowRoot.childNodes[i2], orgLocNodes);
+      }
+    }
+  } else if (node.nodeType === 8 /* CommentNode */) {
+    const childIdSplt = node.nodeValue.split(".");
+    if (childIdSplt[0] === ORG_LOCATION_ID) {
+      orgLocNodes.set(childIdSplt[1] + "." + childIdSplt[2], node);
+      node.nodeValue = "";
+      node["s-en"] = childIdSplt[3];
+    }
+  }
+};
 var parsePropertyValue = (propValue, propType) => {
   if (propValue != null && !isComplexType(propValue)) {
     if (propType & 4 /* Boolean */) {
@@ -324,7 +528,9 @@ var addStyle = (styleContainerNode, cmpMeta, mode) => {
         rootAppliedStyles.set(styleContainerNode, appliedStyles = /* @__PURE__ */ new Set());
       }
       if (!appliedStyles.has(scopeId2)) {
-        {
+        if (styleContainerNode.host && (styleElm = styleContainerNode.querySelector(`[${HYDRATED_STYLE_ID}="${scopeId2}"]`))) {
+          styleElm.innerHTML = style;
+        } else {
           styleElm = doc.createElement("style");
           styleElm.innerHTML = style;
           const nonce = (_a = plt.$nonce$) != null ? _a : queryNonceMetaTagContent(doc);
@@ -361,6 +567,7 @@ var attachStyles = (hostRef) => {
   endAttachStyles();
 };
 var getScopeId = (cmp, mode) => "sc-" + (cmp.$tagName$);
+var convertScopedToShadow = (css) => css.replace(/\/\*!@([^\/]+)\*\/[^\{]+\{/g, "$1{");
 var setAccessor = (elm, memberName, oldValue, newValue, isSvg, flags) => {
   if (oldValue !== newValue) {
     let isProp = isMemberInElement(elm, memberName);
@@ -1209,7 +1416,18 @@ var connectedCallback = (elm) => {
     const endConnected = createTime("connectedCallback", cmpMeta.$tagName$);
     if (!(hostRef.$flags$ & 1 /* hasConnected */)) {
       hostRef.$flags$ |= 1 /* hasConnected */;
+      let hostId;
       {
+        hostId = elm.getAttribute(HYDRATE_ID);
+        if (hostId) {
+          if (cmpMeta.$flags$ & 1 /* shadowDomEncapsulation */) {
+            const scopeId2 = addStyle(elm.shadowRoot, cmpMeta);
+            elm.classList.remove(scopeId2 + "-h", scopeId2 + "-s");
+          }
+          initializeClientHydrate(elm, cmpMeta.$tagName$, hostId, hostRef);
+        }
+      }
+      if (!hostId) {
         if (// TODO(STENCIL-854): Remove code related to legacy shadowDomShim field
         cmpMeta.$flags$ & (4 /* hasSlotRelocation */ | 8 /* needsShadowDomShim */)) {
           setContentReference(elm);
@@ -1218,7 +1436,7 @@ var connectedCallback = (elm) => {
       {
         let ancestorComponent = elm;
         while (ancestorComponent = ancestorComponent.parentNode || ancestorComponent.host) {
-          if (ancestorComponent["s-p"]) {
+          if (ancestorComponent.nodeType === 1 /* ElementNode */ && ancestorComponent.hasAttribute("s-id") && ancestorComponent["s-p"] || ancestorComponent["s-p"]) {
             attachToAncestor(hostRef, hostRef.$ancestorComponent$ = ancestorComponent);
             break;
           }
@@ -1273,10 +1491,20 @@ var bootstrapLazy = (lazyBundles, options = {}) => {
   const metaCharset = /* @__PURE__ */ head.querySelector("meta[charset]");
   const dataStyles = /* @__PURE__ */ doc.createElement("style");
   const deferredConnectedCallbacks = [];
+  const styles2 = /* @__PURE__ */ doc.querySelectorAll(`[${HYDRATED_STYLE_ID}]`);
   let appLoadFallback;
   let isBootstrapping = true;
+  let i2 = 0;
   Object.assign(plt, options);
   plt.$resourcesUrl$ = new URL(options.resourcesUrl || "./", doc.baseURI).href;
+  {
+    plt.$flags$ |= 2 /* appLoaded */;
+  }
+  {
+    for (; i2 < styles2.length; i2++) {
+      registerStyle(styles2[i2].getAttribute(HYDRATED_STYLE_ID), convertScopedToShadow(styles2[i2].innerHTML), true);
+    }
+  }
   let hasSlotRelocation = false;
   lazyBundles.map((lazyBundle) => {
     lazyBundle[1].map((compactMeta) => {
@@ -1380,4 +1608,4 @@ var setNonce = (nonce) => plt.$nonce$ = nonce;
 
 export { setAssetPath as a, bootstrapLazy as b, getAssetPath as g, h, promiseResolve as p, registerInstance as r, setNonce as s };
 
-//# sourceMappingURL=index-6909cb90.js.map
+//# sourceMappingURL=index-b9c338e4.js.map
