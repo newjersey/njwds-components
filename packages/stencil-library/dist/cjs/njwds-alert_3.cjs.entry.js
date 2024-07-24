@@ -2,7 +2,7 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-const index = require('./index-f191956e.js');
+const index = require('./index-ce9791f5.js');
 
 const Alert = class {
     constructor(hostRef) {

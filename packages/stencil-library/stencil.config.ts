@@ -14,9 +14,14 @@ export const config: Config = {
       ],
     },
     reactOutputTarget({
-      componentCorePackage: '../../../../stencil-library',
+      componentCorePackage: '../../../../stencil-library/dist',
       proxiesFile: '../react-library/lib/components/stencil-generated/index.ts',
+      includeImportCustomElements: true,
+      includeDefineCustomElements: false,
     }),
+    {
+      type: 'dist-custom-elements',
+    },
     {
       type: 'docs-readme',
     },
