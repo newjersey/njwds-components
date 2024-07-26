@@ -12,16 +12,12 @@ export const config: Config = {
         { src: '../njwds/js', dest: 'js' },
         { src: '../njwds/css', dest: 'css' },
       ],
+      esmLoaderPath: '../loader',
     },
     reactOutputTarget({
       componentCorePackage: '../../../../stencil-library/dist',
       proxiesFile: '../react-library/lib/components/stencil-generated/index.ts',
-      includeImportCustomElements: true,
-      includeDefineCustomElements: false,
     }),
-    {
-      type: 'dist-custom-elements',
-    },
     {
       type: 'docs-readme',
     },

@@ -1,21 +1,26 @@
-import { h } from "@stencil/core";
+import { Fragment, h } from "@stencil/core";
 export class Alert {
     constructor() {
         this.type = "default";
         this.isSlim = false;
         this.headerText = undefined;
     }
+    componentWillLoad() {
+        const headerSlot = this.hostElement.querySelector('[slot="header"]');
+        this.hasHeaderSlot = !!headerSlot;
+        if (this.hasHeaderSlot) {
+            headerSlot.classList.add("usa-alert__heading");
+        }
+    }
     render() {
         const alertTypeClass = this.type === "default" ? "" : `usa-alert--${this.type}`;
-        // TODO: What if h4 isn't the appropriate heading level?
-        const headerElement = (this.headerText && !this.isSlim)
-            ? (h("h4", { id: "alert-heading", class: "usa-alert__heading" }, this.headerText))
-            : "";
         const roleAttr = (this.type === "error" || this.type === "emergency")
             ? "alert"
             : null;
         const slimClass = this.isSlim ? "usa-alert--slim" : "";
-        return (h("div", { key: 'ff6f0f83921304e70e9e787a0eb5bbd90e3065b6', class: `usa-alert ${alertTypeClass} ${slimClass}`, role: roleAttr }, h("div", { key: 'eec00e2c679c472aa2db81b9491b974743c55d24', class: "usa-alert__body" }, headerElement, h("p", { key: 'be8ba4168e85b2539611fa9d52d82d82f8cd85a9', class: "usa-alert__text" }, h("slot", { key: '0c5ddad07a454630eb80513e5a089abb323376ce' })))));
+        return (h("div", { key: '6a80968b612707d8db92aa461fb4bfbe736fb263', class: `usa-alert ${alertTypeClass} ${slimClass}`, role: roleAttr }, h("div", { key: '61df0224656c2c5f3574789019d36acfbe257223', class: "usa-alert__body" }, !this.isSlim && this.hasHeaderSlot
+            ? h("slot", { name: "header" })
+            : h(Fragment, null), h("p", { key: '7fc7323627b4b62db182f5427c4cd658789f911e', class: "usa-alert__text" }, h("slot", { key: '5c8de0105f477a968bc85deefe48926b4963a67f' })))));
     }
     static get is() { return "njwds-alert"; }
     static get properties() {
@@ -75,5 +80,6 @@ export class Alert {
             }
         };
     }
+    static get elementRef() { return "hostElement"; }
 }
 //# sourceMappingURL=alert.js.map

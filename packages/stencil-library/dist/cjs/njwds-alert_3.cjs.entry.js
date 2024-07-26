@@ -2,7 +2,7 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-const index = require('./index-ce9791f5.js');
+const index = require('./index-28474a8d.js');
 
 const Alert = class {
     constructor(hostRef) {
@@ -11,18 +11,24 @@ const Alert = class {
         this.isSlim = false;
         this.headerText = undefined;
     }
+    componentWillLoad() {
+        const headerSlot = this.hostElement.querySelector('[slot="header"]');
+        this.hasHeaderSlot = !!headerSlot;
+        if (this.hasHeaderSlot) {
+            headerSlot.classList.add("usa-alert__heading");
+        }
+    }
     render() {
         const alertTypeClass = this.type === "default" ? "" : `usa-alert--${this.type}`;
-        // TODO: What if h4 isn't the appropriate heading level?
-        const headerElement = (this.headerText && !this.isSlim)
-            ? (index.h("h4", { id: "alert-heading", class: "usa-alert__heading" }, this.headerText))
-            : "";
         const roleAttr = (this.type === "error" || this.type === "emergency")
             ? "alert"
             : null;
         const slimClass = this.isSlim ? "usa-alert--slim" : "";
-        return (index.h("div", { key: 'ff6f0f83921304e70e9e787a0eb5bbd90e3065b6', class: `usa-alert ${alertTypeClass} ${slimClass}`, role: roleAttr }, index.h("div", { key: 'eec00e2c679c472aa2db81b9491b974743c55d24', class: "usa-alert__body" }, headerElement, index.h("p", { key: 'be8ba4168e85b2539611fa9d52d82d82f8cd85a9', class: "usa-alert__text" }, index.h("slot", { key: '0c5ddad07a454630eb80513e5a089abb323376ce' })))));
+        return (index.h("div", { key: '6a80968b612707d8db92aa461fb4bfbe736fb263', class: `usa-alert ${alertTypeClass} ${slimClass}`, role: roleAttr }, index.h("div", { key: '61df0224656c2c5f3574789019d36acfbe257223', class: "usa-alert__body" }, !this.isSlim && this.hasHeaderSlot
+            ? index.h("slot", { name: "header" })
+            : index.h(index.Fragment, null), index.h("p", { key: '7fc7323627b4b62db182f5427c4cd658789f911e', class: "usa-alert__text" }, index.h("slot", { key: '5c8de0105f477a968bc85deefe48926b4963a67f' })))));
     }
+    get hostElement() { return index.getElement(this); }
 };
 
 const Banner = class {

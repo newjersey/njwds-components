@@ -1,7 +1,8 @@
-import { NjwdsAlert, NjwdsBanner, NjwdsButton } from "react-library"
+import { NjwdsAlert, NjwdsBanner, NjwdsButton, defineCustomElements } from "react-library"
+
+defineCustomElements()
 
 function App() {
-
 
   return (
     <>

@@ -1,2 +1,2 @@
-export * from "./components/stencil-generated";
-export { defineCustomElements } from "../../stencil-library/loader";
+export * from "./components/stencil-generated/index";
+export { defineCustomElements } from "stencil-library/loader";
