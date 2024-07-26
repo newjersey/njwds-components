@@ -1,4 +1,7 @@
-import { Component, Prop, h } from "@stencil/core";
+import { Component, Fragment, Prop, h } from "@stencil/core";
+import { HTMLStencilElement } from "@stencil/core/internal";
+import { Element } from '@stencil/core';
+
 
 @Component({
     tag: "njwds-alert",
@@ -7,14 +10,20 @@ export class Alert {
     @Prop() type: "default" | "info" | "warning" | "error" | "emergency" = "default";
     @Prop() isSlim: boolean = false;
     @Prop() headerText?: string;
+    @Element() hostElement: HTMLStencilElement;
+
+    hasHeaderSlot: boolean;
+
+    componentWillLoad() {
+        const headerSlot = this.hostElement.querySelector('[slot="header"]');
+        this.hasHeaderSlot = !!headerSlot
+        if (this.hasHeaderSlot) {
+            headerSlot.classList.add("usa-alert__heading")
+        }
+    }
 
     render() {
         const alertTypeClass = this.type === "default" ? "" : `usa-alert--${this.type}`
-
-        // TODO: What if h4 isn't the appropriate heading level?
-        const headerElement = (this.headerText && !this.isSlim)
-            ? (<h4 id="alert-heading" class="usa-alert__heading">{this.headerText}</h4>)
-            : "";
 
         const roleAttr = (this.type === "error" || this.type === "emergency")
             ? "alert"
@@ -25,7 +34,10 @@ export class Alert {
         return (
             <div class={`usa-alert ${alertTypeClass} ${slimClass}`} role={roleAttr}>
                 <div class="usa-alert__body">
-                    {headerElement}
+                    {!this.isSlim && this.hasHeaderSlot
+                        ? <slot name="header" />
+                        : <Fragment />
+                    }
                     <p class="usa-alert__text">
                         <slot />
                     </p>
