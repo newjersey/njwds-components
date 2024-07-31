@@ -1,2 +1,0 @@
-import{p as t,b as e}from"./p-396700b9.js";export{s as setNonce}from"./p-396700b9.js";import{g as r}from"./p-e1255160.js";var a=()=>{const e=import.meta.url;const s={};if(e!==""){s.resourcesUrl=new URL(".",e).href}return t(s)};a().then((async t=>{await r();return e([["p-2feb1cab",[[4,"njwds-alert",{type:[1],isSlim:[4,"is-slim"],headerText:[1,"header-text"]}],[0,"njwds-banner"],[4,"njwds-button",{variant:[1]}]]],["p-b41e787d",[[1,"my-component",{first:[1],middle:[1],last:[1]}]]]],t)}));
-//# sourceMappingURL=stencil-library.esm.js.map

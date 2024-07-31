@@ -14,6 +14,10 @@ export const config: Config = {
       ],
       esmLoaderPath: '../loader',
     },
+    {
+      type: 'dist-custom-elements',
+      customElementsExportBehavior: 'auto-define-custom-elements',
+    },
     reactOutputTarget({
       componentCorePackage: '../../../../stencil-library/dist',
       proxiesFile: '../react-library/lib/components/stencil-generated/index.ts',
