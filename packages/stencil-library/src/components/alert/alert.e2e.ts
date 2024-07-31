@@ -1,15 +1,17 @@
 import { newE2EPage } from '@stencil/core/testing';
 
 describe('<njwds-alert>', () => {
-  it('should render an njwds-alert component', async () => {
+  it('should render an njwds-alert component where default slotted content displays as alert text', async () => {
     const page = await newE2EPage();
     await page.setContent(`<njwds-alert><span>Body alert text</span></njwds-alert>`);
     const alertComponent = await page.find('njwds-alert');
     expect(alertComponent).not.toBeNull();
+    const slotContainer = await alertComponent.find('p');
+    expect(slotContainer).toHaveClass('usa-alert__text');
+    const slottedContent = await slotContainer.find('span');
+    expect(slottedContent).toEqualText('Body alert text');
   });
-});
 
-describe('<njwds-alert>', () => {
   describe('type', () => {
     it('renders without special styling by default', async () => {
       const page = await newE2EPage();
@@ -41,6 +43,28 @@ describe('<njwds-alert>', () => {
       });
     });
 
+    describe('header slot', () => {
+      it("renders without a header when the header slot isn't provided", async () => {
+        const page = await newE2EPage();
+        await page.setContent(`<njwds-alert><span>Body alert text</span></njwds-alert>`);
+        const alertDiv = await page.find('.usa-alert');
+        const header = await alertDiv.find('[slot="header"]');
+        expect(header).toBeNull();
+      });
+
+      it('renders a header when the header slot is provided', async () => {
+        const page = await newE2EPage();
+        await page.setContent(`<njwds-alert>
+          <h3 slot="header">Heading Text</h3>
+          <span>Body alert text</span></njwds-alert>
+        `);
+        const alertDiv = await page.find('.usa-alert');
+        const header = await alertDiv.find('[slot="header"]');
+        expect(header).toHaveClass('usa-alert__heading');
+        expect(header).toEqualText('Heading Text');
+      });
+    });
+
     describe('is-slim', () => {
       it('adds slim when is-slim is true', async () => {
         const page = await newE2EPage();
@@ -49,36 +73,14 @@ describe('<njwds-alert>', () => {
         expect(alertDiv).toHaveClass(`usa-alert--slim`);
       });
 
-      describe('header slot', () => {
-        it("renders without a header when the header slot isn't provided", async () => {
-          const page = await newE2EPage();
-          await page.setContent(`<njwds-alert><span>Body alert text</span></njwds-alert>`);
-          const alertDiv = await page.find('.usa-alert');
-          const header = await alertDiv.find('[slot="header"]');
-          expect(header).toBeNull();
-        });
-
-        it('renders a header when the header slot is provided', async () => {
-          const page = await newE2EPage();
-          await page.setContent(`<njwds-alert>
-            <h3 slot="header">Heading Text</h3>
-            <span>Body alert text</span></njwds-alert>
-          `);
-          const alertDiv = await page.find('.usa-alert');
-          const header = await alertDiv.find('[slot="header"]');
-          expect(header).toHaveClass('usa-alert__heading');
-          expect(header).toEqualText('Heading Text');
-        });
-
-        it('does not display header when is-slim is true, even if header slot is provided', async () => {
-          const page = await newE2EPage();
-          await page.setContent(`<njwds-alert is-slim=true>
+      it('does not display header when is-slim is true, even if header slot is provided', async () => {
+        const page = await newE2EPage();
+        await page.setContent(`<njwds-alert is-slim=true>
              <h3 slot="header">Heading Text</h3>
              <span>Body alert text</span></njwds-alert>`);
-          const alertDiv = await page.find('.usa-alert');
-          const header = await alertDiv.find('[slot="header"]');
-          expect(header).toBeNull();
-        });
+        const alertDiv = await page.find('.usa-alert');
+        const header = await alertDiv.find('[slot="header"]');
+        expect(header).toBeNull();
       });
     });
   });
