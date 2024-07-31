@@ -26,20 +26,20 @@ jobs:
         id: install-dependencies
         run: |
           npm install
-      - name: Build and Bundle Static Exports
+      - name: Test web components
         working-directory: ./packages/stencil-library
-        id: build-and-bundle-static
+        id: tests-static
         run: |
-          npm run build
+          npm install
       #      - name: Run Tests
       #        id: run-tests
       #        run: |
       #          npm test
-      - name: Build and Bundle React Exports
+      - name: Test react components
         working-directory: ./packages/react-library
-        id: build-and-bundle-react
+        id: tests-react
         run: |
-          npm run build
+          npm install
       #      - name: Run Tests
       #        id: run-tests
       #        run: |
