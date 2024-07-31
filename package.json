@@ -3,9 +3,9 @@
   "workspaces": [
     "packages/*"
   ],
-  "module": "packages/stencil-library/dist/components/index.js",
-  "types": "packages/stencil-library/dist/components/index.d.ts",
-  "main": "packages/stencil-library/dist/components/index.js",
+  "module": "packages/react-library/dist/index.js",
+  "types": "packages/react-library/dist/types/index.d.ts",
+  "main": "packages/react-library/dist/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/newjersey/stencil-react-export.git"
