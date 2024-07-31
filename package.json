@@ -10,28 +10,6 @@
     "type": "git",
     "url": "https://github.com/newjersey/stencil-react-export.git"
   },
-  "exports": {
-    "./my-component": {
-      "import": "./packages/stencil-library/dist/components/my-component.js",
-      "types": "./packages/stencil-library/dist/components/my-component.d.ts"
-    },
-    "./njwds-alert": {
-      "import": "./packages/stencil-library/dist/components/njwds-alert.js",
-      "types": "./packages/stencil-library/dist/components/njwds-alert.d.ts"
-    },
-    "./njwds-banner": {
-      "import": "./packages/stencil-library/dist/components/njwds-banner.js",
-      "types": "./packages/stencil-library/dist/components/njwds-banner.d.ts"
-    },
-    "./njwds-button": {
-      "import": "./packages/stencil-library/dist/components/njwds-button.js",
-      "types": "./packages/stencil-library/dist/components/njwds-button.d.ts"
-    },
-    "./react": {
-      "import": "./packages/react-library/dist/index.js",
-      "types": "./packages/react-library/dist/types/index.d.ts"
-    }
-  },
   "files": [
     "packages/stencil-library/dist/",
     "packages/stencil-library/loader/",
