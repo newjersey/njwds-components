@@ -30,6 +30,8 @@ export namespace Components {
     interface NjwdsBanner {
     }
     interface NjwdsButton {
+        "isBig": boolean;
+        "isUnstyled": boolean;
         "variant": ButtonVariant;
     }
 }
@@ -88,6 +90,8 @@ declare namespace LocalJSX {
     interface NjwdsBanner {
     }
     interface NjwdsButton {
+        "isBig"?: boolean;
+        "isUnstyled"?: boolean;
         "variant"?: ButtonVariant;
     }
     interface IntrinsicElements {
