@@ -8,7 +8,7 @@ import { Element } from '@stencil/core';
 })
 export class Alert {
     @Prop() type: "default" | "info" | "warning" | "error" | "emergency" = "default";
-    @Prop() isSlim: boolean = false;
+    @Prop() slim: boolean = false;
     @Prop() noIcon: boolean = false;
     @Element() private hostElement: HTMLStencilElement;
 
@@ -29,14 +29,14 @@ export class Alert {
             ? "alert"
             : null;
 
-        const slimClass = this.isSlim ? "usa-alert--slim" : "";
+        const slimClass = this.slim ? "usa-alert--slim" : "";
 
         const noIconClass = this.noIcon ? "usa-alert--no-icon" : ""
 
         return (
             <div class={`usa-alert ${alertTypeClass} ${slimClass} ${noIconClass}`} role={roleAttr}>
                 <div class="usa-alert__body">
-                    {!this.isSlim && this.hasHeaderSlot
+                    {!this.slim && this.hasHeaderSlot
                         ? <slot name="header" />
                         : <Fragment />
                     }

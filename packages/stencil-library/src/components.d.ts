@@ -23,8 +23,8 @@ export namespace Components {
         "middle": string;
     }
     interface NjwdsAlert {
-        "isSlim": boolean;
         "noIcon": boolean;
+        "slim": boolean;
         "type": "default" | "info" | "warning" | "error" | "emergency";
     }
     interface NjwdsBanner {
@@ -81,8 +81,8 @@ declare namespace LocalJSX {
         "middle"?: string;
     }
     interface NjwdsAlert {
-        "isSlim"?: boolean;
         "noIcon"?: boolean;
+        "slim"?: boolean;
         "type"?: "default" | "info" | "warning" | "error" | "emergency";
     }
     interface NjwdsBanner {
