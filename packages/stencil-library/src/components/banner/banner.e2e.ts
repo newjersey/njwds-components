@@ -21,4 +21,13 @@ describe('<njwds-banner>', () => {
     expect(mailUpdatesLinkElt.tagName).toBe('A');
     expect(mailUpdatesLinkElt).toEqualAttribute('href', 'https://nj.gov/subscribe/');
   });
+
+  it("renders the governor and lt. governor's names", async () => {
+    const page = await newE2EPage();
+    await page.setContent(`<njwds-banner></njwds-banner>`);
+    const mailUpdatesLinkElt = await getByTestId(page, 'njwds-banner-governor-names');
+
+    expect(mailUpdatesLinkElt.textContent).toContain('Governor Phil Murphy');
+    expect(mailUpdatesLinkElt.textContent).toContain('Lt. Governor Tahesha Way');
+  });
 });
