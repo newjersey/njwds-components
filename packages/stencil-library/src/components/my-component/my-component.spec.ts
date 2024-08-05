@@ -24,7 +24,6 @@ describe('my-component', () => {
       html: `<my-component first="Stencil" last="'Don't call me a framework' JS"></my-component>`,
     });
 
-    console.log({ root: root.outerHTML });
     expect(root).toEqualHtml(`
       <my-component first="Stencil" last="'Don't call me a framework' JS">
         <mock:shadow-root>
