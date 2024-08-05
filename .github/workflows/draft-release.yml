@@ -31,10 +31,10 @@ jobs:
         id: tests-static
         run: |
           npm install
-      #      - name: Run Tests
-      #        id: run-tests
-      #        run: |
-      #          npm test
+      - name: Run Tests
+        id: run-stencil-tests
+        run: |
+          npm test
       - name: Test react components
         working-directory: ./packages/react-library
         id: tests-react
