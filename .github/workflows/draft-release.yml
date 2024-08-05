@@ -24,26 +24,18 @@ jobs:
           node-version: "20.x"
       - name: Install Dependencies
         id: install-dependencies
-        run: |
-          npm install
+        run: npm install
+
       - name: Test web components
         working-directory: ./packages/stencil-library
         id: tests-static
-        run: |
-          npm install
-      - name: Run Tests
-        id: run-stencil-tests
-        run: |
-          npm test
-      - name: Test react components
-        working-directory: ./packages/react-library
-        id: tests-react
-        run: |
-          npm install
-      #      - name: Run Tests
-      #        id: run-tests
-      #        run: |
-      #          npm test
+        run: npm test
+
+      # - name: Test react components
+      #   working-directory: ./packages/react-library
+      #   id: tests-react
+      #   run: npm test
+
       - name: Bump and commit new version
         id: bump_version
         run: |
