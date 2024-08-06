@@ -1,13 +1,14 @@
 # NJWDS Components
 
-NJWDS Components implements the [New Jersey Web Design System](https://github.com/newjersey/njwds) as web componens and React components, build using [Stencil](https://stenciljs.com/).
+[`njwds-components`](https://www.npmjs.com/package/@newjersey/njwds-components) implements the [New Jersey Web Design System](https://github.com/newjersey/njwds) as web components and React components, build using [Stencil](https://stenciljs.com/).
 
 ## Table of Contents
 
-1. [Architecture](#architecture)
-2. [Installation](#installation)
-3. [Usage](#usage)
-4. [Contact](#contact)
+1. [Demos](#demos)
+2. [How to install and use NJWDS Web components](#how-to-install-and-use-njwds-web-components)
+3. [How to install and use NJWDS React Components](#how-to-install-and-use-njwds-react-components)
+4. [Developing the library](#developing-the-library)
+5. [Releasing a new version to NPM](#releasing-a-new-version-to-npm)
 
 ## Demos
 
@@ -158,10 +159,10 @@ export default function DefineCustomElementsLoader() {
 
 This project is a monorepo containing the NJWDS web components, React components, and two example projects for viewing components during development.
 
-- [`packages/stencil-library`](https://github.com/newjersey/njwds-components/tree/main/packages/stencil-library) contains the NJWDS web components
-- [`packages/react-library`](https://github.com/newjersey/njwds-components/tree/main/packages/react-library) contains the NJWDS React components, created using [Stencil's React Integration](https://stenciljs.com/docs/react).
-- [`packages/example-static`](https://github.com/newjersey/njwds-components/tree/main/packages/example-static) implements the web components in vanilla HTML
-- [`packages/example-react`](https://github.com/newjersey/njwds-components/tree/main/packages/example-react) implements the web and React components in React
+- [`packages/stencil-library`](/packages/stencil-library) contains the NJWDS web components
+- [`packages/react-library`](/packages/react-library) contains the NJWDS React components, created using [Stencil's React Integration](https://stenciljs.com/docs/react).
+- [`packages/example-static`](/packages/example-static) implements the web components in vanilla HTML
+- [`packages/example-react`](/packages/example-react) implements the web and React components in React
 
 ### Installation
 
