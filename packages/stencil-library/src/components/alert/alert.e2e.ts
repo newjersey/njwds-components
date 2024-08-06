@@ -22,13 +22,24 @@ describe('<njwds-alert>', () => {
     expect(slottedContent).toEqualText('Body alert text');
   });
 
-  it('applies no-icon class when no-icon is true', async () => {
-    const alertDiv = await renderAndGetAlertDiv(`
-      <njwds-alert no-icon>
-        <span>Body alert text</span>
-      </njwds-alert>
-    `);
-    expect(alertDiv).toHaveClass('usa-alert--no-icon');
+  describe('no-icon', () => {
+    it('does not have no-icon class when no-icon attribute is absent', async () => {
+      const alertDiv = await renderAndGetAlertDiv(`
+        <njwds-alert>
+          <span>Body alert text</span>
+        </njwds-alert>
+      `);
+      expect(alertDiv).not.toHaveClass('usa-alert--no-icon');
+    });
+
+    it('applies no-icon class when no-icon is true', async () => {
+      const alertDiv = await renderAndGetAlertDiv(`
+        <njwds-alert no-icon>
+          <span>Body alert text</span>
+        </njwds-alert>
+      `);
+      expect(alertDiv).toHaveClass('usa-alert--no-icon');
+    });
   });
 
   describe('type', () => {
@@ -47,7 +58,10 @@ describe('<njwds-alert>', () => {
           <span>Body alert text</span>
         </njwds-alert>
       `);
-      expect(alertDiv).toHaveClass(`usa-alert--${type}`);
+      const expectedClasses = ['usa-alert', `usa-alert--${type}`];
+      for (const expectedClass of expectedClasses) {
+        expect(alertDiv.classList.contains(expectedClass)).toBe(true);
+      }
     });
   });
 
@@ -103,6 +117,15 @@ describe('<njwds-alert>', () => {
         </njwds-alert>
       `);
       expect(alertDiv).toHaveClass(`usa-alert--slim`);
+    });
+
+    it('does not apply slim class when slim attribute is absent', async () => {
+      const alertDiv = await renderAndGetAlertDiv(`
+        <njwds-alert>
+          <span>Body alert text</span>
+        </njwds-alert>
+      `);
+      expect(alertDiv).not.toHaveClass(`usa-alert--slim`);
     });
 
     it('does not display header when slim is true, even if header slot is provided', async () => {
