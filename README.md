@@ -17,7 +17,7 @@
 
 #### Component Names
 
-Web components are named in `kebab-case` and a prefixed with `njwds`. Specific component names can be found by looking at the `@Component` decorator in the component source code.
+Web components names use `kebab-case` and are prefixed with `njwds`. Specific component names can be found by looking at the `@Component` decorator in the component source code.
 
 ```ts
 @Component({
@@ -37,7 +37,7 @@ React component names are converted to `camelCase` from their web component name
 
 #### Property Names
 
-React components props remain in `camelCase` (e.g. the alert's`noIcon` prop will also be named `noIcon` on the `NjwdsAlert` React component).
+React components prop ruse `camelCase` (e.g. the alert's`noIcon` prop will also be named `noIcon` on the `NjwdsAlert` React component).
 
 ## Demos
 
