@@ -4,11 +4,40 @@
 
 ## Table of Contents
 
-1. [Demos](#demos)
-2. [How to install and use NJWDS Web components](#how-to-install-and-use-njwds-web-components)
-3. [How to install and use NJWDS React Components](#how-to-install-and-use-njwds-react-components)
-4. [Developing the library](#developing-the-library)
-5. [Releasing a new version to NPM](#releasing-a-new-version-to-npm)
+1. [Component and Property Naming Conventions](#component-and-property-naming-conventions)
+2. [Demos](#demos)
+3. [How to install and use NJWDS Web components](#how-to-install-and-use-njwds-web-components)
+4. [How to install and use NJWDS React Components](#how-to-install-and-use-njwds-react-components)
+5. [Developing the library](#developing-the-library)
+6. [Releasing a new version to NPM](#releasing-a-new-version-to-npm)
+
+## Component and Property Naming Conventions
+
+### Web Components
+
+#### Component Names
+
+Web components are named in `kebab-case` and a prefixed with `njwds`. Specific component names can be found by looking at the `@Component` decorator in the component source code.
+
+```ts
+@Component({
+    tag: "njwds-alert",
+})
+```
+
+#### Property Names
+
+When accessing properties as HTML attributes, prop names are converted to `kebab-case` (e.g. `noIcon` will be converted to `no-icon`).
+
+### React Components
+
+#### Component Names
+
+React component names are converted to `camelCase` from their web component name (e.g. `njwds-alert` will be converted to `NjwdsAlert`).
+
+#### Property Names
+
+React components props remain in `camelCase` (e.g. the alert's`noIcon` prop will also be named `noIcon` on the `NjwdsAlert` React component).
 
 ## Demos
 
@@ -20,6 +49,10 @@ See the [`njwds-components-demo`](https://github.com/newjersey/njwds-components-
 - [Astro](https://github.com/newjersey/njwds-components-demo/tree/main/demos/astro)
 
 Otherwise, read on for general instructions on how to use the package.
+
+#### React Components
+
+React component names will be the `camelCase` version of the
 
 ## How to install and use NJWDS Web Components
 
