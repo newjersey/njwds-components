@@ -7,8 +7,8 @@ export type ButtonVariant = "default" | "secondary" | "accent-cool" | "accent-wa
 })
 export class Button {
     @Prop() variant: ButtonVariant = "default";
-    @Prop() isBig: boolean = false;
-    @Prop() isUnstyled: boolean = false;
+    @Prop() big: boolean = false;
+    @Prop() unstyled: boolean = false;
 
     private getVariantClass(): string {
         if (this.variant === "default") {
@@ -23,8 +23,8 @@ export class Button {
     render() {
         const variantClass = this.getVariantClass()
 
-        const unstyledClass = this.isUnstyled ? "usa-button--unstyled" : ""
-        const bigClass = this.isBig ? "usa-button--big" : ""
+        const unstyledClass = this.unstyled ? "usa-button--unstyled" : ""
+        const bigClass = this.big ? "usa-button--big" : ""
 
         return (
             <button class={`usa-button ${variantClass} ${unstyledClass} ${bigClass}`}>
