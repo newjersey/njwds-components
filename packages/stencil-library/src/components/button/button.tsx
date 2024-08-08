@@ -10,7 +10,6 @@ export type ButtonVariant = "default" | "secondary" | "outline" | "unstyled" | "
 })
 export class Button {
     @Prop() variant: ButtonVariant = "default";
-    @Prop() buttonAttributes: string;
     @Prop() asChild: boolean = false
     @Element() private hostElement: HTMLStencilElement;
 
@@ -33,7 +32,7 @@ export class Button {
         if (this.asChild) {
             const slotElements = this.hostElement.children
             if (slotElements.length !== 1) {
-                throw new Error(`If the asChild property is set to true on the njwds-button component, the must have exactly one slot element. Instead got ${slotElements.length} elements.`)
+                throw new Error(`If the asChild property is set to true on the njwds-button component, the component must have exactly one slot element. Instead got ${slotElements.length} elements.`)
             }
             if (slotElements[0].tagName !== "BUTTON") {
                 throw new Error(`If the asChild property is set to true on the njwds-button component, the slot element must be a <button>. Instead got ${slotElements[0].outerHTML}`)
