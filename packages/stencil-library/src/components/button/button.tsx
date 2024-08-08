@@ -1,33 +1,30 @@
 import { Component, Prop, h } from "@stencil/core";
 
-export type ButtonVariant = "default" | "secondary" | "accent-cool" | "accent-warm" | "base" | "outline" | "outline-inverse"
+export type ButtonVariant = "default" | "secondary" | "outline" | "unstyled" | "unstyled-inverse"
 
 @Component({
     tag: "njwds-button",
 })
 export class Button {
     @Prop() variant: ButtonVariant = "default";
-    @Prop() big: boolean = false;
-    @Prop() unstyled: boolean = false;
 
     private getVariantClass(): string {
-        if (this.variant === "default") {
-            return ""
-        } else if (this.variant === "outline-inverse") {
-            return "usa-button--outline usa-button--inverse"
-        } else {
-            return `usa-button--${this.variant}`
+        switch (this.variant) {
+            case 'default':
+                return ""
+            case 'unstyled-inverse':
+                return "usa-button--unstyled usa-button--inverse"
+            default:
+                return `usa-button--${this.variant}`
         }
+
     }
 
     render() {
         const variantClass = this.getVariantClass()
 
-        const unstyledClass = this.unstyled ? "usa-button--unstyled" : ""
-        const bigClass = this.big ? "usa-button--big" : ""
-
         return (
-            <button class={`usa-button ${variantClass} ${unstyledClass} ${bigClass}`}>
+            <button class={`usa-button ${variantClass}`}>
                 <slot />
             </button>
         )
