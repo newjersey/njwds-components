@@ -1,6 +1,6 @@
 ---
-name: New Component
-about: Use this template to implemen NJWDS components as web components
+name: New Web Component
+about: Use this template to implement an NJWDS component as a Stencil web component
 title: "Implement [COMPONENT NAME] component"
 ---
 
