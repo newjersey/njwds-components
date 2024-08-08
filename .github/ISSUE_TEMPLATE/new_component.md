@@ -3,6 +3,7 @@ name: New Web Component
 about: Use this template to implement an NJWDS component as a Stencil web component
 title: "Implement [COMPONENT NAME] component"
 ---
+<!-- Reminder to please link the NJWDS Project to this issue! -->
 
 Implement the NJWDS [COMPONENT NAME] component as a Stencil web component.
 
