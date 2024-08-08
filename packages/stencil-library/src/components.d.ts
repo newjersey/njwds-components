@@ -30,6 +30,8 @@ export namespace Components {
     interface NjwdsBanner {
     }
     interface NjwdsButton {
+        "asChild": boolean;
+        "buttonAttributes": string;
         "variant": ButtonVariant;
     }
 }
@@ -88,6 +90,8 @@ declare namespace LocalJSX {
     interface NjwdsBanner {
     }
     interface NjwdsButton {
+        "asChild"?: boolean;
+        "buttonAttributes"?: string;
         "variant"?: ButtonVariant;
     }
     interface IntrinsicElements {
