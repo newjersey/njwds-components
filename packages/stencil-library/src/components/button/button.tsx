@@ -23,11 +23,11 @@ export class Button {
                 case 'link':
                     return "usa-button--unstyled"
                 case 'link-inverse':
-                    return "usa-button--unstyled usa-button--inverse"
+                    return "usa-button--unstyled  usa-button--outline usa-button--inverse"
                 case 'danger':
                     return "usa-button--secondary"
-                default:
-                    return `usa-button--${this.variant}`
+                case 'inverse':
+                    return "usa-button--outline usa-button--inverse"
             }
         }
         const variantClass = getVariantClass()

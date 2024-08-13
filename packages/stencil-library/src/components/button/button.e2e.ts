@@ -39,12 +39,12 @@ describe('<njwds-button>', () => {
         expect(buttonClasses).toEqual(['usa-button', 'usa-button--unstyled'].sort());
       });
 
-      it('renders link-inverse variant with "usa-button--unstyled" and "usa-button--inverse" classes', async () => {
+      it('renders link-inverse variant with "usa-button--unstyled", "usa-button--outline", and "usa-button--inverse" classes', async () => {
         const button = await renderAndGetButtonElement(`
           <njwds-button variant="link-inverse"></njwds-button>
       `);
         const buttonClasses = button.className.split(' ').sort();
-        expect(buttonClasses).toEqual(['usa-button', 'usa-button--unstyled', 'usa-button--inverse'].sort());
+        expect(buttonClasses).toEqual(['usa-button', 'usa-button--unstyled', 'usa-button--outline', 'usa-button--inverse'].sort());
       });
 
       it('renders danger variant with "usa-button--secondary" class', async () => {
@@ -55,12 +55,12 @@ describe('<njwds-button>', () => {
         expect(buttonClasses).toEqual(['usa-button', 'usa-button--secondary'].sort());
       });
 
-      it('renders inverse variant with "usa-button--inverse" class', async () => {
+      it('renders inverse variant with "usa-button--outline" and "usa-button--inverse" classes', async () => {
         const button = await renderAndGetButtonElement(`
           <njwds-button variant="inverse"></njwds-button>
       `);
         const buttonClasses = button.className.split(' ').sort();
-        expect(buttonClasses).toEqual(['usa-button', 'usa-button--inverse'].sort());
+        expect(buttonClasses).toEqual(['usa-button', 'usa-button--outline', 'usa-button--inverse'].sort());
       });
     });
 
