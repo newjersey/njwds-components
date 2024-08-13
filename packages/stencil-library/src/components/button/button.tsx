@@ -3,7 +3,7 @@ import { Host, HTMLStencilElement } from "@stencil/core/internal";
 import { Element } from '@stencil/core';
 
 
-export type ButtonVariant = "primary" | "secondary" | "link" | "link-inverse" | "danger" | "inverse"
+export type ButtonVariant = "primary" | "secondary" | "secondary-dark" | "link" | "link-dark" | "danger"
 
 @Component({
     tag: "njwds-button",
@@ -20,14 +20,14 @@ export class Button {
                     return ""
                 case "secondary":
                     return "usa-button--outline"
+                case "secondary-dark":
+                    return "usa-button--outline usa-button--inverse"
                 case 'link':
                     return "usa-button--unstyled"
-                case 'link-inverse':
+                case 'link-dark':
                     return "usa-button--unstyled  usa-button--outline usa-button--inverse"
                 case 'danger':
                     return "usa-button--secondary"
-                case 'inverse':
-                    return "usa-button--outline usa-button--inverse"
             }
         }
         const variantClass = getVariantClass()
