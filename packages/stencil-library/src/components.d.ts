@@ -5,8 +5,10 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { ButtonType } from "./components/button/button";
-export { ButtonType } from "./components/button/button";
+import { ButtonVariant } from "./components/button/button";
+import { Mode } from "./interface";
+export { ButtonVariant } from "./components/button/button";
+export { Mode } from "./interface";
 export namespace Components {
     interface MyComponent {
         /**
@@ -31,7 +33,8 @@ export namespace Components {
     }
     interface NjwdsButton {
         "asChild": boolean;
-        "type": ButtonType;
+        "mode": Mode;
+        "variant": ButtonVariant;
     }
 }
 declare global {
@@ -90,7 +93,8 @@ declare namespace LocalJSX {
     }
     interface NjwdsButton {
         "asChild"?: boolean;
-        "type"?: ButtonType;
+        "mode"?: Mode;
+        "variant"?: ButtonVariant;
     }
     interface IntrinsicElements {
         "my-component": MyComponent;

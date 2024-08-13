@@ -1,38 +1,49 @@
 import { Component, Prop, h } from "@stencil/core";
 import { Host, HTMLStencilElement } from "@stencil/core/internal";
 import { Element } from '@stencil/core';
+import { Mode } from "../../interface";
 
 
-export type ButtonType = "primary" | "secondary" | "secondary-dark" | "link" | "link-dark" | "danger"
+export type ButtonVariant = "primary" | "secondary" | "link" | "danger"
 
 @Component({
     tag: "njwds-button",
 })
 export class Button {
-    @Prop() type: ButtonType = "primary";
+    @Prop() variant: ButtonVariant = "primary";
+    @Prop() mode: Mode = "light"
 
     @Prop() asChild: boolean = false
     @Element() private hostElement: HTMLStencilElement;
 
     private getButtonClassName(): string {
-        const getTypeClass = (): string => {
-            switch (this.type) {
+        const getVariantClassName = (variant: ButtonVariant): string => {
+            switch (variant) {
                 case 'primary':
                     return ""
                 case "secondary":
                     return "usa-button--outline"
-                case "secondary-dark":
-                    return "usa-button--outline usa-button--inverse"
                 case 'link':
                     return "usa-button--unstyled"
-                case 'link-dark':
-                    return "usa-button--unstyled  usa-button--outline usa-button--inverse"
                 case 'danger':
                     return "usa-button--secondary"
             }
         }
-        const typeClass = getTypeClass()
-        return `usa-button ${typeClass}`
+
+        const getDarkModeVariantClassName = (variant: ButtonVariant) => {
+            switch (variant) {
+                case "secondary":
+                    return "usa-button--outline usa-button--inverse"
+                case 'link':
+                    return "usa-button--unstyled usa-button--outline usa-button--inverse"
+                default:
+                    return getVariantClassName(variant)
+            }
+        }
+
+        return this.mode === "light"
+            ? `usa-button ${getVariantClassName(this.variant)}`
+            : `usa-button ${getDarkModeVariantClassName(this.variant)}`
     }
 
     componentWillLoad() {
