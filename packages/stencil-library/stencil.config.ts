@@ -24,9 +24,6 @@ export const config: Config = {
       proxiesFile: '../react-library/lib/components/stencil-generated/index.ts',
     }),
     {
-      type: 'docs-readme',
-    },
-    {
       type: 'www',
       serviceWorker: null, // disable service workers
       copy: [
