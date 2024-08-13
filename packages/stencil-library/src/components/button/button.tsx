@@ -3,19 +3,19 @@ import { Host, HTMLStencilElement } from "@stencil/core/internal";
 import { Element } from '@stencil/core';
 
 
-export type ButtonVariant = "primary" | "secondary" | "secondary-dark" | "link" | "link-dark" | "danger"
+export type ButtonType = "primary" | "secondary" | "secondary-dark" | "link" | "link-dark" | "danger"
 
 @Component({
     tag: "njwds-button",
 })
 export class Button {
-    @Prop() type: ButtonVariant = "primary";
+    @Prop() type: ButtonType = "primary";
 
     @Prop() asChild: boolean = false
     @Element() private hostElement: HTMLStencilElement;
 
     private getButtonClassName(): string {
-        const getVariantClass = (): string => {
+        const getTypeClass = (): string => {
             switch (this.type) {
                 case 'primary':
                     return ""
@@ -31,8 +31,8 @@ export class Button {
                     return "usa-button--secondary"
             }
         }
-        const variantClass = getVariantClass()
-        return `usa-button ${variantClass}`
+        const typeClass = getTypeClass()
+        return `usa-button ${typeClass}`
     }
 
     componentWillLoad() {
