@@ -31,6 +31,7 @@ export const config: Config = {
         { src: '../njwds/fonts', dest: 'build/fonts' },
         { src: '../njwds/js', dest: 'build/js' },
         { src: '../njwds/css', dest: 'build/css' },
+        { src: 'components' },
       ],
     },
   ],

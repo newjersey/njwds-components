@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
+    <title>Alert Component</title>
+    <script type="module" src="/build/stencil-library.esm.js"></script>
+    <script nomodule src="/build/stencil-library.js"></script>
+    <link rel="stylesheet" href="/build/css/styles.css" />
+  </head>
+  <body>
+    <h1>Alert Component</h1>
+    <h2>Default</h2>
+    <njwds-alert>
+        <h3 slot="header">Header</h3>
+        <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</span>
+    </njwds-alert>
+    <h2>Info</h2>
+    <njwds-alert type="info">
+        <h3 slot="header">Header</h3>
+        <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</span>
+    </njwds-alert>
+    <h2>Warning</h2>
+    <njwds-alert type="warning">
+        <h3 slot="header">Header</h3>
+        <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</span>
+    </njwds-alert>
+    <h2>Error</h2>
+    <njwds-alert type="error">
+        <h3 slot="header">Header</h3>
+        <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</span>
+    </njwds-alert>
+    <h2>Emergency</h2>
+    <njwds-alert type="emergency">
+        <h3 slot="header">Header</h3>
+        <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</span>
+    </njwds-alert>
+    <h2>Slim</h2>
+    <njwds-alert slim>
+        <h3 slot="header">Header</h3>
+        <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</span>
+    </njwds-alert>
+    <h2>No icon</h2>
+    <njwds-alert no-icon type="info">
+        <h3 slot="header">Header</h3>
+        <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</span>
+    </njwds-alert>
+    <h2>No header</h2>
+    <njwds-alert>
+        <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</span>
+    </njwds-alert>
+    <h2>Header + slim</h2>
+    <njwds-alert slim>
+        <h3 slot="header">Header</h3>
+        <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</span>
+    </njwds-alert>
+  </body>
+</html>
