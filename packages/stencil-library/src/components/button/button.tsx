@@ -9,13 +9,14 @@ export type ButtonVariant = "primary" | "secondary" | "secondary-dark" | "link" 
     tag: "njwds-button",
 })
 export class Button {
-    @Prop() variant: ButtonVariant = "primary";
+    @Prop() type: ButtonVariant = "primary";
+
     @Prop() asChild: boolean = false
     @Element() private hostElement: HTMLStencilElement;
 
     private getButtonClassName(): string {
         const getVariantClass = (): string => {
-            switch (this.variant) {
+            switch (this.type) {
                 case 'primary':
                     return ""
                 case "secondary":
