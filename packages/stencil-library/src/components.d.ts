@@ -6,7 +6,9 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { ButtonVariant } from "./components/button/button";
+import { Mode } from "./interface";
 export { ButtonVariant } from "./components/button/button";
+export { Mode } from "./interface";
 export namespace Components {
     interface MyComponent {
         /**
@@ -30,6 +32,8 @@ export namespace Components {
     interface NjwdsBanner {
     }
     interface NjwdsButton {
+        "asChild": boolean;
+        "mode": Mode;
         "variant": ButtonVariant;
     }
 }
@@ -88,6 +92,8 @@ declare namespace LocalJSX {
     interface NjwdsBanner {
     }
     interface NjwdsButton {
+        "asChild"?: boolean;
+        "mode"?: Mode;
         "variant"?: ButtonVariant;
     }
     interface IntrinsicElements {

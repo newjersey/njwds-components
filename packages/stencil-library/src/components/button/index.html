@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
+    <title>Button Component</title>
+    <script type="module" src="/build/stencil-library.esm.js"></script>
+    <script nomodule src="/build/stencil-library.js"></script>
+    <link rel="stylesheet" href="/build/css/styles.css" />
+  </head>
+  <body>
+    <h1>Button</h1>
+    <h2>Primary</h2>
+    <njwds-button variant="primary">
+        Button
+    </njwds-button>
+    <h2>Secondary</h2>
+    <njwds-button variant="secondary">
+        Button
+    </njwds-button>
+    <h2>Secondary Dark</h2>
+    <njwds-button variant="secondary" mode="dark" style="background-color: black; padding: 2rem;">
+        Button
+    </njwds-button>
+    <h2>Link</h2>
+    <njwds-button variant="link" >
+        Button
+    </njwds-button>
+    <h2>Link Dark</h2>
+    <njwds-button variant="link" mode="dark" style="background-color: black;">
+        Button
+    </njwds-button>
+    <h2>Danger</h2>
+    <njwds-button variant="danger">
+        Button
+    </njwds-button>
+
+    <h2>As Child</h2>
+    <njwds-button as-child>
+        <button "data-test"="test" >
+            Button
+        </button>
+    </njwds-button>
+
+    <h2>Planned Styling Changes</h2>
+    <h3>Danger Button Active State</h3>
+    <njwds-button type="danger">
+        Button
+    </njwds-button>
+    <h3>Focus Ring</h3>
+    <njwds-button style="background-color: black; padding: 2rem;">
+        Button
+    </njwds-button>
+
+    <h2>Questions</h2>
+    <p>Should we have a single "type" property with "secondary-dark" and "link-dark"? Or a "mode" property that can be "light"/"dark", and only change the styling for the "secondary" and "link" button types?</p>
+  </body>
+</html>
