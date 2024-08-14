@@ -1,5 +1,5 @@
 {
-  "name": "@newjersey/stencil-react-export",
+  "name": "@newjersey/njwds-components",
   "workspaces": [
     "packages/*"
   ],
@@ -8,7 +8,7 @@
   "main": "packages/react-library/dist/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/newjersey/stencil-react-export.git"
+    "url": "https://github.com/newjersey/njwds-components.git"
   },
   "files": [
     "packages/stencil-library/dist/",
@@ -20,5 +20,5 @@
     "lerna": "^8.1.6",
     "typescript": "^5.5.3"
   },
-  "version": "0.0.33"
+  "version": "0.1.1"
 }

@@ -1,31 +1,40 @@
 import { Component, Prop, h } from "@stencil/core";
+import { HTMLStencilElement } from "@stencil/core/internal";
+import { Element } from '@stencil/core';
+
 
 @Component({
     tag: "njwds-alert",
 })
 export class Alert {
     @Prop() type: "default" | "info" | "warning" | "error" | "emergency" = "default";
-    @Prop() isSlim: boolean = false;
-    @Prop() headerText?: string;
+    @Prop() slim: boolean = false;
+    @Prop() noIcon: boolean = false;
+    @Element() private hostElement: HTMLStencilElement;
+
+    componentWillLoad() {
+        const headerSlot = this.hostElement.querySelector('[slot="header"]');
+        const hasHeaderSlot = !!headerSlot
+        if (hasHeaderSlot) {
+            headerSlot.classList.add("usa-alert__heading")
+        }
+    }
 
     render() {
         const alertTypeClass = this.type === "default" ? "" : `usa-alert--${this.type}`
-
-        // TODO: What if h4 isn't the appropriate heading level?
-        const headerElement = (this.headerText && !this.isSlim)
-            ? (<h4 id="alert-heading" class="usa-alert__heading">{this.headerText}</h4>)
-            : "";
 
         const roleAttr = (this.type === "error" || this.type === "emergency")
             ? "alert"
             : null;
 
-        const slimClass = this.isSlim ? "usa-alert--slim" : "";
+        const slimClass = this.slim ? "usa-alert--slim" : "";
+
+        const noIconClass = this.noIcon ? "usa-alert--no-icon" : ""
 
         return (
-            <div class={`usa-alert ${alertTypeClass} ${slimClass}`} role={roleAttr}>
+            <div class={`usa-alert ${alertTypeClass} ${slimClass} ${noIconClass}`} role={roleAttr}>
                 <div class="usa-alert__body">
-                    {headerElement}
+                    {!this.slim && <slot name="header" />}
                     <p class="usa-alert__text">
                         <slot />
                     </p>
