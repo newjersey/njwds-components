@@ -11,3 +11,4 @@ export const MyComponent = /*@__PURE__*/createReactComponent<JSX.MyComponent, HT
 export const NjwdsAlert = /*@__PURE__*/createReactComponent<JSX.NjwdsAlert, HTMLNjwdsAlertElement>('njwds-alert');
 export const NjwdsBanner = /*@__PURE__*/createReactComponent<JSX.NjwdsBanner, HTMLNjwdsBannerElement>('njwds-banner');
 export const NjwdsButton = /*@__PURE__*/createReactComponent<JSX.NjwdsButton, HTMLNjwdsButtonElement>('njwds-button');
+export const NjwdsIcon = /*@__PURE__*/createReactComponent<JSX.NjwdsIcon, HTMLNjwdsIconElement>('njwds-icon');

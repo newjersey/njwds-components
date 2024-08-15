@@ -36,6 +36,12 @@ export namespace Components {
         "mode": Mode;
         "variant": ButtonVariant;
     }
+    interface NjwdsIcon {
+        "decorative": boolean;
+        "icon": string;
+        "iconTitle"?: string;
+        "size": "small" | "medium" | "large" | "scale";
+    }
 }
 declare global {
     interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
@@ -62,11 +68,18 @@ declare global {
         prototype: HTMLNjwdsButtonElement;
         new (): HTMLNjwdsButtonElement;
     };
+    interface HTMLNjwdsIconElement extends Components.NjwdsIcon, HTMLStencilElement {
+    }
+    var HTMLNjwdsIconElement: {
+        prototype: HTMLNjwdsIconElement;
+        new (): HTMLNjwdsIconElement;
+    };
     interface HTMLElementTagNameMap {
         "my-component": HTMLMyComponentElement;
         "njwds-alert": HTMLNjwdsAlertElement;
         "njwds-banner": HTMLNjwdsBannerElement;
         "njwds-button": HTMLNjwdsButtonElement;
+        "njwds-icon": HTMLNjwdsIconElement;
     }
 }
 declare namespace LocalJSX {
@@ -96,11 +109,18 @@ declare namespace LocalJSX {
         "mode"?: Mode;
         "variant"?: ButtonVariant;
     }
+    interface NjwdsIcon {
+        "decorative"?: boolean;
+        "icon"?: string;
+        "iconTitle"?: string;
+        "size"?: "small" | "medium" | "large" | "scale";
+    }
     interface IntrinsicElements {
         "my-component": MyComponent;
         "njwds-alert": NjwdsAlert;
         "njwds-banner": NjwdsBanner;
         "njwds-button": NjwdsButton;
+        "njwds-icon": NjwdsIcon;
     }
 }
 export { LocalJSX as JSX };
@@ -111,6 +131,7 @@ declare module "@stencil/core" {
             "njwds-alert": LocalJSX.NjwdsAlert & JSXBase.HTMLAttributes<HTMLNjwdsAlertElement>;
             "njwds-banner": LocalJSX.NjwdsBanner & JSXBase.HTMLAttributes<HTMLNjwdsBannerElement>;
             "njwds-button": LocalJSX.NjwdsButton & JSXBase.HTMLAttributes<HTMLNjwdsButtonElement>;
+            "njwds-icon": LocalJSX.NjwdsIcon & JSXBase.HTMLAttributes<HTMLNjwdsIconElement>;
         }
     }
 }
