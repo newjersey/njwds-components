@@ -32,7 +32,6 @@ export namespace Components {
     interface NjwdsBanner {
     }
     interface NjwdsButton {
-        "asChild": boolean;
         "mode": Mode;
         "variant": ButtonVariant;
     }
@@ -105,7 +104,6 @@ declare namespace LocalJSX {
     interface NjwdsBanner {
     }
     interface NjwdsButton {
-        "asChild"?: boolean;
         "mode"?: Mode;
         "variant"?: ButtonVariant;
     }

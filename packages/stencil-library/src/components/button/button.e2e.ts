@@ -80,26 +80,4 @@ describe('<njwds-button>', () => {
       expect(buttonClasses).toEqual(['usa-button', 'usa-button--unstyled', 'usa-button--outline', 'usa-button--inverse'].sort());
     });
   });
-
-  describe('asChild', () => {
-    it('renders a button element when asChild is false (default)', async () => {
-      const button = await renderAndGetButtonElement('<njwds-button></njwds-button>');
-      expect(button.tagName).toBe('BUTTON');
-    });
-
-    it('renders with only the "usa-button" class by default', async () => {
-      const button = await renderAndGetButtonElement('<njwds-button as-child><button></button></njwds-button>');
-      expect(button.className.trim()).toBe('usa-button');
-    });
-
-    it('renders the button slot element with custom attributes when asChild is true', async () => {
-      const button = await renderAndGetButtonElement(`
-        <njwds-button as-child>
-          <button data-test-1="1" data-test-2="2"></button>
-        </njwds-button>
-      `);
-      expect(button).toEqualAttribute('data-test-1', '1');
-      expect(button).toEqualAttribute('data-test-2', '2');
-    });
-  });
 });
