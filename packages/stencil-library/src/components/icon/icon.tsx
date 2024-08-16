@@ -5,16 +5,13 @@ import { Component, getAssetPath, h, Prop } from "@stencil/core";
 })
 export class Icon {
     @Prop() icon: string
-    @Prop() size: "small" | "medium" | "large" | "scale" = "medium"
+    @Prop() size: "3" | "4" | "scale" = "3"
     @Prop() decorative: boolean = false;
     @Prop() iconTitle?: string
 
     componentWillLoad() {
         if (!this.decorative && this.iconTitle === undefined) {
             throw Error('<njwds-icon>: missing the "iconTitle" prop. The "iconTitle" prop is required unless the "decorative" prop is set to true.')
-        }
-        if (this.size === "small") {
-            throw Error("<njwds-icon>: the small size is currently unsupported. Currently supported size values: 'medium', 'large', 'scale'")
         }
     }
 
@@ -25,9 +22,8 @@ export class Icon {
 
         const sizeToClass = {
             "scale": "",
-            "small": "", // 20px icon is not defined by uswds utility classes
-            "medium": "usa-icon--size-3",
-            "large": "usa-icon--size-4"
+            "3": "usa-icon--size-3",
+            "4": "usa-icon--size-4"
         }
 
         const iconClass = `usa-icon ${sizeToClass[this.size]}`
@@ -40,8 +36,8 @@ export class Icon {
                 </svg>
             )
             : (
-                <svg class={iconClass} aria-labelledby={iconTitleId} role="img">
-                    <title id={iconTitleId}>{this.iconTitle}</title>
+                <svg class={iconClass} aria-labelledby={iconTitleId} role="img" focusable="false">
+                    <title id={iconTitleId}>{this.iconTitle ?? this.icon}</title>
                     <use xlinkHref={iconSrc}></use>
                 </svg>
             )

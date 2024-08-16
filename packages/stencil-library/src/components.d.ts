@@ -40,7 +40,7 @@ export namespace Components {
         "decorative": boolean;
         "icon": string;
         "iconTitle"?: string;
-        "size": "small" | "medium" | "large" | "scale";
+        "size": "3" | "4" | "scale";
     }
 }
 declare global {
@@ -113,7 +113,7 @@ declare namespace LocalJSX {
         "decorative"?: boolean;
         "icon"?: string;
         "iconTitle"?: string;
-        "size"?: "small" | "medium" | "large" | "scale";
+        "size"?: "3" | "4" | "scale";
     }
     interface IntrinsicElements {
         "my-component": MyComponent;

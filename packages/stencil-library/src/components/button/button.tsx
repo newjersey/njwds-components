@@ -66,16 +66,10 @@ export class Button {
     render() {
         const buttonClassName = this.getButtonClassName()
 
-        return this.asChild
-            ? (
-                <Host>
-                    <slot />
-                </Host>
-            )
-            : (
-                <button class={buttonClassName}>
-                    <slot />
-                </button>
-            )
+        return (
+            <button class={buttonClassName}>
+                <slot />
+            </button>
+        )
     }
 }
