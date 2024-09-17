@@ -1,1 +1,1 @@
-export type Mode = 'light' | 'dark';
+export type Mode = 'light' | 'dark' | 'danger';
