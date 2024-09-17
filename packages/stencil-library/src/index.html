@@ -1,29 +1,101 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
-    <title>Stencil Component Starter</title>
-    <script type="module" src="/build/stencil-library.esm.js"></script>
-    <script nomodule src="/build/stencil-library.js"></script>
-    <link rel="stylesheet" href="/build/css/styles.css" />
-  </head>
-  <body>
-    <h1>Components</h1>
-    <h2>Banner</h2>
-    <njwds-banner></njwds-banner>
-    <h2>Alert</h2>
-    <njwds-alert type="warning">
-      <h3 slot="header">Warning</h3>
-      <span>Lorem ipsum dolor sit amet, <a href="javascript:void(0);">consectetur adipiscing</a> elit, sed do eiusmod.</span>
-    </njwds-alert>
-    <h2>Button</h2>
-    <njwds-button>
-      Default
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
+  <title>Stencil Component Starter</title>
+  <script type="module" src="/build/stencil-library.esm.js"></script>
+  <script nomodule src="/build/stencil-library.js"></script>
+  <link rel="stylesheet" href="/build/css/styles.css" />
+</head>
+
+<body>
+  <h1>Components</h1>
+  <h2>Banner</h2>
+  <njwds-banner></njwds-banner>
+  <h2>Alert</h2>
+  <njwds-alert type="warning">
+    <h3 slot="header">Warning</h3>
+    <span>Lorem ipsum dolor sit amet, <a href="javascript:void(0);">consectetur adipiscing</a> elit, sed do
+      eiusmod.</span>
+  </njwds-alert>
+  <h2>Button</h2>
+  <h3>Light Mode Buttons</h3>
+  <njwds-button variant="primary">
+    Primary
+  </njwds-button>
+  <njwds-button variant="secondary">
+    Secondary
+  </njwds-button>
+  <njwds-button variant="link">
+    Link
+  </njwds-button>
+  <h3>Dark Mode Buttons</h3>
+  <div style="background-color: black; padding: .5rem 0; margin:.5rem 0">
+    <njwds-button variant="primary" mode="dark">
+      Primary
     </njwds-button>
-    <njwds-button variant="secondary" as-child>
-      <button autofocus="true">test</button>
+    <njwds-button variant="secondary" mode="dark">
+      Secondary
     </njwds-button>
-    <njwds-icon icon="accessibility_new"></njwds-icon>
-  </body>
+    <njwds-button variant="link" mode="dark">
+      Link
+    </njwds-button>
+  </div>
+  <h3>Danger Mode Buttons</h3>
+  <njwds-button variant="primary" mode="danger">
+    Primary
+  </njwds-button>
+  <njwds-button variant="secondary" mode="danger">
+    Secondary
+  </njwds-button>
+  <njwds-button variant="link" mode="danger">
+    Link
+  </njwds-button>
+  <h3>Icon Buttons</h3>
+  <njwds-button icon="accessibility_new" icon-position="leading">Leading</njwds-button>
+  <njwds-button icon="accessibility_new" icon-position="trailing">Trailing</njwds-button>
+  <njwds-button icon="accessibility_new" icon-position="icon-only"></njwds-button>
+  <njwds-button variant="secondary" icon="accessibility_new" icon-position="leading">Leading</njwds-button>
+  <njwds-button variant="secondary" icon="accessibility_new" icon-position="trailing">Trailing</njwds-button>
+  <njwds-button variant="secondary" icon="accessibility_new" icon-position="icon-only"></njwds-button>
+  <njwds-button variant="link" icon="accessibility_new" icon-position="leading">Leading</njwds-button>
+  <njwds-button variant="link" icon="accessibility_new" icon-position="trailing">Trailing</njwds-button>
+  <njwds-button variant="link" icon="accessibility_new" icon-position="icon-only"></njwds-button>
+  <div style="background-color: black; padding: .5rem 0; margin:.5rem 0">
+    <njwds-button icon="accessibility_new" mode="dark" icon-position="leading">Leading</njwds-button>
+    <njwds-button icon="accessibility_new" mode="dark" icon-position="trailing">Trailing</njwds-button>
+    <njwds-button icon="accessibility_new" mode="dark" icon-position="icon-only"></njwds-button>
+    <njwds-button variant="secondary" mode="dark" icon="accessibility_new"
+      icon-position="leading">Leading</njwds-button>
+    <njwds-button variant="secondary" mode="dark" icon="accessibility_new"
+      icon-position="trailing">Trailing</njwds-button>
+    <njwds-button variant="secondary" mode="dark" icon="accessibility_new" icon-position="icon-only"></njwds-button>
+    <njwds-button variant="link" mode="dark" icon="accessibility_new" icon-position="leading">Leading</njwds-button>
+    <njwds-button variant="link" mode="dark" icon="accessibility_new" icon-position="trailing">Trailing</njwds-button>
+    <njwds-button variant="link" mode="dark" icon="accessibility_new" icon-position="icon-only"></njwds-button>
+  </div>
+  <njwds-button icon="accessibility_new" mode="danger" icon-position="leading">Leading</njwds-button>
+  <njwds-button icon="accessibility_new" mode="danger" icon-position="trailing">Trailing</njwds-button>
+  <njwds-button icon="accessibility_new" mode="danger" icon-position="icon-only"></njwds-button>
+  <njwds-button variant="secondary" mode="danger" icon="accessibility_new"
+    icon-position="leading">Leading</njwds-button>
+  <njwds-button variant="secondary" mode="danger" icon="accessibility_new"
+    icon-position="trailing">Trailing</njwds-button>
+  <njwds-button variant="secondary" mode="danger" icon="accessibility_new" icon-position="icon-only"></njwds-button>
+  <njwds-button variant="link" mode="danger" icon="accessibility_new" icon-position="leading">Leading</njwds-button>
+  <njwds-button variant="link" mode="danger" icon="accessibility_new" icon-position="trailing">Trailing</njwds-button>
+  <njwds-button variant="link" mode="danger" icon="accessibility_new" icon-position="icon-only"></njwds-button>
+  <h2>Icon</h2>
+  <njwds-icon size="scale" icon="accessibility_new"></njwds-icon>
+  <njwds-icon size="3" icon="accessibility_new"></njwds-icon>
+  <njwds-icon size="4" icon="accessibility_new"></njwds-icon>
+  <njwds-icon size="5" icon="accessibility_new"></njwds-icon>
+  <njwds-icon size="6" icon="accessibility_new"></njwds-icon>
+  <njwds-icon size="7" icon="accessibility_new"></njwds-icon>
+  <njwds-icon size="8" icon="accessibility_new"></njwds-icon>
+  <njwds-icon size="9" icon="accessibility_new"></njwds-icon>
+</body>
+
 </html>

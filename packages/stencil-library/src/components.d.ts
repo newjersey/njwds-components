@@ -5,9 +5,9 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { ButtonVariant } from "./components/button/button";
+import { ButtonVariant, iconPosition } from "./components/button/button";
 import { Mode } from "./interface";
-export { ButtonVariant } from "./components/button/button";
+export { ButtonVariant, iconPosition } from "./components/button/button";
 export { Mode } from "./interface";
 export namespace Components {
     interface MyComponent {
@@ -32,6 +32,8 @@ export namespace Components {
     interface NjwdsBanner {
     }
     interface NjwdsButton {
+        "icon"?: string;
+        "iconPosition": iconPosition;
         "mode": Mode;
         "variant": ButtonVariant;
     }
@@ -39,7 +41,7 @@ export namespace Components {
         "decorative": boolean;
         "icon": string;
         "iconTitle"?: string;
-        "size": "3" | "4" | "scale";
+        "size": "3" | "4" | "5" | "6" | "7" | "8" | "9" | "scale";
     }
 }
 declare global {
@@ -104,6 +106,8 @@ declare namespace LocalJSX {
     interface NjwdsBanner {
     }
     interface NjwdsButton {
+        "icon"?: string;
+        "iconPosition"?: iconPosition;
         "mode"?: Mode;
         "variant"?: ButtonVariant;
     }
@@ -111,7 +115,7 @@ declare namespace LocalJSX {
         "decorative"?: boolean;
         "icon"?: string;
         "iconTitle"?: string;
-        "size"?: "3" | "4" | "scale";
+        "size"?: "3" | "4" | "5" | "6" | "7" | "8" | "9" | "scale";
     }
     interface IntrinsicElements {
         "my-component": MyComponent;
