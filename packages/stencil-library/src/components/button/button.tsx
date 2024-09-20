@@ -1,8 +1,5 @@
 import { Component, Prop, h, getAssetPath } from "@stencil/core";
-import { Mode } from "../../interface";
-
-export type ButtonVariant = "primary" | "secondary" | "link"
-export type iconPosition = "leading" | "trailing" | "icon-only"
+import { ButtonVariant, Mode, IconPosition } from "../../interface";
 
 @Component({
     tag: "njwds-button",
@@ -11,7 +8,8 @@ export class Button {
     @Prop() variant: ButtonVariant = "primary";
     @Prop() mode: Mode = "light";
     @Prop() icon?: string;
-    @Prop() iconPosition: iconPosition = "leading";
+    @Prop() iconPosition: IconPosition = "leading";
+    @Prop() iconTitle?: string;
 
     private getButtonClassName(): string {
 
@@ -83,11 +81,24 @@ export class Button {
 
         if (this.icon) {
             const spriteSrc = getAssetPath("img/sprite.svg");
-            return (
-                <svg class={iconClass} aria-hidden={this.iconPosition === 'icon-only' ? false : true} role="img">
-                    <use xlinkHref={`${spriteSrc}#${this.icon}`}></use>
-                </svg>
-            )
+            const iconSrc = `${spriteSrc}#${this.icon}`
+            const iconTitleId = crypto.randomUUID();
+
+            if (this.iconPosition === 'icon-only') {
+                return (
+                    <svg class={iconClass} aria-labelledby={iconTitleId} role="img" focusable="false">
+                        <title id={iconTitleId}>{this.iconTitle ?? this.icon}</title>
+                        <use xlinkHref={iconSrc}></use>
+                    </svg>
+                )
+
+            } else {
+                return (
+                    <svg class={iconClass} aria-hidden="true" role="img" focusable="false">
+                        <use xlinkHref={iconSrc}></use>
+                    </svg>
+                )
+            }
         }
         return null;
     }

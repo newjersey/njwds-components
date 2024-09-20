@@ -5,10 +5,8 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { ButtonVariant, iconPosition } from "./components/button/button";
-import { Mode } from "./interface";
-export { ButtonVariant, iconPosition } from "./components/button/button";
-export { Mode } from "./interface";
+import { ButtonVariant, IconPosition, Mode } from "./interface";
+export { ButtonVariant, IconPosition, Mode } from "./interface";
 export namespace Components {
     interface MyComponent {
         /**
@@ -33,7 +31,8 @@ export namespace Components {
     }
     interface NjwdsButton {
         "icon"?: string;
-        "iconPosition": iconPosition;
+        "iconPosition": IconPosition;
+        "iconTitle"?: string;
         "mode": Mode;
         "variant": ButtonVariant;
     }
@@ -107,7 +106,8 @@ declare namespace LocalJSX {
     }
     interface NjwdsButton {
         "icon"?: string;
-        "iconPosition"?: iconPosition;
+        "iconPosition"?: IconPosition;
+        "iconTitle"?: string;
         "mode"?: Mode;
         "variant"?: ButtonVariant;
     }
