@@ -1,4 +1,4 @@
-import { Component, Prop, h, getAssetPath } from "@stencil/core";
+import { Component, Prop, h } from "@stencil/core";
 import { ButtonVariant, Mode, IconPosition } from "../../interface";
 
 @Component({
@@ -69,7 +69,7 @@ export class Button {
     }
 
     private renderIcon() {
-        let iconClass = 'usa-icon usa-icon--size-3'
+        let iconClass = ''
         switch (this.iconPosition) {
             case "leading":
                 iconClass += ' margin-right-105'
@@ -80,23 +80,14 @@ export class Button {
         }
 
         if (this.icon) {
-            const spriteSrc = getAssetPath("img/sprite.svg");
-            const iconSrc = `${spriteSrc}#${this.icon}`
-            const iconTitleId = crypto.randomUUID();
-
             if (this.iconPosition === 'icon-only') {
                 return (
-                    <svg class={iconClass} aria-labelledby={iconTitleId} role="img" focusable="false">
-                        <title id={iconTitleId}>{this.iconTitle ?? this.icon}</title>
-                        <use xlinkHref={iconSrc}></use>
-                    </svg>
+                  <njwds-icon icon={this.icon} size="3" decorative={false} iconTitle={this.iconTitle}></njwds-icon>
                 )
 
             } else {
                 return (
-                    <svg class={iconClass} aria-hidden="true" role="img" focusable="false">
-                        <use xlinkHref={iconSrc}></use>
-                    </svg>
+                  <njwds-icon class={iconClass} icon={this.icon} size="3" decorative={true} iconTitle={this.iconTitle}></njwds-icon>
                 )
             }
         }

@@ -136,27 +136,24 @@ describe('<njwds-button>', () => {
             const button = await renderAndGetButtonElement(`
                     <njwds-button icon=${testIcon}>button</njwds-button>
             `);
-            const icon = await button.find('svg');
-            expect(getElementClasses(icon)).toEqual(['usa-icon', 'usa-icon--size-3', 'margin-right-105'].sort());
-            expect(icon).toHaveAttribute('aria-hidden');
+            const iconComponent = await button.find('njwds-icon');
+            expect(getElementClasses(iconComponent)).toEqual(['hydrated','margin-right-105'].sort());
         });
 
         it('renders a leading icon button with the correct icon classes and attributes when position set to leading', async () => {
             const button = await renderAndGetButtonElement(`
                     <njwds-button icon=${testIcon} icon-position=${iconPosition.leading}>button</njwds-button>
             `);
-            const icon = await button.find('svg');
-            expect(getElementClasses(icon)).toEqual(['usa-icon', 'usa-icon--size-3', 'margin-right-105'].sort());
-            expect(icon).toHaveAttribute('aria-hidden');
+            const iconComponent = await button.find('njwds-icon');
+            expect(getElementClasses(iconComponent)).toEqual(['hydrated', 'margin-right-105'].sort());
         });
 
         it('renders a trailing icon button with the correct icon classes and attributes when position set to trailing', async () => {
             const button = await renderAndGetButtonElement(`
                     <njwds-button icon=${testIcon} icon-position=${iconPosition.trailing}>button</njwds-button>
             `);
-            const icon = await button.find('svg');
-            expect(getElementClasses(icon)).toEqual(['usa-icon', 'usa-icon--size-3', 'margin-left-105'].sort());
-            expect(icon).toHaveAttribute('aria-hidden');
+            const iconComponent = await button.find('njwds-icon');
+            expect(getElementClasses(iconComponent)).toEqual(['hydrated', 'margin-left-105'].sort());
         });
 
         it('renders an icon-only button with the correct icon classes, attributes, and a title when position set to icon-only', async () => {
