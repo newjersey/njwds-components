@@ -36,6 +36,12 @@ export namespace Components {
         "mode": Mode;
         "variant": ButtonVariant;
     }
+    interface NjwdsRadio {
+        "inputId": string;
+        "name": string;
+        "tile": boolean;
+        "value": string;
+    }
 }
 declare global {
     interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
@@ -62,11 +68,18 @@ declare global {
         prototype: HTMLNjwdsButtonElement;
         new (): HTMLNjwdsButtonElement;
     };
+    interface HTMLNjwdsRadioElement extends Components.NjwdsRadio, HTMLStencilElement {
+    }
+    var HTMLNjwdsRadioElement: {
+        prototype: HTMLNjwdsRadioElement;
+        new (): HTMLNjwdsRadioElement;
+    };
     interface HTMLElementTagNameMap {
         "my-component": HTMLMyComponentElement;
         "njwds-alert": HTMLNjwdsAlertElement;
         "njwds-banner": HTMLNjwdsBannerElement;
         "njwds-button": HTMLNjwdsButtonElement;
+        "njwds-radio": HTMLNjwdsRadioElement;
     }
 }
 declare namespace LocalJSX {
@@ -96,11 +109,18 @@ declare namespace LocalJSX {
         "mode"?: Mode;
         "variant"?: ButtonVariant;
     }
+    interface NjwdsRadio {
+        "inputId"?: string;
+        "name"?: string;
+        "tile"?: boolean;
+        "value"?: string;
+    }
     interface IntrinsicElements {
         "my-component": MyComponent;
         "njwds-alert": NjwdsAlert;
         "njwds-banner": NjwdsBanner;
         "njwds-button": NjwdsButton;
+        "njwds-radio": NjwdsRadio;
     }
 }
 export { LocalJSX as JSX };
@@ -111,6 +131,7 @@ declare module "@stencil/core" {
             "njwds-alert": LocalJSX.NjwdsAlert & JSXBase.HTMLAttributes<HTMLNjwdsAlertElement>;
             "njwds-banner": LocalJSX.NjwdsBanner & JSXBase.HTMLAttributes<HTMLNjwdsBannerElement>;
             "njwds-button": LocalJSX.NjwdsButton & JSXBase.HTMLAttributes<HTMLNjwdsButtonElement>;
+            "njwds-radio": LocalJSX.NjwdsRadio & JSXBase.HTMLAttributes<HTMLNjwdsRadioElement>;
         }
     }
 }
