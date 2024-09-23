@@ -12,3 +12,4 @@ export const NjwdsAlert = /*@__PURE__*/createReactComponent<JSX.NjwdsAlert, HTML
 export const NjwdsBanner = /*@__PURE__*/createReactComponent<JSX.NjwdsBanner, HTMLNjwdsBannerElement>('njwds-banner');
 export const NjwdsButton = /*@__PURE__*/createReactComponent<JSX.NjwdsButton, HTMLNjwdsButtonElement>('njwds-button');
 export const NjwdsRadio = /*@__PURE__*/createReactComponent<JSX.NjwdsRadio, HTMLNjwdsRadioElement>('njwds-radio');
+export const NjwdsRadioGroup = /*@__PURE__*/createReactComponent<JSX.NjwdsRadioGroup, HTMLNjwdsRadioGroupElement>('njwds-radio-group');

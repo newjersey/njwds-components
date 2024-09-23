@@ -39,8 +39,14 @@ export namespace Components {
     interface NjwdsRadio {
         "inputId": string;
         "name": string;
+        "required": boolean;
         "tile": boolean;
         "value": string;
+    }
+    interface NjwdsRadioGroup {
+        "name": string;
+        "required": boolean;
+        "tile": boolean;
     }
 }
 declare global {
@@ -74,12 +80,19 @@ declare global {
         prototype: HTMLNjwdsRadioElement;
         new (): HTMLNjwdsRadioElement;
     };
+    interface HTMLNjwdsRadioGroupElement extends Components.NjwdsRadioGroup, HTMLStencilElement {
+    }
+    var HTMLNjwdsRadioGroupElement: {
+        prototype: HTMLNjwdsRadioGroupElement;
+        new (): HTMLNjwdsRadioGroupElement;
+    };
     interface HTMLElementTagNameMap {
         "my-component": HTMLMyComponentElement;
         "njwds-alert": HTMLNjwdsAlertElement;
         "njwds-banner": HTMLNjwdsBannerElement;
         "njwds-button": HTMLNjwdsButtonElement;
         "njwds-radio": HTMLNjwdsRadioElement;
+        "njwds-radio-group": HTMLNjwdsRadioGroupElement;
     }
 }
 declare namespace LocalJSX {
@@ -112,8 +125,14 @@ declare namespace LocalJSX {
     interface NjwdsRadio {
         "inputId"?: string;
         "name"?: string;
+        "required"?: boolean;
         "tile"?: boolean;
         "value"?: string;
+    }
+    interface NjwdsRadioGroup {
+        "name"?: string;
+        "required"?: boolean;
+        "tile"?: boolean;
     }
     interface IntrinsicElements {
         "my-component": MyComponent;
@@ -121,6 +140,7 @@ declare namespace LocalJSX {
         "njwds-banner": NjwdsBanner;
         "njwds-button": NjwdsButton;
         "njwds-radio": NjwdsRadio;
+        "njwds-radio-group": NjwdsRadioGroup;
     }
 }
 export { LocalJSX as JSX };
@@ -132,6 +152,7 @@ declare module "@stencil/core" {
             "njwds-banner": LocalJSX.NjwdsBanner & JSXBase.HTMLAttributes<HTMLNjwdsBannerElement>;
             "njwds-button": LocalJSX.NjwdsButton & JSXBase.HTMLAttributes<HTMLNjwdsButtonElement>;
             "njwds-radio": LocalJSX.NjwdsRadio & JSXBase.HTMLAttributes<HTMLNjwdsRadioElement>;
+            "njwds-radio-group": LocalJSX.NjwdsRadioGroup & JSXBase.HTMLAttributes<HTMLNjwdsRadioGroupElement>;
         }
     }
 }

@@ -52,6 +52,19 @@ describe('<njwds-radio>', () => {
       const input = await radio.find(':scope > input');
       expect(input).toEqualAttribute('value', 'radio-value');
     });
+
+    it('whose <input> element does not have the required attribute by default', async () => {
+      const radio = await renderAndGetRadioComponent('<njwds-radio></njwds-radio>');
+      const input = await radio.find(':scope > input');
+      expect(input).not.toHaveAttribute('required');
+    });
+
+    it("whose 'required' prop sets the <input> element's required attribute", async () => {
+      const radio = await renderAndGetRadioComponent('<njwds-radio required></njwds-radio>');
+      const input = await radio.find(':scope > input');
+      expect(input).toHaveAttribute('required');
+      expect(input).not.toEqualAttribute('required', 'false');
+    });
   });
 
   describe('<label> child', () => {

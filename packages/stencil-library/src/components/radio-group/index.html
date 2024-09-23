@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
+    <title>Radio Group Component</title>
+    <script type="module" src="/build/stencil-library.esm.js"></script>
+    <script nomodule src="/build/stencil-library.js"></script>
+    <link rel="stylesheet" href="/build/css/styles.css" />
+  </head>
+  <body>
+    <h1>Radio Group Component</h1>
+    <h2>Default</h2>
+    <form class="usa-form">
+        <njwds-radio-group name="historial-figures">
+            <span slot="legend">Select one historical figure</span>
+            <njwds-radio input-id="historical-douglass" type="radio" value="frederick-douglass">
+                Frederick Douglass
+            </njwds-radio>
+            <njwds-radio  input-id="historical-truth" type="radio" value="sojourner-truth">
+                Sojourner Truth
+            </njwds-radio>
+        </njwds-radio-group>
+    </form>
+    <h2>Tile</h2>
+    <form class="usa-form">
+        <njwds-radio-group name="historial-figures-2" tile>
+            <span slot="legend">Select one historical figure</span>
+            <njwds-radio input-id="historical-douglass-2" type="radio" value="frederick-douglass">
+                Frederick Douglass
+            </njwds-radio>
+            <njwds-radio  input-id="historical-truth-2" type="radio" value="sojourner-truth">
+                Sojourner Truth
+            </njwds-radio>
+        </njwds-radio-group>
+    </form>
+  
+  </body>
+</html>
