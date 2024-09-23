@@ -8,20 +8,6 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { ButtonVariant, IconPosition, Mode } from "./interface";
 export { ButtonVariant, IconPosition, Mode } from "./interface";
 export namespace Components {
-    interface MyComponent {
-        /**
-          * The first name
-         */
-        "first": string;
-        /**
-          * The last name
-         */
-        "last": string;
-        /**
-          * The middle name
-         */
-        "middle": string;
-    }
     interface NjwdsAlert {
         "noIcon": boolean;
         "slim": boolean;
@@ -44,12 +30,6 @@ export namespace Components {
     }
 }
 declare global {
-    interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
-    }
-    var HTMLMyComponentElement: {
-        prototype: HTMLMyComponentElement;
-        new (): HTMLMyComponentElement;
-    };
     interface HTMLNjwdsAlertElement extends Components.NjwdsAlert, HTMLStencilElement {
     }
     var HTMLNjwdsAlertElement: {
@@ -75,7 +55,6 @@ declare global {
         new (): HTMLNjwdsIconElement;
     };
     interface HTMLElementTagNameMap {
-        "my-component": HTMLMyComponentElement;
         "njwds-alert": HTMLNjwdsAlertElement;
         "njwds-banner": HTMLNjwdsBannerElement;
         "njwds-button": HTMLNjwdsButtonElement;
@@ -83,20 +62,6 @@ declare global {
     }
 }
 declare namespace LocalJSX {
-    interface MyComponent {
-        /**
-          * The first name
-         */
-        "first"?: string;
-        /**
-          * The last name
-         */
-        "last"?: string;
-        /**
-          * The middle name
-         */
-        "middle"?: string;
-    }
     interface NjwdsAlert {
         "noIcon"?: boolean;
         "slim"?: boolean;
@@ -118,7 +83,6 @@ declare namespace LocalJSX {
         "size"?: "3" | "4" | "5" | "6" | "7" | "8" | "9" | "scale";
     }
     interface IntrinsicElements {
-        "my-component": MyComponent;
         "njwds-alert": NjwdsAlert;
         "njwds-banner": NjwdsBanner;
         "njwds-button": NjwdsButton;
@@ -129,7 +93,6 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
-            "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
             "njwds-alert": LocalJSX.NjwdsAlert & JSXBase.HTMLAttributes<HTMLNjwdsAlertElement>;
             "njwds-banner": LocalJSX.NjwdsBanner & JSXBase.HTMLAttributes<HTMLNjwdsBannerElement>;
             "njwds-button": LocalJSX.NjwdsButton & JSXBase.HTMLAttributes<HTMLNjwdsButtonElement>;
