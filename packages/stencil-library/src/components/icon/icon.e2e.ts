@@ -55,7 +55,6 @@ describe("<njwds-icon>", () => {
             <njwds-icon icon="mail" icon-title="mail"></njwds-icon>
         `)
         expect(functionalSVG).toEqualAttribute("focusable", "false")
-
         const decorativeSVG = await renderAndGetSVGElement(`
             <njwds-icon icon="mail" decorative></njwds-icon>
         `)
@@ -67,7 +66,6 @@ describe("<njwds-icon>", () => {
             const svgElement = await renderAndGetSVGElement(`
                 <njwds-icon icon="mail" icon-title="Get updates"></njwds-icon>
             `)
-
             expect(svgElement).not.toHaveAttribute("aria-hidden")
         })
 
@@ -78,27 +76,19 @@ describe("<njwds-icon>", () => {
 
             const titleElement = await svgElement.find("title")
             expect(titleElement).toEqualText("Get updates")
-
             const titleElementId = titleElement.getAttribute("id")
             const svgLabelledBy = svgElement.getAttribute("aria-labelledby")
-
             expect(svgLabelledBy).toBe(titleElementId)
         })
 
         it("if no icon title is provided, set it to the icon name", async () => {
             /* We throw an error when no icon title is provided on a functional icon (see spec tests), but if the user still doesn't provide a title, we provide a reasonable placeholder. */
             suppressConsoleErrorFromE2EPage()
-
             const svgElement = await renderAndGetSVGElement(`
                 <njwds-icon icon="mail"></njwds-icon>
             `)
             const titleElement = await svgElement.find("title")
-            try {
-                expect(titleElement).toEqualText("mail")
-            } catch {
-
-            }
-
+            expect(titleElement).toEqualText('mail');
         })
 
     })
@@ -108,7 +98,6 @@ describe("<njwds-icon>", () => {
             const svgElement = await renderAndGetSVGElement(`
                 <njwds-icon decorative icon="mail" size="scale"></njwds-icon>
             `)
-
             expect(svgElement).toEqualAttribute("aria-hidden", true)
         })
 
@@ -116,9 +105,7 @@ describe("<njwds-icon>", () => {
             const svgElement = await renderAndGetSVGElement(`
                 <njwds-icon decorative icon="mail" size="scale"></njwds-icon>
             `)
-
             const titleElement = await svgElement.find("title")
-
             expect(titleElement).toBeNull()
         })
     })

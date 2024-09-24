@@ -64,7 +64,7 @@ describe('<njwds-button>', () => {
             expect(button.className).toBe('usa-button');
         });
 
-        it('renders light mode secondary variant as USWDS outline inverse variant', async () => {
+        it('renders light mode secondary variant as USWDS outline variant', async () => {
             const button = await renderAndGetButtonElement(`
                     <njwds-button variant=${variant.secondary} mode=${mode.light}></njwds-button>
             `);
