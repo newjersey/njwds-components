@@ -5,7 +5,7 @@ import { Component, getAssetPath, h, Prop } from "@stencil/core";
 })
 export class Icon {
     @Prop() icon: string
-    @Prop() size: "3" | "4" | "5" | "6" | "7" | "8" | "9" | "scale" = "3"
+    @Prop() size: "3" | "4"| "scale" = "3"
     @Prop() decorative: boolean = false;
     @Prop() iconTitle?: string
 
@@ -22,12 +22,7 @@ export class Icon {
         const sizeToClass = {
             "scale": "",
             "3": "usa-icon--size-3",
-            "4": "usa-icon--size-4",
-            "5": "usa-icon--size-5",
-            "6": "usa-icon--size-6",
-            "7": "usa-icon--size-7",
-            "8": "usa-icon--size-8",
-            "9": "usa-icon--size-9"
+            "4": "usa-icon--size-4"
         }
 
         const iconClass = `usa-icon ${sizeToClass[this.size]}`
