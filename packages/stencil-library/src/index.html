@@ -1,28 +1,27 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
-    <title>Stencil Component Starter</title>
-    <script type="module" src="/build/stencil-library.esm.js"></script>
-    <script nomodule src="/build/stencil-library.js"></script>
-    <link rel="stylesheet" href="/build/css/styles.css" />
-  </head>
-  <body>
-    <h1>Components</h1>
-    <h2>Banner</h2>
-    <njwds-banner></njwds-banner>
-    <h2>Alert</h2>
-    <njwds-alert type="warning">
-      <h3 slot="header">Warning</h3>
-      <span>Lorem ipsum dolor sit amet, <a href="javascript:void(0);">consectetur adipiscing</a> elit, sed do eiusmod.</span>
-    </njwds-alert>
-    <h2>Button</h2>
-    <njwds-button>
-      Default
-    </njwds-button>
-    <njwds-button variant="secondary" as-child>
-      <button autofocus="true">test</button>
-    </njwds-button>
-  </body>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
+  <title>Stencil Component Starter</title>
+  <script type="module" src="/build/stencil-library.esm.js"></script>
+  <script nomodule src="/build/stencil-library.js"></script>
+  <link rel="stylesheet" href="/build/css/styles.css" />
+</head>
+
+<body>
+  <h1>Components</h1>
+  <h2>Banner</h2>
+  <njwds-banner></njwds-banner>
+  <h2>Alert</h2>
+  <njwds-alert type="warning">
+    <h3 slot="header">Warning</h3>
+    <span>Lorem ipsum dolor sit amet, <a href="javascript:void(0);">consectetur adipiscing</a> elit, sed do
+      eiusmod.</span>
+  </njwds-alert>
+  <h2><a href="./components/button/index.html">Button</a></h2>
+  <h2><a href="./components/icon/index.html">Icon</a></h2>
+</body>
+
 </html>
