@@ -37,6 +37,7 @@ export namespace Components {
         "variant": ButtonVariant;
     }
     interface NjwdsRadio {
+        "checked": boolean;
         "inputId": string;
         "name": string;
         "required": boolean;
@@ -44,6 +45,7 @@ export namespace Components {
         "value": string;
     }
     interface NjwdsRadioGroup {
+        "defaultValue": string;
         "name": string;
         "required": boolean;
         "tile": boolean;
@@ -123,14 +125,16 @@ declare namespace LocalJSX {
         "variant"?: ButtonVariant;
     }
     interface NjwdsRadio {
-        "inputId"?: string;
+        "checked"?: boolean;
+        "inputId": string;
         "name"?: string;
         "required"?: boolean;
         "tile"?: boolean;
-        "value"?: string;
+        "value": string;
     }
     interface NjwdsRadioGroup {
-        "name"?: string;
+        "defaultValue"?: string;
+        "name": string;
         "required"?: boolean;
         "tile"?: boolean;
     }

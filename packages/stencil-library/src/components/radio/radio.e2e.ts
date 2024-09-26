@@ -65,6 +65,20 @@ describe('<njwds-radio>', () => {
       expect(input).toHaveAttribute('required');
       expect(input).not.toEqualAttribute('required', 'false');
     });
+
+    it("whose 'checked' prop sets the <input> element's checked property", async () => {
+      const radio = await renderAndGetRadioComponent('<njwds-radio checked></njwds-radio>');
+      const input = await radio.find(':scope > input');
+      const checkedProperty = await input.getProperty('checked');
+      expect(checkedProperty).toBe(true);
+    });
+
+    it("whose <input> element's checked property is false by default", async () => {
+      const radio = await renderAndGetRadioComponent('<njwds-radio></njwds-radio>');
+      const input = await radio.find(':scope > input');
+      const checkedProperty = await input.getProperty('checked');
+      expect(checkedProperty).toBe(false);
+    });
   });
 
   describe('<label> child', () => {

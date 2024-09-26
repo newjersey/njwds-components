@@ -6,11 +6,12 @@ import { Element } from '@stencil/core';
     tag: "njwds-radio-group",
 })
 export class RadioGroup {
-    @Prop() name: string;
+    @Prop() name!: string;
     @Prop() required: boolean = false;
     @Prop() tile: boolean = false;
-    @Element() private hostElement: HTMLStencilElement
+    @Prop() defaultValue: string;
 
+    @Element() private hostElement: HTMLStencilElement
 
     componentWillLoad() {
         const njwdsRadios = this.hostElement.querySelectorAll(":scope > njwds-radio")
@@ -23,8 +24,13 @@ export class RadioGroup {
             if (this.tile) {
                 radio.setAttribute("tile", "")
             }
+            const radioValue = radio.getAttribute("value")
+            if (this.defaultValue === radioValue) {
+                radio.setAttribute("checked", "")
+            }
         })
     }
+
     render() {
         return (
             <fieldset class="usa-fieldset">

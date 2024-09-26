@@ -102,5 +102,32 @@ describe('<njwds-radio-group>', () => {
         expect(radio).not.toEqualAttribute('tile', 'false');
       }
     });
+
+    describe('defaultValue prop', () => {
+      it('no njwds-radios are checked by default', async () => {
+        const fieldset = await renderAndGetFieldset(`<njwds-radio-group
+            name="historical-figures"
+            >
+                <njwds-radio value="truth">Sojourner Truth</njwds-radio>
+                <njwds-radio value="douglass">Frederick Douglass</njwds-radio>
+          </njwds-radio-group>`);
+        const inputs = await fieldset.findAll('input');
+        for (const input of inputs) {
+          expect(await input.getProperty('checked')).toBe(false);
+        }
+      });
+
+      it('on component load, sets the checked property to true on the correct njwds-radio element ', async () => {
+        const fieldset = await renderAndGetFieldset(`<njwds-radio-group
+            name="historical-figures"
+            default-value="douglass"
+            >
+                <njwds-radio value="truth">Sojourner Truth</njwds-radio>
+                <njwds-radio value="douglass">Frederick Douglass</njwds-radio>
+          </njwds-radio-group>`);
+        const douglassInput = await fieldset.find('input[value="douglass"]');
+        expect(await douglassInput.getProperty('checked')).toBe(true);
+      });
+    });
   });
 });
