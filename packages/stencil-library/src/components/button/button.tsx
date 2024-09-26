@@ -51,6 +51,7 @@ export class Button {
         }
 
         let getClassName: string;
+        
         switch (this.mode) {
             case "light":
                 getClassName = getLightModeVariantClassName(this.variant);
