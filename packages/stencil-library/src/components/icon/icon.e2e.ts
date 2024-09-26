@@ -119,7 +119,7 @@ describe("<njwds-icon>", () => {
             expect(svgElement).toHaveClass(`usa-icon--size-3`)
         })
 
-      it.each(["3", "4"])("has size %s USWDS utility class when passed", async (size) => {
+      it.each(["3", "4", "5"])("has size %s USWDS utility class when passed", async (size) => {
             const svgElement = await renderAndGetSVGElement(`
                 <njwds-icon decorative icon="mail" size=${size}></njwds-icon>
             `)

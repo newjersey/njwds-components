@@ -26,7 +26,7 @@ export namespace Components {
         "decorative": boolean;
         "icon": string;
         "iconTitle"?: string;
-        "size": "3" | "4"| "scale";
+        "size": "3" | "4"| "5" | "scale";
     }
 }
 declare global {
@@ -80,7 +80,7 @@ declare namespace LocalJSX {
         "decorative"?: boolean;
         "icon"?: string;
         "iconTitle"?: string;
-        "size"?: "3" | "4"| "scale";
+        "size"?: "3" | "4"| "5" | "scale";
     }
     interface IntrinsicElements {
         "njwds-alert": NjwdsAlert;
