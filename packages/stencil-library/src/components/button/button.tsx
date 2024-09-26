@@ -13,7 +13,7 @@ export class Button {
 
     private getButtonClassName(): string {
 
-        const getVariantClassName = (variant: ButtonVariant): string => {
+        const getLightModeVariantClassName = (variant: ButtonVariant): string => {
             switch (variant) {
                 case 'primary':
                     return ""
@@ -46,50 +46,49 @@ export class Button {
                 case 'link':
                     return "usa-button--unstyled unstyled-button-danger"
                 default:
-                    return getVariantClassName(variant)
+                    return getLightModeVariantClassName(variant)
             }
         }
 
-        let getClassName;
+        let getClassName: string;
         switch (this.mode) {
             case "light":
-                getClassName = getVariantClassName;
+                getClassName = getLightModeVariantClassName(this.variant);
                 break;
             case "dark":
-                getClassName = getDarkModeVariantClassName;
+                getClassName = getDarkModeVariantClassName(this.variant);
                 break;
             case "danger":
-                getClassName = getDangerModeVariantClassName;
+                getClassName = getDangerModeVariantClassName(this.variant);
                 break;
             default:
-                getClassName = getVariantClassName;
+                getClassName = getLightModeVariantClassName(this.variant);
         }
-
-        return `usa-button ${getClassName(this.variant)} ${this.icon ? 'button-icon' : ''}`
+        
+        return `usa-button ${getClassName} ${this.icon ? 'button-icon' : ''}`
     }
 
     private renderIcon() {
         let iconClass = ''
         switch (this.iconPosition) {
             case "leading":
-                iconClass += ' margin-right-105'
+                iconClass = ' margin-right-105'
                 break;
             case "trailing":
-                iconClass += ' margin-left-105'
+                iconClass = ' margin-left-105'
                 break;
         }
 
         if (this.icon) {
-            if (this.iconPosition === 'icon-only') {
-                return (
-                  <njwds-icon icon={this.icon} size="3" decorative={false} iconTitle={this.iconTitle}></njwds-icon>
-                )
-
-            } else {
-                return (
-                  <njwds-icon class={iconClass} icon={this.icon} size="3" decorative={true} iconTitle={this.iconTitle}></njwds-icon>
-                )
-            }
+            return (
+                <njwds-icon
+                    class={this.iconPosition !== 'icon-only' ? iconClass : undefined}
+                    icon={this.icon}
+                    size="3"
+                    decorative={this.iconPosition === 'icon-only' ? false : true}
+                    iconTitle={this.iconTitle}
+                ></njwds-icon>
+            )
         }
         return null;
     }
