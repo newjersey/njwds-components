@@ -1,5 +1,5 @@
 import { Component, h } from "@stencil/core";
-import { HTMLStencilElement, Prop } from "@stencil/core/internal";
+import { HTMLStencilElement, Listen, Prop, Watch } from "@stencil/core/internal";
 import { Element } from '@stencil/core';
 
 @Component({
@@ -9,24 +9,51 @@ export class RadioGroup {
     @Prop() name!: string;
     @Prop() required: boolean = false;
     @Prop() tile: boolean = false;
-    @Prop() defaultValue: string;
+    @Prop({ reflect: true, mutable: true }) value: string;
 
     @Element() private hostElement: HTMLStencilElement
+
+    @Listen('change')
+    changeHandler(event: Event) {
+        if ("value" in event.target && typeof event.target.value === "string") {
+            this.value = event.target.value
+        }
+    }
+
+    @Watch('value')
+    watchValueHandler(newValue: string) {
+        const inputs = this.hostElement.querySelectorAll("input")
+        inputs.forEach(input => {
+            const radioValue = input.getAttribute("value")
+            if (radioValue === newValue) {
+                input.checked = true
+            }
+        })
+    }
+
+    componentDidLoad() {
+        const inputs = this.hostElement.querySelectorAll("input")
+
+        inputs.forEach(input => {
+            input.setAttribute("name", this.name)
+
+            if (this.required) {
+                input.setAttribute("required", "")
+            }
+
+            const radioValue = input.getAttribute("value")
+            if (radioValue === this.value) {
+                input.setAttribute("checked", "")
+            }
+        })
+    }
 
     componentWillLoad() {
         const njwdsRadios = this.hostElement.querySelectorAll(":scope > njwds-radio")
 
         njwdsRadios.forEach(radio => {
-            radio.setAttribute("name", this.name)
-            if (this.required) {
-                radio.setAttribute("required", "")
-            }
             if (this.tile) {
                 radio.setAttribute("tile", "")
-            }
-            const radioValue = radio.getAttribute("value")
-            if (this.defaultValue === radioValue) {
-                radio.setAttribute("checked", "")
             }
         })
     }

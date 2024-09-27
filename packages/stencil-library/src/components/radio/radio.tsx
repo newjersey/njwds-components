@@ -11,10 +11,7 @@ import { Component, h, Host, Prop } from "@stencil/core";
 export class Radio {
     @Prop() inputId!: string;
     @Prop() value!: string;
-    @Prop() name: string;
-    @Prop() required: boolean = false
     @Prop() tile: boolean = false
-    @Prop() checked: boolean = false
 
     render() {
         const tileClass = this.tile ? "usa-radio__input--tile" : ""
@@ -24,10 +21,7 @@ export class Radio {
                     class={`usa-radio__input ${tileClass}`}
                     id={this.inputId}
                     type="radio"
-                    name={this.name}
                     value={this.value}
-                    required={this.required}
-                    checked={this.checked}
                 />
                 <label class="usa-radio__label" htmlFor={this.inputId}>
                     <slot />

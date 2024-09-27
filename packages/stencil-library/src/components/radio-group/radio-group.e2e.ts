@@ -1,10 +1,17 @@
-import { E2EElement, newE2EPage } from '@stencil/core/testing';
+import { E2EElement, E2EPage, newE2EPage } from '@stencil/core/testing';
 
 const renderAndGetFieldset = async (content: string): Promise<E2EElement> => {
   const page = await newE2EPage();
   await page.setContent(content);
   const fieldset = await page.find('njwds-radio-group > fieldset');
   return fieldset;
+};
+
+const renderAndGetRadioGroupAndPage = async (content: string): Promise<{ radioGroup: E2EElement; page: E2EPage }> => {
+  const page = await newE2EPage();
+  await page.setContent(content);
+  const radioGroup = await page.find('njwds-radio-group');
+  return { radioGroup, page };
 };
 
 describe('<njwds-radio-group>', () => {
@@ -117,15 +124,43 @@ describe('<njwds-radio-group>', () => {
         }
       });
 
-      it('on component load, sets the checked property to true on the correct njwds-radio element ', async () => {
+      it('checks the correct njwds-radio element on component load', async () => {
         const fieldset = await renderAndGetFieldset(`<njwds-radio-group
             name="historical-figures"
-            default-value="douglass"
+            value="douglass"
             >
                 <njwds-radio value="truth">Sojourner Truth</njwds-radio>
                 <njwds-radio value="douglass">Frederick Douglass</njwds-radio>
           </njwds-radio-group>`);
         const douglassInput = await fieldset.find('input[value="douglass"]');
+        expect(await douglassInput.getProperty('checked')).toBe(true);
+      });
+
+      it('updates to the correct value when a njwds-radio element is selected', async () => {
+        const { radioGroup } = await renderAndGetRadioGroupAndPage(`<njwds-radio-group
+          name="historical-figures"
+          value="douglass"
+          >
+              <njwds-radio value="truth">Sojourner Truth</njwds-radio>
+              <njwds-radio value="douglass">Frederick Douglass</njwds-radio>
+        </njwds-radio-group>`);
+        const truthInput = await radioGroup.find('input[value="truth"]');
+        await truthInput.click();
+        expect(await radioGroup.getProperty('value')).toBe('truth');
+      });
+
+      it('when the value prop is programmatically set, selects the correct njwds-radio element', async () => {
+        const { radioGroup, page } = await renderAndGetRadioGroupAndPage(`<njwds-radio-group
+          name="historical-figures"
+          >
+              <njwds-radio value="truth">Sojourner Truth</njwds-radio>
+              <njwds-radio value="douglass">Frederick Douglass</njwds-radio>
+        </njwds-radio-group>`);
+        const douglassInput = await radioGroup.find('input[value="douglass"]');
+        expect(await douglassInput.getProperty('checked')).toBe(false);
+
+        radioGroup.setProperty('value', 'douglass');
+        await page.waitForChanges();
         expect(await douglassInput.getProperty('checked')).toBe(true);
       });
     });

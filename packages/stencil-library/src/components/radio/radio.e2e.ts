@@ -41,43 +41,10 @@ describe('<njwds-radio>', () => {
       expect(input.id).toBe('radio-id');
     });
 
-    it("whose 'name' prop sets the <input> element's name attribute", async () => {
-      const radio = await renderAndGetRadioComponent('<njwds-radio name="radio-name"></njwds-radio>');
-      const input = await radio.find(':scope > input');
-      expect(input).toEqualAttribute('name', 'radio-name');
-    });
-
     it("whose 'value' prop sets the <input> element's value attribute", async () => {
       const radio = await renderAndGetRadioComponent('<njwds-radio value="radio-value"></njwds-radio>');
       const input = await radio.find(':scope > input');
       expect(input).toEqualAttribute('value', 'radio-value');
-    });
-
-    it('whose <input> element does not have the required attribute by default', async () => {
-      const radio = await renderAndGetRadioComponent('<njwds-radio></njwds-radio>');
-      const input = await radio.find(':scope > input');
-      expect(input).not.toHaveAttribute('required');
-    });
-
-    it("whose 'required' prop sets the <input> element's required attribute", async () => {
-      const radio = await renderAndGetRadioComponent('<njwds-radio required></njwds-radio>');
-      const input = await radio.find(':scope > input');
-      expect(input).toHaveAttribute('required');
-      expect(input).not.toEqualAttribute('required', 'false');
-    });
-
-    it("whose 'checked' prop sets the <input> element's checked property", async () => {
-      const radio = await renderAndGetRadioComponent('<njwds-radio checked></njwds-radio>');
-      const input = await radio.find(':scope > input');
-      const checkedProperty = await input.getProperty('checked');
-      expect(checkedProperty).toBe(true);
-    });
-
-    it("whose <input> element's checked property is false by default", async () => {
-      const radio = await renderAndGetRadioComponent('<njwds-radio></njwds-radio>');
-      const input = await radio.find(':scope > input');
-      const checkedProperty = await input.getProperty('checked');
-      expect(checkedProperty).toBe(false);
     });
   });
 

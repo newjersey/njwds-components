@@ -37,18 +37,15 @@ export namespace Components {
         "variant": ButtonVariant;
     }
     interface NjwdsRadio {
-        "checked": boolean;
         "inputId": string;
-        "name": string;
-        "required": boolean;
         "tile": boolean;
         "value": string;
     }
     interface NjwdsRadioGroup {
-        "defaultValue": string;
         "name": string;
         "required": boolean;
         "tile": boolean;
+        "value": string;
     }
 }
 declare global {
@@ -125,18 +122,15 @@ declare namespace LocalJSX {
         "variant"?: ButtonVariant;
     }
     interface NjwdsRadio {
-        "checked"?: boolean;
         "inputId": string;
-        "name"?: string;
-        "required"?: boolean;
         "tile"?: boolean;
         "value": string;
     }
     interface NjwdsRadioGroup {
-        "defaultValue"?: string;
         "name": string;
         "required"?: boolean;
         "tile"?: boolean;
+        "value"?: string;
     }
     interface IntrinsicElements {
         "my-component": MyComponent;
