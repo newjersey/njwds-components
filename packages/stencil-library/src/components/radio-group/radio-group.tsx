@@ -1,6 +1,22 @@
 import { Component, h } from "@stencil/core";
-import { HTMLStencilElement, Listen, Prop, Watch } from "@stencil/core/internal";
+import { HTMLStencilElement, Listen, Method, Prop, Watch } from "@stencil/core/internal";
 import { Element } from '@stencil/core';
+
+export interface RadioGroupValidityState {
+    readonly valid: boolean
+    readonly valueMissing: boolean
+}
+
+const validityStates: { [state: string]: RadioGroupValidityState } = Object.freeze({
+    VALID: {
+        valid: true,
+        valueMissing: false
+    },
+    MISSING_VALUE: {
+        valid: false,
+        valueMissing: true
+    },
+})
 
 @Component({
     tag: "njwds-radio-group",
@@ -10,6 +26,8 @@ export class RadioGroup {
     @Prop() required: boolean = false;
     @Prop() tile: boolean = false;
     @Prop({ reflect: true, mutable: true }) value: string;
+
+    validationMessage: string = ""
 
     @Element() private hostElement: HTMLStencilElement
 
@@ -29,6 +47,19 @@ export class RadioGroup {
                 input.checked = true
             }
         })
+    }
+
+    @Method()
+    async setCustomValidity(message: string): Promise<void> {
+        this.validationMessage = message
+    }
+
+    @Method()
+    async getValidity(): Promise<RadioGroupValidityState> {
+        if (this.required && !this.value) {
+            return validityStates.MISSING_VALUE
+        }
+        return validityStates.VALID
     }
 
     componentDidLoad() {

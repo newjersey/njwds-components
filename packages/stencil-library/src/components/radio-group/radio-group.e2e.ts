@@ -1,4 +1,5 @@
 import { E2EElement, E2EPage, newE2EPage } from '@stencil/core/testing';
+import { RadioGroupValidityState } from './radio-group';
 
 const renderAndGetFieldset = async (content: string): Promise<E2EElement> => {
   const page = await newE2EPage();
@@ -110,7 +111,7 @@ describe('<njwds-radio-group>', () => {
       }
     });
 
-    describe('defaultValue prop', () => {
+    describe('value prop', () => {
       it('no njwds-radios are checked by default', async () => {
         const fieldset = await renderAndGetFieldset(`<njwds-radio-group
             name="historical-figures"
@@ -163,6 +164,35 @@ describe('<njwds-radio-group>', () => {
         await page.waitForChanges();
         expect(await douglassInput.getProperty('checked')).toBe(true);
       });
+    });
+  });
+
+  describe('getValidity() method', () => {
+    it('returns a value missing validity state when required input is missing', async () => {
+      const { radioGroup } = await renderAndGetRadioGroupAndPage(`<njwds-radio-group
+          name="historical-figures"
+          required
+        >
+            <njwds-radio value="truth">Sojourner Truth</njwds-radio>
+            <njwds-radio value="douglass">Frederick Douglass</njwds-radio>
+      </njwds-radio-group>`);
+
+      const validity: RadioGroupValidityState = await radioGroup.callMethod('getValidity');
+      expect(validity.valid).toBe(false);
+      expect(validity.valueMissing).toBe(true);
+    });
+
+    it('returns a valid validity state when input is not required', async () => {
+      const { radioGroup } = await renderAndGetRadioGroupAndPage(`<njwds-radio-group
+          name="historical-figures"
+        >
+            <njwds-radio value="truth">Sojourner Truth</njwds-radio>
+            <njwds-radio value="douglass">Frederick Douglass</njwds-radio>
+      </njwds-radio-group>`);
+
+      const validity: RadioGroupValidityState = await radioGroup.callMethod('getValidity');
+      expect(validity.valid).toBe(true);
+      expect(validity.valueMissing).toBe(false);
     });
   });
 });
