@@ -146,6 +146,7 @@ describe('<njwds-radio-group>', () => {
             <njwds-radio value="truth">Sojourner Truth</njwds-radio>
             <njwds-radio value="douglass">Frederick Douglass</njwds-radio>
       </njwds-radio-group>`);
+      expect(await radioGroup.getProperty('value')).toBe('douglass');
       const truthInput = await radioGroup.find('input[value="truth"]');
       await truthInput.click();
       expect(await radioGroup.getProperty('value')).toBe('truth');
@@ -196,8 +197,8 @@ describe('<njwds-radio-group>', () => {
     });
   });
 
-  describe('showValidity() method', () => {
-    it('validation message does not display by default', async () => {
+  describe('showValidity prop', () => {
+    it('does not display the validation message when the showValidity prop is absent', async () => {
       const { radioGroup } = await renderAndGetRadioGroupAndPage(`<njwds-radio-group
           name="historical-figures"
           validation-message="${validationMessage}"
@@ -210,7 +211,50 @@ describe('<njwds-radio-group>', () => {
       expect(radioGroup.textContent).not.toContain(validationMessage);
     });
 
-    it('when showValidity() is called on an invalid group, displays the validation message', async () => {
+    it('does not display the validation message when the showValidity prop is false', async () => {
+      const { radioGroup } = await renderAndGetRadioGroupAndPage(`<njwds-radio-group
+          name="historical-figures"
+          validation-message="${validationMessage}"
+          required
+          show-validity="false"
+        >
+            <njwds-radio value="truth">Sojourner Truth</njwds-radio>
+            <njwds-radio value="douglass">Frederick Douglass</njwds-radio>
+      </njwds-radio-group>`);
+
+      expect(radioGroup.textContent).not.toContain(validationMessage);
+    });
+
+    it('does not display the validation message when the showValidity prop is added to a valid radio group on load', async () => {
+      const { radioGroup } = await renderAndGetRadioGroupAndPage(`<njwds-radio-group
+          name="historical-figures"
+          validation-message="${validationMessage}"
+          show-validity
+          value="douglass"
+          required
+        >
+            <njwds-radio value="truth">Sojourner Truth</njwds-radio>
+            <njwds-radio value="douglass">Frederick Douglass</njwds-radio>
+      </njwds-radio-group>`);
+
+      expect(radioGroup.textContent).not.toContain(validationMessage);
+    });
+
+    it('displays the validation message when the showValidity prop is added to an invalid radio group on component load', async () => {
+      const { radioGroup } = await renderAndGetRadioGroupAndPage(`<njwds-radio-group
+          name="historical-figures"
+          validation-message="${validationMessage}"
+          show-validity
+          required
+        >
+            <njwds-radio value="truth">Sojourner Truth</njwds-radio>
+            <njwds-radio value="douglass">Frederick Douglass</njwds-radio>
+      </njwds-radio-group>`);
+
+      expect(radioGroup.textContent).toContain(validationMessage);
+    });
+
+    it('displays the validation message when the showValidity prop is added to an invalid radio group after component load', async () => {
       const { radioGroup, page } = await renderAndGetRadioGroupAndPage(`<njwds-radio-group
           name="historical-figures"
           validation-message="${validationMessage}"
@@ -220,25 +264,59 @@ describe('<njwds-radio-group>', () => {
             <njwds-radio value="douglass">Frederick Douglass</njwds-radio>
       </njwds-radio-group>`);
 
-      await radioGroup.callMethod('showValidity');
+      radioGroup.setAttribute('show-validity', true);
       await page.waitForChanges();
       const updatedRadioGroup = await page.find('njwds-radio-group');
       expect(updatedRadioGroup.textContent).toContain(validationMessage);
     });
 
-    it('renders a validation message with the nj-radio-group__validation--message class', async () => {
+    it('when showValidity prop is added on a required field, the validation message disappears when the value prop is set', async () => {
       const { radioGroup, page } = await renderAndGetRadioGroupAndPage(`<njwds-radio-group
           name="historical-figures"
           validation-message="${validationMessage}"
+          required
+          show-validity
+        >
+            <njwds-radio value="truth">Sojourner Truth</njwds-radio>
+            <njwds-radio value="douglass">Frederick Douglass</njwds-radio>
+      </njwds-radio-group>`);
+
+      expect(radioGroup.textContent).toContain(validationMessage);
+      radioGroup.setAttribute('value', 'douglass');
+      await page.waitForChanges();
+      const updatedRadioGroup = await page.find('njwds-radio-group');
+      expect(updatedRadioGroup.textContent).not.toContain(validationMessage);
+    });
+
+    it('when showValidity prop is added on a required field, the validation message disappears when user clicks an option', async () => {
+      const { radioGroup } = await renderAndGetRadioGroupAndPage(`<njwds-radio-group
+          name="historical-figures"
+          validation-message="${validationMessage}"
+          required
+          show-validity
+        >
+            <njwds-radio value="truth">Sojourner Truth</njwds-radio>
+            <njwds-radio value="douglass">Frederick Douglass</njwds-radio>
+      </njwds-radio-group>`);
+
+      expect(radioGroup.textContent).toContain(validationMessage);
+      const douglassInput = await radioGroup.find('input[value="douglass"]');
+      await douglassInput.click();
+      expect(douglassInput.textContent).not.toContain(validationMessage);
+    });
+
+    it('renders a validation message with the nj-radio-group__validation--message class', async () => {
+      const { radioGroup } = await renderAndGetRadioGroupAndPage(`<njwds-radio-group
+          name="historical-figures"
+          validation-message="${validationMessage}"
+          show-validity
           required
         >
             <njwds-radio value="truth">Sojourner Truth</njwds-radio>
             <njwds-radio value="douglass">Frederick Douglass</njwds-radio>
       </njwds-radio-group>`);
 
-      await radioGroup.callMethod('showValidity');
-      await page.waitForChanges();
-      const message = await page.find('.nj-radio-group__validation--message');
+      const message = await radioGroup.find('.nj-radio-group__validation--message');
       expect(message).toEqualText(validationMessage);
     });
   });

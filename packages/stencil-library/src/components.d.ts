@@ -33,11 +33,15 @@ export namespace Components {
         "getValidity": () => Promise<RadioGroupValidityState>;
         "name": string;
         "required": boolean;
-        "showValidity": () => Promise<void>;
+        "showValidity": boolean;
         "tile": boolean;
         "validationMessage": string;
         "value": string;
     }
+}
+export interface NjwdsRadioGroupCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLNjwdsRadioGroupElement;
 }
 declare global {
     interface HTMLNjwdsAlertElement extends Components.NjwdsAlert, HTMLStencilElement {
@@ -64,7 +68,18 @@ declare global {
         prototype: HTMLNjwdsRadioElement;
         new (): HTMLNjwdsRadioElement;
     };
+    interface HTMLNjwdsRadioGroupElementEventMap {
+        "njwdsChange": string;
+    }
     interface HTMLNjwdsRadioGroupElement extends Components.NjwdsRadioGroup, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLNjwdsRadioGroupElementEventMap>(type: K, listener: (this: HTMLNjwdsRadioGroupElement, ev: NjwdsRadioGroupCustomEvent<HTMLNjwdsRadioGroupElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLNjwdsRadioGroupElementEventMap>(type: K, listener: (this: HTMLNjwdsRadioGroupElement, ev: NjwdsRadioGroupCustomEvent<HTMLNjwdsRadioGroupElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLNjwdsRadioGroupElement: {
         prototype: HTMLNjwdsRadioGroupElement;
@@ -98,7 +113,9 @@ declare namespace LocalJSX {
     }
     interface NjwdsRadioGroup {
         "name": string;
+        "onNjwdsChange"?: (event: NjwdsRadioGroupCustomEvent<string>) => void;
         "required"?: boolean;
+        "showValidity"?: boolean;
         "tile"?: boolean;
         "validationMessage"?: string;
         "value"?: string;

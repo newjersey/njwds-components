@@ -1,5 +1,5 @@
 import { Component, h } from "@stencil/core";
-import { HTMLStencilElement, Listen, Method, Prop, State, Watch } from "@stencil/core/internal";
+import { Event, EventEmitter, HTMLStencilElement, Listen, Method, Prop, State, Watch } from "@stencil/core/internal";
 import { Element } from '@stencil/core';
 
 export interface RadioGroupValidityState {
@@ -7,7 +7,7 @@ export interface RadioGroupValidityState {
     readonly valueMissing: boolean
 }
 
-const validityStates: { [state: string]: RadioGroupValidityState } = Object.freeze({
+const validityStates = Object.freeze({
     VALID: {
         valid: true,
         valueMissing: false
@@ -26,21 +26,33 @@ export class RadioGroup {
     @Prop() required: boolean = false;
     @Prop() tile: boolean = false;
     @Prop({ reflect: true, mutable: true }) value: string;
+    @Prop({ reflect: true, mutable: true }) showValidity: boolean;
     @Prop() validationMessage: string = "Please select an option."
 
-    @State() invalid: boolean = false;
+    @State() validity: RadioGroupValidityState = validityStates.VALID;
+
+    @Event() njwdsChange!: EventEmitter<string>;
 
     @Element() private hostElement: HTMLStencilElement
+
+    private computeValidity(): RadioGroupValidityState {
+        if (this.required && !this.value) {
+            return validityStates.MISSING_VALUE
+        }
+        return validityStates.VALID
+    }
 
     @Listen('change')
     changeHandler(event: Event) {
         if ("value" in event.target && typeof event.target.value === "string") {
-            this.value = event.target.value
+            const newValue = event.target.value
+            this.value = newValue
+            this.njwdsChange.emit(newValue)
         }
     }
 
     @Watch('value')
-    watchValueHandler(newValue: string) {
+    async watchValueHandler(newValue: string) {
         const inputs = this.hostElement.querySelectorAll("input")
         inputs.forEach(input => {
             const radioValue = input.getAttribute("value")
@@ -48,25 +60,26 @@ export class RadioGroup {
                 input.checked = true
             }
         })
+        this.validity = this.computeValidity()
     }
 
     @Method()
     async getValidity(): Promise<RadioGroupValidityState> {
-        if (this.required && !this.value) {
-            return validityStates.MISSING_VALUE
-        }
-        return validityStates.VALID
+        const validityCopy = { ...this.validity }
+        return validityCopy
     }
 
+    componentWillLoad() {
+        const njwdsRadios = this.hostElement.querySelectorAll(":scope > njwds-radio")
 
-    @Method()
-    async showValidity(): Promise<void> {
-        const validity = await this.getValidity()
-        if (!validity.valid) {
-            this.invalid = true
-        }
+        njwdsRadios.forEach(radio => {
+            if (this.tile) {
+                radio.setAttribute("tile", "")
+            }
+        })
+
+        this.validity = this.computeValidity()
     }
-
 
     componentDidLoad() {
         const inputs = this.hostElement.querySelectorAll("input")
@@ -89,16 +102,6 @@ export class RadioGroup {
         })
     }
 
-    componentWillLoad() {
-        const njwdsRadios = this.hostElement.querySelectorAll(":scope > njwds-radio")
-
-        njwdsRadios.forEach(radio => {
-            if (this.tile) {
-                radio.setAttribute("tile", "")
-            }
-        })
-    }
-
     render() {
         return (
             <fieldset class="usa-fieldset">
@@ -106,7 +109,7 @@ export class RadioGroup {
                     <slot name="legend" />
                 </legend>
                 <slot />
-                {this.invalid &&
+                {this.showValidity && !this.validity.valid &&
                     <span
                         class="nj-radio-group__validation--message" aria-live="polite"
                     >

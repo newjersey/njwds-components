@@ -11,7 +11,7 @@
   <body>
     <h1>Radio Group Component</h1>
     <h2>Default</h2>
-    <form class="usa-form">
+    <!-- <form class="usa-form">
         <njwds-radio-group name="historial-figures">
             <span slot="legend">Select one historical figure</span>
             <njwds-radio input-id="historical-douglass" type="radio" value="frederick-douglass">
@@ -21,15 +21,15 @@
                 Sojourner Truth
             </njwds-radio>
         </njwds-radio-group>
-    </form>
+    </form> -->
     <h2>Tile</h2>
     <form class="usa-form" id="tile-form">
         <njwds-radio-group name="historical-figures-2" tile required id="tile-radio-group">
             <span slot="legend">Select one historical figure</span>
-            <njwds-radio input-id="historical-douglass-2" type="radio" value="frederick-douglass">
+            <njwds-radio input-id="historical-douglass-2" value="frederick-douglass">
                 Frederick Douglass
             </njwds-radio>
-            <njwds-radio input-id="historical-truth-2" type="radio" value="sojourner-truth">
+            <njwds-radio input-id="historical-truth-2" value="sojourner-truth">
                 Sojourner Truth
             </njwds-radio>
         </njwds-radio-group>
@@ -53,7 +53,10 @@
     <script type="module">
         
         const tileRadioGroup = document.getElementById("tile-radio-group")
-        
+        tileRadioGroup.addEventListener('njwdsChange', event => {
+            console.log("njwdsChange", event)
+        })
+
         // const njwdsButton = document.getElementById("njwds-button")
         // njwdsButton.addEventListener('click', event => {
         //     console.log("njwdsButton clicked!")
@@ -61,19 +64,15 @@
         //     tileRadioGroup.value = "frederick-douglass"
         // })
 
-        tileRadioGroup.showValidity()
-       
-        // const tileForm = document.getElementById("tile-form")
-        // tileForm.addEventListener('submit', event => {
-        //     event.preventDefault()
-        //     console.log(event)
-        // })
+        const tileForm = document.getElementById("tile-form")
+
+    
+        tileRadioGroup.addEventListener('njwdsInvalid', event => {
+            console.log("njwdsInvalid", event)
+        })
 
              
-        // const vanillaForm = document.getElementById("vanilla-form")
-        // tileForm.addEventListener('submit', event => {
-        //     console.log(event)
-        // })
+        const vanillaForm = document.getElementById("vanilla-form")
 
 
         // tileRadioGroup.addEventListener('change', event => {
@@ -88,13 +87,11 @@
         //     console.log("douglass (vanilla)", douglassInput.validity)
         // })
 
-        // const njwdsButton = document.getElementById("njwds-button")
-        // njwdsButton.addEventListener('click', event => {
-        //     const truthInput = document.getElementById("historical-truth-2")
-        //     console.log("truth", truthInput.validity)
-        //     const douglassInput = document.getElementById("historical-douglass-2")
-        //     console.log("douglass", douglassInput.validity)
-        // })
+        const njwdsButton = document.getElementById("njwds-button")
+        njwdsButton.addEventListener('click', event => {
+            console.log("njwdsButton clicked!")
+            tileRadioGroup.setAttribute("show-validity", true)
+        })
     </script>
   </body>
 </html>
