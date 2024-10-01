@@ -23,10 +23,10 @@
         </njwds-radio-group>
     </form>
     <h2>Tile</h2>
-    <form class="usa-form">
+    <form class="usa-form" id="tile-form">
         <njwds-radio-group name="historical-figures-2" tile required id="tile-radio-group">
             <span slot="legend">Select one historical figure</span>
-            <njwds-radio input-id="historical-douglass-2" type="radio" value="frederick-douglass" required>
+            <njwds-radio input-id="historical-douglass-2" type="radio" value="frederick-douglass">
                 Frederick Douglass
             </njwds-radio>
             <njwds-radio input-id="historical-truth-2" type="radio" value="sojourner-truth">
@@ -61,10 +61,21 @@
         //     tileRadioGroup.value = "frederick-douglass"
         // })
 
-        // await customElements.whenDefined('njwds-radio-group');
-        console.log("TEST")
+        tileRadioGroup.showValidity()
+       
+        // const tileForm = document.getElementById("tile-form")
+        // tileForm.addEventListener('submit', event => {
+        //     event.preventDefault()
+        //     console.log(event)
+        // })
 
-        console.log("VALIDITY", await tileRadioGroup.getValidity())
+             
+        // const vanillaForm = document.getElementById("vanilla-form")
+        // tileForm.addEventListener('submit', event => {
+        //     console.log(event)
+        // })
+
+
         // tileRadioGroup.addEventListener('change', event => {
         //     console.log("change event on tileRadioGroup", event)
         // })

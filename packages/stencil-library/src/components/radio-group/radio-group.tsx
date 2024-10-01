@@ -1,5 +1,5 @@
 import { Component, h } from "@stencil/core";
-import { HTMLStencilElement, Listen, Method, Prop, Watch } from "@stencil/core/internal";
+import { HTMLStencilElement, Listen, Method, Prop, State, Watch } from "@stencil/core/internal";
 import { Element } from '@stencil/core';
 
 export interface RadioGroupValidityState {
@@ -26,8 +26,9 @@ export class RadioGroup {
     @Prop() required: boolean = false;
     @Prop() tile: boolean = false;
     @Prop({ reflect: true, mutable: true }) value: string;
+    @Prop() validationMessage: string = "Please select an option."
 
-    validationMessage: string = ""
+    @State() invalid: boolean = false;
 
     @Element() private hostElement: HTMLStencilElement
 
@@ -50,11 +51,6 @@ export class RadioGroup {
     }
 
     @Method()
-    async setCustomValidity(message: string): Promise<void> {
-        this.validationMessage = message
-    }
-
-    @Method()
     async getValidity(): Promise<RadioGroupValidityState> {
         if (this.required && !this.value) {
             return validityStates.MISSING_VALUE
@@ -62,8 +58,22 @@ export class RadioGroup {
         return validityStates.VALID
     }
 
+
+    @Method()
+    async showValidity(): Promise<void> {
+        const validity = await this.getValidity()
+        if (!validity.valid) {
+            this.invalid = true
+        }
+    }
+
+
     componentDidLoad() {
         const inputs = this.hostElement.querySelectorAll("input")
+
+        if (inputs.length > 0 && this.validationMessage === undefined) {
+            this.validationMessage = inputs[0].validationMessage
+        }
 
         inputs.forEach(input => {
             input.setAttribute("name", this.name)
@@ -96,6 +106,12 @@ export class RadioGroup {
                     <slot name="legend" />
                 </legend>
                 <slot />
+                {this.invalid &&
+                    <span
+                        class="nj-radio-group__validation--message" aria-live="polite"
+                    >
+                        {this.validationMessage}
+                    </span>}
             </fieldset>
         )
     }

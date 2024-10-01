@@ -15,7 +15,51 @@ const renderAndGetRadioGroupAndPage = async (content: string): Promise<{ radioGr
   return { radioGroup, page };
 };
 
+const validationMessage = 'Invalid field';
+
 describe('<njwds-radio-group>', () => {
+  it('renders default slot content inside the <fieldset> element', async () => {
+    const fieldset = await renderAndGetFieldset(`<njwds-radio-group>
+             <njwds-radio>Sojourner Truth</njwds-radio>
+             <njwds-radio>Frederick Douglass</njwds-radio>
+        </njwds-radio-group>`);
+
+    const radioComponents = await fieldset.findAll(':scope > njwds-radio');
+
+    expect(radioComponents).toHaveLength(2);
+  });
+
+  it('applies the "name" prop to all <njwds-radio> children', async () => {
+    const fieldset = await renderAndGetFieldset(`<njwds-radio-group name="historical-figures">
+            <njwds-radio>Sojourner Truth</njwds-radio>
+            <njwds-radio>Frederick Douglass</njwds-radio>
+       </njwds-radio-group>`);
+
+    const njwdsRadios = await fieldset.findAll('njwds-radio');
+
+    for (const radio of njwdsRadios) {
+      const input = await radio.find('input');
+      expect(input).toEqualAttribute('name', 'historical-figures');
+    }
+  });
+
+  it('applies the "tile" prop to all <njwds-radio> children', async () => {
+    const fieldset = await renderAndGetFieldset(`<njwds-radio-group
+            name="historical-figures"
+            tile
+        >
+            <njwds-radio>Sojourner Truth</njwds-radio>
+            <njwds-radio>Frederick Douglass</njwds-radio>
+       </njwds-radio-group>`);
+
+    const njwdsRadios = await fieldset.findAll('njwds-radio');
+
+    for (const radio of njwdsRadios) {
+      expect(radio).toHaveAttribute('tile');
+      expect(radio).not.toEqualAttribute('tile', 'false');
+    }
+  });
+
   describe('<fieldset> child', () => {
     it('renders a fieldset element as its only child', async () => {
       const page = await newE2EPage();
@@ -53,117 +97,73 @@ describe('<njwds-radio-group>', () => {
     });
   });
 
-  describe('<njwds-radio> children', () => {
-    it('renders default slot content inside the <fieldset> element', async () => {
-      const fieldset = await renderAndGetFieldset(`<njwds-radio-group>
-             <njwds-radio>Sojourner Truth</njwds-radio>
-             <njwds-radio>Frederick Douglass</njwds-radio>
-        </njwds-radio-group>`);
-
-      const radioComponents = await fieldset.findAll(':scope > njwds-radio');
-
-      expect(radioComponents).toHaveLength(2);
-    });
-
-    it('applies the "name" prop to all <njwds-radio> children', async () => {
-      const fieldset = await renderAndGetFieldset(`<njwds-radio-group name="historical-figures">
-            <njwds-radio>Sojourner Truth</njwds-radio>
-            <njwds-radio>Frederick Douglass</njwds-radio>
-       </njwds-radio-group>`);
-
-      const njwdsRadios = await fieldset.findAll('njwds-radio');
-
-      for (const radio of njwdsRadios) {
-        const input = await radio.find('input');
-        expect(input).toEqualAttribute('name', 'historical-figures');
-      }
-    });
-
-    it('applies the "required" prop to all <njwds-radio> children', async () => {
-      const fieldset = await renderAndGetFieldset(`<njwds-radio-group required>
+  it('applies the "required" prop to all <njwds-radio> children', async () => {
+    const fieldset = await renderAndGetFieldset(`<njwds-radio-group required>
               <njwds-radio>Sojourner Truth</njwds-radio>
               <njwds-radio>Frederick Douglass</njwds-radio>
          </njwds-radio-group>`);
 
-      const njwdsRadios = await fieldset.findAll('njwds-radio');
+    const njwdsRadios = await fieldset.findAll('njwds-radio');
 
-      for (const radio of njwdsRadios) {
-        const input = await radio.find('input');
-        expect(input).toHaveAttribute('required');
-        expect(input).not.toEqualAttribute('required', 'false');
-      }
-    });
+    for (const radio of njwdsRadios) {
+      const input = await radio.find('input');
+      expect(input).toHaveAttribute('required');
+      expect(input).not.toEqualAttribute('required', 'false');
+    }
+  });
 
-    it('applies the "tile" prop to all <njwds-radio> children', async () => {
+  describe('value prop', () => {
+    it('no njwds-radios are checked by default', async () => {
       const fieldset = await renderAndGetFieldset(`<njwds-radio-group
-            name="historical-figures"
-            tile
-        >
-            <njwds-radio>Sojourner Truth</njwds-radio>
-            <njwds-radio>Frederick Douglass</njwds-radio>
-       </njwds-radio-group>`);
-
-      const njwdsRadios = await fieldset.findAll('njwds-radio');
-
-      for (const radio of njwdsRadios) {
-        expect(radio).toHaveAttribute('tile');
-        expect(radio).not.toEqualAttribute('tile', 'false');
+          name="historical-figures"
+          >
+              <njwds-radio value="truth">Sojourner Truth</njwds-radio>
+              <njwds-radio value="douglass">Frederick Douglass</njwds-radio>
+        </njwds-radio-group>`);
+      const inputs = await fieldset.findAll('input');
+      for (const input of inputs) {
+        expect(await input.getProperty('checked')).toBe(false);
       }
     });
 
-    describe('value prop', () => {
-      it('no njwds-radios are checked by default', async () => {
-        const fieldset = await renderAndGetFieldset(`<njwds-radio-group
-            name="historical-figures"
-            >
-                <njwds-radio value="truth">Sojourner Truth</njwds-radio>
-                <njwds-radio value="douglass">Frederick Douglass</njwds-radio>
-          </njwds-radio-group>`);
-        const inputs = await fieldset.findAll('input');
-        for (const input of inputs) {
-          expect(await input.getProperty('checked')).toBe(false);
-        }
-      });
-
-      it('checks the correct njwds-radio element on component load', async () => {
-        const fieldset = await renderAndGetFieldset(`<njwds-radio-group
-            name="historical-figures"
-            value="douglass"
-            >
-                <njwds-radio value="truth">Sojourner Truth</njwds-radio>
-                <njwds-radio value="douglass">Frederick Douglass</njwds-radio>
-          </njwds-radio-group>`);
-        const douglassInput = await fieldset.find('input[value="douglass"]');
-        expect(await douglassInput.getProperty('checked')).toBe(true);
-      });
-
-      it('updates to the correct value when a njwds-radio element is selected', async () => {
-        const { radioGroup } = await renderAndGetRadioGroupAndPage(`<njwds-radio-group
+    it('checks the correct njwds-radio element on component load', async () => {
+      const fieldset = await renderAndGetFieldset(`<njwds-radio-group
           name="historical-figures"
           value="douglass"
           >
               <njwds-radio value="truth">Sojourner Truth</njwds-radio>
               <njwds-radio value="douglass">Frederick Douglass</njwds-radio>
         </njwds-radio-group>`);
-        const truthInput = await radioGroup.find('input[value="truth"]');
-        await truthInput.click();
-        expect(await radioGroup.getProperty('value')).toBe('truth');
-      });
+      const douglassInput = await fieldset.find('input[value="douglass"]');
+      expect(await douglassInput.getProperty('checked')).toBe(true);
+    });
 
-      it('when the value prop is programmatically set, selects the correct njwds-radio element', async () => {
-        const { radioGroup, page } = await renderAndGetRadioGroupAndPage(`<njwds-radio-group
-          name="historical-figures"
-          >
-              <njwds-radio value="truth">Sojourner Truth</njwds-radio>
-              <njwds-radio value="douglass">Frederick Douglass</njwds-radio>
-        </njwds-radio-group>`);
-        const douglassInput = await radioGroup.find('input[value="douglass"]');
-        expect(await douglassInput.getProperty('checked')).toBe(false);
+    it('updates to the correct value when a njwds-radio element is selected', async () => {
+      const { radioGroup } = await renderAndGetRadioGroupAndPage(`<njwds-radio-group
+        name="historical-figures"
+        value="douglass"
+        >
+            <njwds-radio value="truth">Sojourner Truth</njwds-radio>
+            <njwds-radio value="douglass">Frederick Douglass</njwds-radio>
+      </njwds-radio-group>`);
+      const truthInput = await radioGroup.find('input[value="truth"]');
+      await truthInput.click();
+      expect(await radioGroup.getProperty('value')).toBe('truth');
+    });
 
-        radioGroup.setProperty('value', 'douglass');
-        await page.waitForChanges();
-        expect(await douglassInput.getProperty('checked')).toBe(true);
-      });
+    it('when the value prop is programmatically set, selects the correct njwds-radio element', async () => {
+      const { radioGroup, page } = await renderAndGetRadioGroupAndPage(`<njwds-radio-group
+        name="historical-figures"
+        >
+            <njwds-radio value="truth">Sojourner Truth</njwds-radio>
+            <njwds-radio value="douglass">Frederick Douglass</njwds-radio>
+      </njwds-radio-group>`);
+      const douglassInput = await radioGroup.find('input[value="douglass"]');
+      expect(await douglassInput.getProperty('checked')).toBe(false);
+
+      radioGroup.setProperty('value', 'douglass');
+      page.waitForChanges();
+      expect(await douglassInput.getProperty('checked')).toBe(true);
     });
   });
 
@@ -193,6 +193,53 @@ describe('<njwds-radio-group>', () => {
       const validity: RadioGroupValidityState = await radioGroup.callMethod('getValidity');
       expect(validity.valid).toBe(true);
       expect(validity.valueMissing).toBe(false);
+    });
+  });
+
+  describe('showValidity() method', () => {
+    it('validation message does not display by default', async () => {
+      const { radioGroup } = await renderAndGetRadioGroupAndPage(`<njwds-radio-group
+          name="historical-figures"
+          validation-message="${validationMessage}"
+          required
+        >
+            <njwds-radio value="truth">Sojourner Truth</njwds-radio>
+            <njwds-radio value="douglass">Frederick Douglass</njwds-radio>
+      </njwds-radio-group>`);
+
+      expect(radioGroup.textContent).not.toContain(validationMessage);
+    });
+
+    it('when showValidity() is called on an invalid group, displays the validation message', async () => {
+      const { radioGroup, page } = await renderAndGetRadioGroupAndPage(`<njwds-radio-group
+          name="historical-figures"
+          validation-message="${validationMessage}"
+          required
+        >
+            <njwds-radio value="truth">Sojourner Truth</njwds-radio>
+            <njwds-radio value="douglass">Frederick Douglass</njwds-radio>
+      </njwds-radio-group>`);
+
+      await radioGroup.callMethod('showValidity');
+      await page.waitForChanges();
+      const updatedRadioGroup = await page.find('njwds-radio-group');
+      expect(updatedRadioGroup.textContent).toContain(validationMessage);
+    });
+
+    it('renders a validation message with the nj-radio-group__validation--message class', async () => {
+      const { radioGroup, page } = await renderAndGetRadioGroupAndPage(`<njwds-radio-group
+          name="historical-figures"
+          validation-message="${validationMessage}"
+          required
+        >
+            <njwds-radio value="truth">Sojourner Truth</njwds-radio>
+            <njwds-radio value="douglass">Frederick Douglass</njwds-radio>
+      </njwds-radio-group>`);
+
+      await radioGroup.callMethod('showValidity');
+      await page.waitForChanges();
+      const message = await page.find('.nj-radio-group__validation--message');
+      expect(message).toEqualText(validationMessage);
     });
   });
 });

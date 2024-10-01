@@ -33,8 +33,9 @@ export namespace Components {
         "getValidity": () => Promise<RadioGroupValidityState>;
         "name": string;
         "required": boolean;
-        "setCustomValidity": (message: string) => Promise<void>;
+        "showValidity": () => Promise<void>;
         "tile": boolean;
+        "validationMessage": string;
         "value": string;
     }
 }
@@ -99,6 +100,7 @@ declare namespace LocalJSX {
         "name": string;
         "required"?: boolean;
         "tile"?: boolean;
+        "validationMessage"?: string;
         "value"?: string;
     }
     interface IntrinsicElements {
