@@ -7,10 +7,10 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { ButtonVariant } from "./components/button/button";
 import { Mode } from "./interface";
-import { RadioGroupValidityState } from "./components/radio-group/radio-group";
+import { NjwdsChangeEventDetail, NjwdsInvalidEventDetail, RadioGroupValidityState } from "./components/radio-group/radio-group";
 export { ButtonVariant } from "./components/button/button";
 export { Mode } from "./interface";
-export { RadioGroupValidityState } from "./components/radio-group/radio-group";
+export { NjwdsChangeEventDetail, NjwdsInvalidEventDetail, RadioGroupValidityState } from "./components/radio-group/radio-group";
 export namespace Components {
     interface NjwdsAlert {
         "noIcon": boolean;
@@ -25,6 +25,7 @@ export namespace Components {
         "variant": ButtonVariant;
     }
     interface NjwdsRadio {
+        "error": boolean;
         "inputId": string;
         "tile": boolean;
         "value": string;
@@ -69,7 +70,8 @@ declare global {
         new (): HTMLNjwdsRadioElement;
     };
     interface HTMLNjwdsRadioGroupElementEventMap {
-        "njwdsChange": string;
+        "njwdsChange": NjwdsChangeEventDetail;
+        "njwdsInvalid": NjwdsInvalidEventDetail;
     }
     interface HTMLNjwdsRadioGroupElement extends Components.NjwdsRadioGroup, HTMLStencilElement {
         addEventListener<K extends keyof HTMLNjwdsRadioGroupElementEventMap>(type: K, listener: (this: HTMLNjwdsRadioGroupElement, ev: NjwdsRadioGroupCustomEvent<HTMLNjwdsRadioGroupElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -107,13 +109,15 @@ declare namespace LocalJSX {
         "variant"?: ButtonVariant;
     }
     interface NjwdsRadio {
+        "error"?: boolean;
         "inputId": string;
         "tile"?: boolean;
         "value": string;
     }
     interface NjwdsRadioGroup {
         "name": string;
-        "onNjwdsChange"?: (event: NjwdsRadioGroupCustomEvent<string>) => void;
+        "onNjwdsChange"?: (event: NjwdsRadioGroupCustomEvent<NjwdsChangeEventDetail>) => void;
+        "onNjwdsInvalid"?: (event: NjwdsRadioGroupCustomEvent<NjwdsInvalidEventDetail>) => void;
         "required"?: boolean;
         "showValidity"?: boolean;
         "tile"?: boolean;

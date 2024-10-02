@@ -18,8 +18,23 @@ const validityStates = Object.freeze({
     },
 })
 
+export interface NjwdsChangeEventDetail {
+    readonly value: string
+}
+
+export interface NjwdsInvalidEventDetail {
+    readonly validity: RadioGroupValidityState
+}
+
 @Component({
     tag: "njwds-radio-group",
+    styles: `
+        .nj-radio-group__validation--message {
+            font-weight: bold;
+            color: #b50909;
+            margin-top: 0.5em;
+        }
+    `
 })
 export class RadioGroup {
     @Prop() name!: string;
@@ -27,11 +42,12 @@ export class RadioGroup {
     @Prop() tile: boolean = false;
     @Prop({ reflect: true, mutable: true }) value: string;
     @Prop({ reflect: true, mutable: true }) showValidity: boolean;
-    @Prop() validationMessage: string = "Please select an option."
+    @Prop() validationMessage: string = "Please select an option.";
 
     @State() validity: RadioGroupValidityState = validityStates.VALID;
 
-    @Event() njwdsChange!: EventEmitter<string>;
+    @Event() njwdsChange: EventEmitter<NjwdsChangeEventDetail>;
+    @Event() njwdsInvalid: EventEmitter<NjwdsInvalidEventDetail>;
 
     @Element() private hostElement: HTMLStencilElement
 
@@ -42,25 +58,45 @@ export class RadioGroup {
         return validityStates.VALID
     }
 
+    private changeErrorPropOnRadios(isError: boolean) {
+        const njwdsRadios = this.hostElement.querySelectorAll("njwds-radio")
+
+        njwdsRadios.forEach((radio: HTMLNjwdsRadioElement) => {
+            radio.error = isError
+        })
+    }
+
     @Listen('change')
     changeHandler(event: Event) {
         if ("value" in event.target && typeof event.target.value === "string") {
             const newValue = event.target.value
             this.value = newValue
-            this.njwdsChange.emit(newValue)
+            this.njwdsChange.emit({
+                value: newValue
+            })
         }
     }
 
     @Watch('value')
-    async watchValueHandler(newValue: string) {
+    watchValueHandler(newValue: string) {
         const inputs = this.hostElement.querySelectorAll("input")
         inputs.forEach(input => {
             const radioValue = input.getAttribute("value")
-            if (radioValue === newValue) {
+            if (radioValue === newValue && !input.checked) {
                 input.checked = true
             }
         })
         this.validity = this.computeValidity()
+        if (this.showValidity) {
+            this.changeErrorPropOnRadios(!this.validity.valid)
+        }
+    }
+
+    @Watch('showValidity')
+    watchShowValidityHandler(newValidity: RadioGroupValidityState) {
+        if (this.showValidity) {
+            this.changeErrorPropOnRadios(!newValidity.valid)
+        }
     }
 
     @Method()
@@ -69,8 +105,16 @@ export class RadioGroup {
         return validityCopy
     }
 
+    private njwdsInvalidHandler(
+        njwdsInvalidEventEmitter: EventEmitter<NjwdsInvalidEventDetail>,
+    ) {
+        njwdsInvalidEventEmitter.emit({
+            validity: this.validity
+        })
+    }
+
     componentWillLoad() {
-        const njwdsRadios = this.hostElement.querySelectorAll(":scope > njwds-radio")
+        const njwdsRadios = this.hostElement.querySelectorAll("njwds-radio")
 
         njwdsRadios.forEach(radio => {
             if (this.tile) {
@@ -79,13 +123,16 @@ export class RadioGroup {
         })
 
         this.validity = this.computeValidity()
+        if (this.showValidity && !this.validity.valid) {
+            this.changeErrorPropOnRadios(true)
+        }
     }
 
     componentDidLoad() {
         const inputs = this.hostElement.querySelectorAll("input")
 
-        if (inputs.length > 0 && this.validationMessage === undefined) {
-            this.validationMessage = inputs[0].validationMessage
+        if (inputs.length > 0) {
+            inputs[0].addEventListener('invalid', () => this.njwdsInvalidHandler(this.njwdsInvalid))
         }
 
         inputs.forEach(input => {
@@ -107,14 +154,23 @@ export class RadioGroup {
             <fieldset class="usa-fieldset">
                 <legend class="usa-legend">
                     <slot name="legend" />
+                    {this.required &&
+                        <span
+                            aria-hidden="true"
+                            class="nj-form__required--asterisk"
+                        >
+                            *
+                        </span>
+                    }
                 </legend>
                 <slot />
                 {this.showValidity && !this.validity.valid &&
-                    <span
-                        class="nj-radio-group__validation--message" aria-live="polite"
+                    <p
+                        class="nj-radio-group__validation--message"
+                        aria-live="polite"
                     >
                         {this.validationMessage}
-                    </span>}
+                    </p>}
             </fieldset>
         )
     }

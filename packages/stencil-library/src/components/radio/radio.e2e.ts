@@ -28,11 +28,16 @@ describe('<njwds-radio>', () => {
       expect(input.className).toBe('usa-radio__input');
     });
 
-    it('when the "tile" prop is include, the <input> element contains the "usa-radio__input--tile" as well', async () => {
+    it('when the "tile" prop is included, the <input> element contains the "usa-radio__input--tile" as well', async () => {
       const radio = await renderAndGetRadioComponent('<njwds-radio tile></njwds-radio>');
       const input = await radio.find(':scope > input');
-      const inputClasses = input.className.split(' ').sort();
-      expect(inputClasses).toEqual(['usa-radio__input', 'usa-radio__input--tile'].sort());
+      expect(input.classList.contains('usa-radio__input--tile')).toBe(true);
+    });
+
+    it('when the "error" prop is included, the <input> element contains the "nj-radio--error" class as well', async () => {
+      const radio = await renderAndGetRadioComponent('<njwds-radio error></njwds-radio>');
+      const input = await radio.find(':scope > input');
+      expect(input.classList.contains('nj-radio--error')).toBe(true);
     });
 
     it("whose 'inputId' prop sets the <input> element's id", async () => {

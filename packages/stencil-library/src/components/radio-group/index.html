@@ -10,9 +10,9 @@
   </head>
   <body>
     <h1>Radio Group Component</h1>
-    <h2>Default</h2>
-    <!-- <form class="usa-form">
-        <njwds-radio-group name="historial-figures">
+    <h2>Default Variant</h2>
+    <form class="usa-form">
+        <njwds-radio-group name="historical-figures">
             <span slot="legend">Select one historical figure</span>
             <njwds-radio input-id="historical-douglass" type="radio" value="frederick-douglass">
                 Frederick Douglass
@@ -21,9 +21,23 @@
                 Sojourner Truth
             </njwds-radio>
         </njwds-radio-group>
-    </form> -->
-    <h2>Tile</h2>
-    <form class="usa-form" id="tile-form">
+    </form>
+    
+    <h3>Required</h3>
+    <form class="usa-form">
+        <njwds-radio-group name="historical-figures" show-validity required>
+            <span slot="legend">Select one historical figure</span>
+            <njwds-radio input-id="historical-douglass" type="radio" value="frederick-douglass">
+                Frederick Douglass
+            </njwds-radio>
+            <njwds-radio  input-id="historical-truth" type="radio" value="sojourner-truth">
+                Sojourner Truth
+            </njwds-radio>
+        </njwds-radio-group>
+    </form>
+
+    <h2>Tile Variant</h2>
+    <form class="usa-form">
         <njwds-radio-group name="historical-figures-2" tile required id="tile-radio-group">
             <span slot="legend">Select one historical figure</span>
             <njwds-radio input-id="historical-douglass-2" value="frederick-douglass">
@@ -33,65 +47,32 @@
                 Sojourner Truth
             </njwds-radio>
         </njwds-radio-group>
-        <njwds-button id="njwds-button">Submit</njwds-button>
     </form>
 
-    <form class="usa-form" id="vanilla-form">
-        <fieldset class="usa-fieldset">
-            <legend class="usa-legend">Select one historical figure</legend>
-            <div class="usa-radio">
-                <input class="usa-radio__input" id="historical-truth-3" type="radio" name="historical-figures-3" value="sojourner-truth" required>
-                <label class="usa-radio__label" for="historical-truth-3">Sojourner Truth</label>
-            </div>
-            <div class="usa-radio">
-                <input class="usa-radio__input" id="historical-douglass-3" type="radio" name="historical-figures-3" value="frederick-douglass">
-                <label class="usa-radio__label" for="historical-douglass-3">Frederick Douglass</label>
-            </div>
-        </fieldset>
-        <button id="vanilla-button">Submit</button>
+    <h3>Required</h3>
+    <form class="usa-form">
+        <njwds-radio-group name="historical-figures-2" tile required show-validity id="tile-radio-group">
+            <span slot="legend">Select one historical figure</span>
+            <njwds-radio input-id="historical-douglass-2" value="frederick-douglass">
+                Frederick Douglass
+            </njwds-radio>
+            <njwds-radio input-id="historical-truth-2" value="sojourner-truth">
+                Sojourner Truth
+            </njwds-radio>
+        </njwds-radio-group>
     </form>
-    <script type="module">
-        
-        const tileRadioGroup = document.getElementById("tile-radio-group")
-        tileRadioGroup.addEventListener('njwdsChange', event => {
-            console.log("njwdsChange", event)
-        })
 
-        // const njwdsButton = document.getElementById("njwds-button")
-        // njwdsButton.addEventListener('click', event => {
-        //     console.log("njwdsButton clicked!")
-        //     event.preventDefault()
-        //     tileRadioGroup.value = "frederick-douglass"
-        // })
-
-        const tileForm = document.getElementById("tile-form")
-
-    
-        tileRadioGroup.addEventListener('njwdsInvalid', event => {
-            console.log("njwdsInvalid", event)
-        })
-
-             
-        const vanillaForm = document.getElementById("vanilla-form")
-
-
-        // tileRadioGroup.addEventListener('change', event => {
-        //     console.log("change event on tileRadioGroup", event)
-        // })
-
-        // const vanillaButton = document.getElementById("vanilla-button")
-        // vanillaButton.addEventListener('click', event => {
-        //     const truthInput = document.getElementById("historical-truth-3")
-        //     console.log("truth (vanilla)", truthInput.validity)
-        //     const douglassInput = document.getElementById("historical-douglass-3")
-        //     console.log("douglass (vanilla)", douglassInput.validity)
-        // })
-
-        const njwdsButton = document.getElementById("njwds-button")
-        njwdsButton.addEventListener('click', event => {
-            console.log("njwdsButton clicked!")
-            tileRadioGroup.setAttribute("show-validity", true)
-        })
-    </script>
+    <h2>Default Option</h>
+    <form class="usa-form">
+        <njwds-radio-group name="historical-figures" value="frederick-douglass">
+            <span slot="legend">Select one historical figure</span>
+            <njwds-radio input-id="historical-douglass" type="radio" value="frederick-douglass">
+                Frederick Douglass
+            </njwds-radio>
+            <njwds-radio  input-id="historical-truth" type="radio" value="sojourner-truth">
+                Sojourner Truth
+            </njwds-radio>
+        </njwds-radio-group>
+    </form>
   </body>
 </html>

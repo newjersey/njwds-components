@@ -6,23 +6,17 @@
     <title>Stencil Component Starter</title>
     <script type="module" src="/build/stencil-library.esm.js"></script>
     <script nomodule src="/build/stencil-library.js"></script>
+    <script src="/build/js/uswds-init.min.js"></script>
     <link rel="stylesheet" href="/build/css/styles.css" />
   </head>
   <body>
-    <h1>Components</h1>
-    <h2>Banner</h2>
-    <njwds-banner></njwds-banner>
-    <h2>Alert</h2>
-    <njwds-alert type="warning">
-      <h3 slot="header">Warning</h3>
-      <span>Lorem ipsum dolor sit amet, <a href="javascript:void(0);">consectetur adipiscing</a> elit, sed do eiusmod.</span>
-    </njwds-alert>
-    <h2>Button</h2>
-    <njwds-button>
-      Default
-    </njwds-button>
-    <njwds-button variant="secondary" as-child>
-      <button autofocus="true">test</button>
-    </njwds-button>
+    <script src="/build/js/uswds.min.js"></script>
+    <h1>Component Examples</h1>
+    <ul>
+      <li><a href="/components/button">Button</a></li>
+      <li><a href="/components/alert">Alert</a></li>
+      <li><a href="/components/radio">Radio</a></li>
+      <li><a href="/components/radio-group">Radio Group</a></li>
+    </ul>
   </body>
 </html>
