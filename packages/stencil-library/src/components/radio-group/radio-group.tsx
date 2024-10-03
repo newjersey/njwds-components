@@ -17,10 +17,15 @@ const validityStates = Object.freeze({
 @Component({
     tag: "njwds-radio-group",
     styles: `
-        .nj-radio-group__validation--message {
+        njwds-radio-group .nj-radio-group__validation--message {
             font-weight: bold;
             color: #b50909;
             margin-top: 0.5em;
+        }
+
+        njwds-radio-group .nj-form__required--asterisk {
+            color: #d54309;
+            margin-left: 0.2em;
         }
     `
 })
