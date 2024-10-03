@@ -1,4 +1,4 @@
-# Radio Component
+# Radio Group Component
 
 - Web component name: `njwds-radio-group`
 - React component name: `NjwdsRadioGroup`
@@ -43,10 +43,10 @@ The `njwds-radio-group` component is meant to be used with the `njwds-radio` com
 
 The `RadioGroupValidityState` takes a subset of properties from the [`ValidityState`](https://developer.mozilla.org/en-US/docs/Web/API/ValidityState) interface.
 
-```json
+```typescript
 {
-    valid: boolean
-    valueMissing: boolean
+  valid: boolean;
+  valueMissing: boolean;
 }
 ```
 
