@@ -1,11 +1,7 @@
 import { Component, h } from "@stencil/core";
 import { Event, EventEmitter, HTMLStencilElement, Listen, Method, Prop, State, Watch } from "@stencil/core/internal";
 import { Element } from '@stencil/core';
-
-export interface RadioGroupValidityState {
-    readonly valid: boolean
-    readonly valueMissing: boolean
-}
+import { RadioGroupValidityState, NjwdsChangeEventDetail, NjwdsInvalidEventDetail } from "../../interface";
 
 const validityStates = Object.freeze({
     VALID: {
@@ -17,14 +13,6 @@ const validityStates = Object.freeze({
         valueMissing: true
     },
 })
-
-export interface NjwdsChangeEventDetail {
-    readonly value: string
-}
-
-export interface NjwdsInvalidEventDetail {
-    readonly validity: RadioGroupValidityState
-}
 
 @Component({
     tag: "njwds-radio-group",

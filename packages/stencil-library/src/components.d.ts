@@ -5,10 +5,8 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { ButtonVariant, IconPosition, Mode } from "./interface";
-import { NjwdsChangeEventDetail, NjwdsInvalidEventDetail, RadioGroupValidityState } from "./components/radio-group/radio-group";
-export { ButtonVariant, IconPosition, Mode } from "./interface";
-export { NjwdsChangeEventDetail, NjwdsInvalidEventDetail, RadioGroupValidityState } from "./components/radio-group/radio-group";
+import { ButtonVariant, IconPosition, Mode, NjwdsChangeEventDetail, NjwdsInvalidEventDetail, RadioGroupValidityState } from "./interface";
+export { ButtonVariant, IconPosition, Mode, NjwdsChangeEventDetail, NjwdsInvalidEventDetail, RadioGroupValidityState } from "./interface";
 export namespace Components {
     interface NjwdsAlert {
         "noIcon": boolean;
