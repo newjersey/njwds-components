@@ -5,11 +5,9 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { ButtonVariant } from "./components/button/button";
-import { Mode } from "./interface";
+import { ButtonVariant, IconPosition, Mode } from "./interface";
 import { NjwdsChangeEventDetail, NjwdsInvalidEventDetail, RadioGroupValidityState } from "./components/radio-group/radio-group";
-export { ButtonVariant } from "./components/button/button";
-export { Mode } from "./interface";
+export { ButtonVariant, IconPosition, Mode } from "./interface";
 export { NjwdsChangeEventDetail, NjwdsInvalidEventDetail, RadioGroupValidityState } from "./components/radio-group/radio-group";
 export namespace Components {
     interface NjwdsAlert {
@@ -20,9 +18,17 @@ export namespace Components {
     interface NjwdsBanner {
     }
     interface NjwdsButton {
-        "asChild": boolean;
+        "icon"?: string;
+        "iconPosition": IconPosition;
+        "iconTitle"?: string;
         "mode": Mode;
         "variant": ButtonVariant;
+    }
+    interface NjwdsIcon {
+        "decorative": boolean;
+        "icon": string;
+        "iconTitle"?: string;
+        "size": "3" | "4"| "5" | "scale";
     }
     interface NjwdsRadio {
         "error": boolean;
@@ -63,6 +69,12 @@ declare global {
         prototype: HTMLNjwdsButtonElement;
         new (): HTMLNjwdsButtonElement;
     };
+    interface HTMLNjwdsIconElement extends Components.NjwdsIcon, HTMLStencilElement {
+    }
+    var HTMLNjwdsIconElement: {
+        prototype: HTMLNjwdsIconElement;
+        new (): HTMLNjwdsIconElement;
+    };
     interface HTMLNjwdsRadioElement extends Components.NjwdsRadio, HTMLStencilElement {
     }
     var HTMLNjwdsRadioElement: {
@@ -91,6 +103,7 @@ declare global {
         "njwds-alert": HTMLNjwdsAlertElement;
         "njwds-banner": HTMLNjwdsBannerElement;
         "njwds-button": HTMLNjwdsButtonElement;
+        "njwds-icon": HTMLNjwdsIconElement;
         "njwds-radio": HTMLNjwdsRadioElement;
         "njwds-radio-group": HTMLNjwdsRadioGroupElement;
     }
@@ -104,9 +117,17 @@ declare namespace LocalJSX {
     interface NjwdsBanner {
     }
     interface NjwdsButton {
-        "asChild"?: boolean;
+        "icon"?: string;
+        "iconPosition"?: IconPosition;
+        "iconTitle"?: string;
         "mode"?: Mode;
         "variant"?: ButtonVariant;
+    }
+    interface NjwdsIcon {
+        "decorative"?: boolean;
+        "icon"?: string;
+        "iconTitle"?: string;
+        "size"?: "3" | "4"| "5" | "scale";
     }
     interface NjwdsRadio {
         "error"?: boolean;
@@ -128,6 +149,7 @@ declare namespace LocalJSX {
         "njwds-alert": NjwdsAlert;
         "njwds-banner": NjwdsBanner;
         "njwds-button": NjwdsButton;
+        "njwds-icon": NjwdsIcon;
         "njwds-radio": NjwdsRadio;
         "njwds-radio-group": NjwdsRadioGroup;
     }
@@ -139,6 +161,7 @@ declare module "@stencil/core" {
             "njwds-alert": LocalJSX.NjwdsAlert & JSXBase.HTMLAttributes<HTMLNjwdsAlertElement>;
             "njwds-banner": LocalJSX.NjwdsBanner & JSXBase.HTMLAttributes<HTMLNjwdsBannerElement>;
             "njwds-button": LocalJSX.NjwdsButton & JSXBase.HTMLAttributes<HTMLNjwdsButtonElement>;
+            "njwds-icon": LocalJSX.NjwdsIcon & JSXBase.HTMLAttributes<HTMLNjwdsIconElement>;
             "njwds-radio": LocalJSX.NjwdsRadio & JSXBase.HTMLAttributes<HTMLNjwdsRadioElement>;
             "njwds-radio-group": LocalJSX.NjwdsRadioGroup & JSXBase.HTMLAttributes<HTMLNjwdsRadioGroupElement>;
         }
