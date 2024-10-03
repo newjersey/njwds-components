@@ -8,14 +8,14 @@ The `njwds-radio-group` component is meant to be used with the `njwds-radio` com
 
 ## Properties
 
-| Property            | Type      | Default | Description                                                                                                                |
-| ------------------- | --------- | ------- | -------------------------------------------------------------------------------------------------------------------------- |
-| `name`              | `string`  | _none_  | the name associated with the form control (sets the `name` attribute on the child inputs)                                  |
-| `value`             | `string`  | _none_  | the current value of the radio group                                                                                       |
-| `required`          | `boolean` | `false` | whether an option must be selected before the parent form is submitted (sets the `required` attribute on the child inputs) |
-| `showValidity`      | `boolean` | `false` | when `true` and the field is invalid, shows the validation message and error state on the child radios                     |
-| `validationMessage` | `string`  | _none_  | the validation message displayed when the radio group is invalid and `showValidity` is true                                |
-| `tile`              | `boolean` | `false` | whether to render the tile variant for all child radios                                                                    |
+| Property            | Type      | Default                                        | Description                                                                                                                                                                                                       |
+| ------------------- | --------- | ---------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `name`              | `string`  | _none_                                         | **Required for the component to function**. The name associated with the form control (sets the `name` attribute on the child inputs).                                                                            |
+| `value`             | `string`  | `""`                                           | The current value of the radio. This attribute can be left empty or set to initialize a default option.                                                                                                           |
+| `required`          | `boolean` | `false`                                        | Whether an option must be selected before the parent form is submitted (sets the `required` attribute on the child inputs). Also used to compute the component's validity for `showValidity` and `getValidity()`. |
+| `showValidity`      | `boolean` | `false`                                        | When `true` and the field is invalid, shows the validation message and error state on the child radio.                                                                                                            |
+| `validationMessage` | `string`  | The child input's `validationMessage` property | The validation message displayed when the radio group is invalid and `showValidity` is true.                                                                                                                      |
+| `tile`              | `boolean` | `false`                                        | Whether to render the tile variant on the child radios.                                                                                                                                                           |
 
 ## Slots
 

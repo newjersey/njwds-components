@@ -28,7 +28,7 @@ export class RadioGroup {
     @Prop() name!: string;
     @Prop() required: boolean = false;
     @Prop() tile: boolean = false;
-    @Prop({ reflect: true, mutable: true }) value: string;
+    @Prop({ reflect: true, mutable: true }) value: string = "";
     @Prop({ reflect: true, mutable: true }) showValidity: boolean;
     @Prop() validationMessage: string = "Please select an option.";
 
