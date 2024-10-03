@@ -1,5 +1,5 @@
 import { E2EElement, E2EPage, newE2EPage } from '@stencil/core/testing';
-import { RadioGroupValidityState } from './radio-group';
+import { RadioGroupValidityState } from '../../interface';
 
 const renderAndGetFieldset = async (content: string): Promise<E2EElement> => {
   const page = await newE2EPage();
