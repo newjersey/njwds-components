@@ -42,20 +42,6 @@ export class RadioGroup {
 
     @Element() private hostElement: HTMLStencilElement
 
-    private computeValidity(): RadioGroupValidityState {
-        if (this.required && !this.value) {
-            return validityStates.INVALID
-        }
-        return validityStates.VALID
-    }
-
-    private changeErrorPropOnRadios(isError: boolean) {
-        const njwdsRadios = this.hostElement.querySelectorAll("njwds-radio")
-
-        njwdsRadios.forEach((radio: HTMLNjwdsRadioElement) => {
-            radio.error = isError
-        })
-    }
 
     @Listen('change')
     changeHandler(event: Event) {
@@ -79,14 +65,14 @@ export class RadioGroup {
         })
         this.validity = this.computeValidity()
         if (this.showValidity) {
-            this.changeErrorPropOnRadios(!this.validity.valid)
+            this.changeErrorPropOnChildRadios(!this.validity.valid)
         }
     }
 
     @Watch('showValidity')
     watchShowValidityHandler(newValidity: RadioGroupValidityState) {
         if (this.showValidity) {
-            this.changeErrorPropOnRadios(!newValidity.valid)
+            this.changeErrorPropOnChildRadios(!newValidity.valid)
         }
     }
 
@@ -96,6 +82,22 @@ export class RadioGroup {
         return validityCopy
     }
 
+    private computeValidity(): RadioGroupValidityState {
+        if (this.required && !this.value) {
+            return validityStates.INVALID
+        }
+        return validityStates.VALID
+    }
+
+    private changeErrorPropOnChildRadios(isError: boolean) {
+        const njwdsRadios = this.hostElement.querySelectorAll("njwds-radio")
+
+        njwdsRadios.forEach((radio: HTMLNjwdsRadioElement) => {
+            radio.error = isError
+        })
+    }
+
+
     private njwdsInvalidHandler(
         njwdsInvalidEventEmitter: EventEmitter<NjwdsInvalidEventDetail>,
     ) {
@@ -104,7 +106,7 @@ export class RadioGroup {
         })
     }
 
-    componentWillLoad() {
+    private applyTileAttributeToChildRadios() {
         const njwdsRadios = this.hostElement.querySelectorAll("njwds-radio")
 
         njwdsRadios.forEach(radio => {
@@ -112,20 +114,22 @@ export class RadioGroup {
                 radio.setAttribute("tile", "")
             }
         })
+    }
 
+    private updateValidityAndRadioErrorStates() {
         this.validity = this.computeValidity()
         if (this.showValidity && !this.validity.valid) {
-            this.changeErrorPropOnRadios(true)
+            this.changeErrorPropOnChildRadios(true)
         }
     }
 
-    componentDidLoad() {
-        const inputs = this.hostElement.querySelectorAll("input")
-
+    private addInvalidEventListenerToFirstRadioChild(inputs: NodeListOf<HTMLInputElement>) {
         if (inputs.length > 0) {
             inputs[0].addEventListener('invalid', () => this.njwdsInvalidHandler(this.njwdsInvalid))
         }
+    }
 
+    private applyAttributesToChildInputs(inputs: NodeListOf<HTMLInputElement>) {
         inputs.forEach(input => {
             input.setAttribute("name", this.name)
 
@@ -138,6 +142,18 @@ export class RadioGroup {
                 input.setAttribute("checked", "")
             }
         })
+    }
+
+    componentWillLoad() {
+        this.applyTileAttributeToChildRadios()
+        this.updateValidityAndRadioErrorStates()
+    }
+
+    componentDidLoad() {
+        const inputs = this.hostElement.querySelectorAll("input")
+
+        this.addInvalidEventListenerToFirstRadioChild(inputs)
+        this.applyAttributesToChildInputs(inputs)
     }
 
     render() {
