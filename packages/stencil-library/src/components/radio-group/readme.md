@@ -46,7 +46,6 @@ The `RadioGroupValidityState` takes a subset of properties from the [`ValiditySt
 ```typescript
 {
   valid: boolean;
-  valueMissing: boolean;
 }
 ```
 
