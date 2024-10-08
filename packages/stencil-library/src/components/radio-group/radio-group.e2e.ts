@@ -87,8 +87,21 @@ describe('<njwds-radio-group>', () => {
       const page = await newE2EPage();
       await page.setContent('<njwds-radio-group></njwds-radio-group>');
       const radioGroup = await page.find('njwds-radio-group');
-      const fieldsetList = await radioGroup.findAll('fieldset');
-      expect(fieldsetList).toHaveLength(1);
+
+      const children = await radioGroup.findAll(':scope > *');
+      expect(children).toHaveLength(1);
+
+      const fieldset = children[0];
+      expect(fieldset.tagName).toBe('FIELDSET');
+    });
+
+    it('renders a fieldset element with an empty legend when the radio group is left empty (i.e. does not have any slotted children)', async () => {
+      const fieldset = await renderAndGetFieldset('<njwds-radio-group></njwds-radio-group>');
+      expect(fieldset).toEqualHtml(`
+        <fieldset class="usa-fieldset">
+          <legend class="usa-legend"></legend>
+        </fieldset>
+      `);
     });
 
     it('renders a fieldset element with the "usa-fieldset" class', async () => {
