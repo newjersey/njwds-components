@@ -31,13 +31,13 @@ describe('<njwds-radio>', () => {
     it('when the "tile" prop is included, the <input> element contains the "usa-radio__input--tile" as well', async () => {
       const radio = await renderAndGetRadioComponent('<njwds-radio tile></njwds-radio>');
       const input = await radio.find(':scope > input');
-      expect(input.classList.contains('usa-radio__input--tile')).toBe(true);
+      expect(input).toHaveClass('usa-radio__input--tile');
     });
 
     it('when the "error" prop is included, the <input> element contains the "nj-radio--error" class as well', async () => {
       const radio = await renderAndGetRadioComponent('<njwds-radio error></njwds-radio>');
       const input = await radio.find(':scope > input');
-      expect(input.classList.contains('nj-radio--error')).toBe(true);
+      expect(input).toHaveClass('nj-radio--error');
     });
 
     it("whose 'inputId' prop sets the <input> element's id", async () => {
