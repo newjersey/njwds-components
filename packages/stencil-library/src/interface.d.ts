@@ -7,7 +7,6 @@ export interface NjwdsChangeEventDetail {
 }
 export interface RadioGroupValidityState {
   readonly valid: boolean;
-  readonly valueMissing: boolean;
 }
 export interface NjwdsInvalidEventDetail {
   readonly validity: RadioGroupValidityState;

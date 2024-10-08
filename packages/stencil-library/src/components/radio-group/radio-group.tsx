@@ -6,11 +6,9 @@ import { RadioGroupValidityState, NjwdsChangeEventDetail, NjwdsInvalidEventDetai
 const validityStates = Object.freeze({
     VALID: {
         valid: true,
-        valueMissing: false
     },
-    MISSING_VALUE: {
+    INVALID: {
         valid: false,
-        valueMissing: true
     },
 })
 
@@ -46,7 +44,7 @@ export class RadioGroup {
 
     private computeValidity(): RadioGroupValidityState {
         if (this.required && !this.value) {
-            return validityStates.MISSING_VALUE
+            return validityStates.INVALID
         }
         return validityStates.VALID
     }

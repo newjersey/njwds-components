@@ -204,7 +204,6 @@ describe('<njwds-radio-group>', () => {
 
       const validity: RadioGroupValidityState = await radioGroup.callMethod('getValidity');
       expect(validity.valid).toBe(false);
-      expect(validity.valueMissing).toBe(true);
     });
 
     it('returns a valid validity state when input is not required', async () => {
@@ -217,7 +216,6 @@ describe('<njwds-radio-group>', () => {
 
       const validity: RadioGroupValidityState = await radioGroup.callMethod('getValidity');
       expect(validity.valid).toBe(true);
-      expect(validity.valueMissing).toBe(false);
     });
   });
 
@@ -484,7 +482,6 @@ describe('<njwds-radio-group>', () => {
       expect(njwdsInvalidEventSpy).toHaveReceivedEventDetail({
         validity: {
           valid: false,
-          valueMissing: true,
         },
       });
     });
