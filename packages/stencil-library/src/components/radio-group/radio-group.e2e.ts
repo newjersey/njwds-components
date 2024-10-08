@@ -29,7 +29,7 @@ describe('<njwds-radio-group>', () => {
     expect(radioComponents).toHaveLength(2);
   });
 
-  it('applies the "name" prop to all <njwds-radio> children', async () => {
+  it('applies the "name" attribute to all <njwds-radio> children when the required prop is specified on the radio group', async () => {
     const fieldset = await renderAndGetFieldset(`<njwds-radio-group name="historical-figures">
             <njwds-radio>Sojourner Truth</njwds-radio>
             <njwds-radio>Frederick Douglass</njwds-radio>
@@ -43,7 +43,7 @@ describe('<njwds-radio-group>', () => {
     }
   });
 
-  it('applies the "tile" prop to all <njwds-radio> children', async () => {
+  it('applies the "tile" attribute to all <njwds-radio> children when the tile prop is specified on the radio group', async () => {
     const fieldset = await renderAndGetFieldset(`<njwds-radio-group
             name="historical-figures"
             tile
@@ -60,7 +60,7 @@ describe('<njwds-radio-group>', () => {
   });
 
   describe('required asterisk', () => {
-    it('renders a required asterisk on the required field', async () => {
+    it('renders a required asterisk on a required field', async () => {
       const fieldset = await renderAndGetFieldset(`
         <njwds-radio-group required>
           <span slot="legend">Radio Legend</span>  
@@ -71,7 +71,7 @@ describe('<njwds-radio-group>', () => {
       expect(asterisk).toEqualAttribute('aria-hidden', true);
     });
 
-    it('does not render a required asterisk on an optional required field', async () => {
+    it('does not render a required asterisk on an optional field', async () => {
       const fieldset = await renderAndGetFieldset(`
         <njwds-radio-group>
           <span slot="legend">Radio Legend</span>  
@@ -121,7 +121,7 @@ describe('<njwds-radio-group>', () => {
     });
   });
 
-  it('applies the "required" prop to all <njwds-radio> children', async () => {
+  it('applies the "required" prop to all <njwds-radio> children when the required prop is specified on the radio group', async () => {
     const fieldset = await renderAndGetFieldset(`
       <njwds-radio-group required>
             <njwds-radio>Sojourner Truth</njwds-radio>
@@ -137,7 +137,7 @@ describe('<njwds-radio-group>', () => {
   });
 
   describe('value prop', () => {
-    it('no njwds-radios are checked by default', async () => {
+    it('no njwds-radios are checked by default when the value prop is not provided', async () => {
       const fieldset = await renderAndGetFieldset(`<njwds-radio-group
           name="historical-figures"
           >
@@ -150,7 +150,7 @@ describe('<njwds-radio-group>', () => {
       }
     });
 
-    it('checks the correct njwds-radio element on component load', async () => {
+    it('checks the njwds-radio element specified by the value prop on component load', async () => {
       const fieldset = await renderAndGetFieldset(`<njwds-radio-group
           name="historical-figures"
           value="douglass"
@@ -162,7 +162,7 @@ describe('<njwds-radio-group>', () => {
       expect(await douglassInput.getProperty('checked')).toBe(true);
     });
 
-    it('updates to the correct value when a njwds-radio element is selected', async () => {
+    it('updates the value prop correctly when a njwds-radio element is selected', async () => {
       const { radioGroup } = await renderAndGetRadioGroupAndPage(`<njwds-radio-group
         name="historical-figures"
         value="douglass"
@@ -358,7 +358,7 @@ describe('<njwds-radio-group>', () => {
       expect(douglassInput.textContent).not.toContain(validationMessage);
     });
 
-    it('when showValidity prop is added on a required field, the error class  is removed from the radios when user clicks an option', async () => {
+    it('when showValidity prop is added on a required field, the error class is removed from the radios when user clicks an option', async () => {
       const { radioGroup } = await renderAndGetRadioGroupAndPage(`<njwds-radio-group
           name="historical-figures"
           required
@@ -380,7 +380,7 @@ describe('<njwds-radio-group>', () => {
       }
     });
 
-    it('when showValidity is set to true on an invalid field, input children render with the nj-radio--error class', async () => {
+    it('when showValidity prop is added on an invalid field on component load, input children render with the nj-radio--error class', async () => {
       const { radioGroup } = await renderAndGetRadioGroupAndPage(`<njwds-radio-group
           name="historical-figures"
           validation-message="${validationMessage}"
@@ -414,7 +414,7 @@ describe('<njwds-radio-group>', () => {
       }
     });
 
-    it('when showValidity is true on an valid field, <njwds-radio> children will not render with the nj-radio--error class', async () => {
+    it('when showValidity prop is added on an valid field, <njwds-radio> children will not render with the nj-radio--error class', async () => {
       const { radioGroup } = await renderAndGetRadioGroupAndPage(`<njwds-radio-group
           name="historical-figures"
           validation-message="${validationMessage}"
