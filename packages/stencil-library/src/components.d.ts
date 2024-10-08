@@ -5,8 +5,8 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { ButtonVariant, IconPosition, Mode } from "./interface";
-export { ButtonVariant, IconPosition, Mode } from "./interface";
+import { ButtonVariant, IconPosition, Mode, NjwdsChangeEventDetail, NjwdsInvalidEventDetail, RadioGroupValidityState } from "./interface";
+export { ButtonVariant, IconPosition, Mode, NjwdsChangeEventDetail, NjwdsInvalidEventDetail, RadioGroupValidityState } from "./interface";
 export namespace Components {
     interface NjwdsAlert {
         "noIcon": boolean;
@@ -28,6 +28,25 @@ export namespace Components {
         "iconTitle"?: string;
         "size": "3" | "4"| "5" | "scale";
     }
+    interface NjwdsRadio {
+        "error": boolean;
+        "inputId": string;
+        "tile": boolean;
+        "value": string;
+    }
+    interface NjwdsRadioGroup {
+        "getValidity": () => Promise<RadioGroupValidityState>;
+        "name": string;
+        "required": boolean;
+        "showValidity": boolean;
+        "tile": boolean;
+        "validationMessage": string;
+        "value": string;
+    }
+}
+export interface NjwdsRadioGroupCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLNjwdsRadioGroupElement;
 }
 declare global {
     interface HTMLNjwdsAlertElement extends Components.NjwdsAlert, HTMLStencilElement {
@@ -54,11 +73,37 @@ declare global {
         prototype: HTMLNjwdsIconElement;
         new (): HTMLNjwdsIconElement;
     };
+    interface HTMLNjwdsRadioElement extends Components.NjwdsRadio, HTMLStencilElement {
+    }
+    var HTMLNjwdsRadioElement: {
+        prototype: HTMLNjwdsRadioElement;
+        new (): HTMLNjwdsRadioElement;
+    };
+    interface HTMLNjwdsRadioGroupElementEventMap {
+        "njwdsChange": NjwdsChangeEventDetail;
+        "njwdsInvalid": NjwdsInvalidEventDetail;
+    }
+    interface HTMLNjwdsRadioGroupElement extends Components.NjwdsRadioGroup, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLNjwdsRadioGroupElementEventMap>(type: K, listener: (this: HTMLNjwdsRadioGroupElement, ev: NjwdsRadioGroupCustomEvent<HTMLNjwdsRadioGroupElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLNjwdsRadioGroupElementEventMap>(type: K, listener: (this: HTMLNjwdsRadioGroupElement, ev: NjwdsRadioGroupCustomEvent<HTMLNjwdsRadioGroupElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLNjwdsRadioGroupElement: {
+        prototype: HTMLNjwdsRadioGroupElement;
+        new (): HTMLNjwdsRadioGroupElement;
+    };
     interface HTMLElementTagNameMap {
         "njwds-alert": HTMLNjwdsAlertElement;
         "njwds-banner": HTMLNjwdsBannerElement;
         "njwds-button": HTMLNjwdsButtonElement;
         "njwds-icon": HTMLNjwdsIconElement;
+        "njwds-radio": HTMLNjwdsRadioElement;
+        "njwds-radio-group": HTMLNjwdsRadioGroupElement;
     }
 }
 declare namespace LocalJSX {
@@ -82,11 +127,29 @@ declare namespace LocalJSX {
         "iconTitle"?: string;
         "size"?: "3" | "4"| "5" | "scale";
     }
+    interface NjwdsRadio {
+        "error"?: boolean;
+        "inputId": string;
+        "tile"?: boolean;
+        "value": string;
+    }
+    interface NjwdsRadioGroup {
+        "name": string;
+        "onNjwdsChange"?: (event: NjwdsRadioGroupCustomEvent<NjwdsChangeEventDetail>) => void;
+        "onNjwdsInvalid"?: (event: NjwdsRadioGroupCustomEvent<NjwdsInvalidEventDetail>) => void;
+        "required"?: boolean;
+        "showValidity"?: boolean;
+        "tile"?: boolean;
+        "validationMessage"?: string;
+        "value"?: string;
+    }
     interface IntrinsicElements {
         "njwds-alert": NjwdsAlert;
         "njwds-banner": NjwdsBanner;
         "njwds-button": NjwdsButton;
         "njwds-icon": NjwdsIcon;
+        "njwds-radio": NjwdsRadio;
+        "njwds-radio-group": NjwdsRadioGroup;
     }
 }
 export { LocalJSX as JSX };
@@ -97,6 +160,8 @@ declare module "@stencil/core" {
             "njwds-banner": LocalJSX.NjwdsBanner & JSXBase.HTMLAttributes<HTMLNjwdsBannerElement>;
             "njwds-button": LocalJSX.NjwdsButton & JSXBase.HTMLAttributes<HTMLNjwdsButtonElement>;
             "njwds-icon": LocalJSX.NjwdsIcon & JSXBase.HTMLAttributes<HTMLNjwdsIconElement>;
+            "njwds-radio": LocalJSX.NjwdsRadio & JSXBase.HTMLAttributes<HTMLNjwdsRadioElement>;
+            "njwds-radio-group": LocalJSX.NjwdsRadioGroup & JSXBase.HTMLAttributes<HTMLNjwdsRadioGroupElement>;
         }
     }
 }
