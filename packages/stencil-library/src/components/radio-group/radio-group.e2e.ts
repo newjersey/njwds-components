@@ -353,13 +353,13 @@ describe('<njwds-radio-group>', () => {
 
       const inputs = await radioGroup.findAll('input');
       for (const input of inputs) {
-        expect(input.classList.contains('nj-radio--error')).toBe(true);
+        expect(input).toHaveClass('nj-radio--error');
       }
       const douglassInput = await radioGroup.find('input[value="douglass"]');
       await douglassInput.click();
       const updatedInputs = await radioGroup.findAll('input');
       for (const updatedInput of updatedInputs) {
-        expect(updatedInput.classList.contains('nj-radio--error')).toBe(false);
+        expect(updatedInput).not.toHaveClass('nj-radio--error');
       }
     });
 
@@ -376,7 +376,7 @@ describe('<njwds-radio-group>', () => {
 
       const inputs = await radioGroup.findAll('input');
       for (const input of inputs) {
-        expect(input.classList.contains('nj-radio--error')).toBe(true);
+        expect(input).toHaveClass('nj-radio--error');
       }
     });
 
@@ -393,7 +393,7 @@ describe('<njwds-radio-group>', () => {
       await page.waitForChanges();
       const inputs = await radioGroup.findAll('input');
       for (const input of inputs) {
-        expect(input.classList.contains('nj-radio--error')).toBe(true);
+        expect(input).toHaveClass('nj-radio--error');
       }
     });
 
@@ -409,7 +409,7 @@ describe('<njwds-radio-group>', () => {
 
       const radios = await radioGroup.findAll('njwds-radio');
       for (const radio of radios) {
-        expect(radio.classList.contains('nj-radio--error')).toBe(false);
+        expect(radio).not.toHaveClass('nj-radio--error');
       }
     });
 
