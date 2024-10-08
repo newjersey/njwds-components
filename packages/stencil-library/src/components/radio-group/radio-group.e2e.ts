@@ -227,8 +227,7 @@ describe('<njwds-radio-group>', () => {
           <njwds-radio value="douglass">Frederick Douglass</njwds-radio>
     </njwds-radio-group>`);
     const validationMessage = await radioGroup.getProperty('validationMessage');
-    expect(typeof validationMessage).toBe('string');
-    expect(validationMessage.length).toBeGreaterThan(0);
+    expect(validationMessage).toBe('Please select an option.');
   });
 
   describe('showValidity prop', () => {
