@@ -341,23 +341,6 @@ describe('<njwds-radio-group>', () => {
       expect(douglassInput.textContent).not.toContain(validationMessage);
     });
 
-    it('when showValidity prop is added on a required field, the validation message disappears when user clicks an option', async () => {
-      const { radioGroup } = await renderAndGetRadioGroupAndPage(`<njwds-radio-group
-          name="historical-figures"
-          validation-message="${validationMessage}"
-          required
-          show-validity
-        >
-            <njwds-radio value="truth">Sojourner Truth</njwds-radio>
-            <njwds-radio value="douglass">Frederick Douglass</njwds-radio>
-      </njwds-radio-group>`);
-
-      expect(radioGroup.textContent).toContain(validationMessage);
-      const douglassInput = await radioGroup.find('input[value="douglass"]');
-      await douglassInput.click();
-      expect(douglassInput.textContent).not.toContain(validationMessage);
-    });
-
     it('when showValidity prop is added on a required field, the error class is removed from the radios when user clicks an option', async () => {
       const { radioGroup } = await renderAndGetRadioGroupAndPage(`<njwds-radio-group
           name="historical-figures"
