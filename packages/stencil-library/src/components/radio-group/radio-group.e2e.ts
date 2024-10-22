@@ -423,7 +423,7 @@ describe('<njwds-radio-group>', () => {
       }
     });
 
-    it('renders a validation message with the nj-radio-group__validation--message class', async () => {
+    it('renders a validation message with the usa-error-message class', async () => {
       const { radioGroup } = await renderAndGetRadioGroupAndPage(`<njwds-radio-group
           name="historical-figures"
           validation-message="${validationMessage}"
@@ -434,7 +434,7 @@ describe('<njwds-radio-group>', () => {
             <njwds-radio value="douglass">Frederick Douglass</njwds-radio>
       </njwds-radio-group>`);
 
-      const message = await radioGroup.find('.nj-radio-group__validation--message');
+      const message = await radioGroup.find('.usa-error-message');
       expect(message).toEqualText(validationMessage);
     });
   });
