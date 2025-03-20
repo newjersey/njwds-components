@@ -18,14 +18,14 @@ export class Banner {
                                 <img class="nj-banner__header-seal" src={sealSrc} alt="NJ flag" />
                             </div>
                             <div class="grid-col-fill">
-                                <a href="https://nj.gov">Official Site of the State of New Jersey</a>
+                                <a href="https://nj.gov" data-testid="njwds-banner-site-link">Official Site of the State of New Jersey</a>
                             </div>
                             <div class="grid-col-auto">
                                 <div class="text-white">
                                     <ul>
-                                        <li>Governor Phil Murphy &bull; Lt. Governor Tahesha Way</li>
+                                        <li data-testid="njwds-banner-governor-names">Governor Phil Murphy &bull; Lt. Governor Tahesha Way</li>
                                         <li>
-                                            <a href="https://nj.gov/subscribe/" target="_blank" rel="noreferrer">
+                                            <a href="https://nj.gov/subscribe/" target="_blank" rel="noreferrer" data-testid="njwds-banner-updates-link">
                                                 <svg
                                                     class="usa-icon bottom-neg-2px margin-right-05"
                                                     aria-hidden="true"
