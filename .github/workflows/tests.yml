@@ -14,16 +14,6 @@ jobs:
         with:
           node-version-file: '.nvmrc'
 
-      - name: Setup Chrome
-        uses: browser-actions/setup-chrome@v2
-        with:
-          chrome-version: 'stable'
-          install-chromedriver: true
-
-      - name: Check Chrome Version
-        run: |
-          google-chrome --version # Or chromium --version depending on the installation
-
       - name: Install Dependencies
         id: install-dependencies
         run: npm ci
