@@ -14,6 +14,16 @@ jobs:
         with:
           node-version-file: '.nvmrc'
 
+      - name: Setup Chrome
+        uses: browser-actions/setup-chrome@v2
+        with:
+          chrome-version: 'stable'
+          install-chromedriver: true
+
+      - name: Check Chrome Version
+        run: |
+          google-chrome --version # Or chromium --version depending on the installation
+
       - name: Install Dependencies
         id: install-dependencies
         run: npm ci
@@ -22,3 +32,9 @@ jobs:
         working-directory: ./packages/stencil-library
         id: tests-static
         run: npm test
+
+      - name: Upload screenshots (optional)
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots
+          path: screenshots/ # Path to your generated screenshots
