@@ -36,7 +36,8 @@ export const config: Config = {
     },
   ],
   testing: {
-    browserHeadless: 'new',
+    browserHeadless: true,
+    browserArgs: ['--no-sandbox', '--disable-setuid-sandbox'],
   },
   enableCache: false,
 };
