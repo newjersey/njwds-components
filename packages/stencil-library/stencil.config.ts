@@ -36,7 +36,7 @@ export const config: Config = {
     },
   ],
   testing: {
-    browserHeadless: 'new',
+    browserHeadless: true,
   },
   enableCache: false,
 };
