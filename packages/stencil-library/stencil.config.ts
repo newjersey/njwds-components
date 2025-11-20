@@ -3,7 +3,6 @@ import { reactOutputTarget } from '@stencil/react-output-target';
 
 export const config: Config = {
   namespace: 'stencil-library',
-  browserArgs: ['--no-sandbox', '--disable-setuid-sandbox'],
   outputTargets: [
     {
       type: 'dist',
@@ -38,6 +37,7 @@ export const config: Config = {
   ],
   testing: {
     browserHeadless: true,
+    browserArgs: ['--no-sandbox', '--disable-setuid-sandbox'],
   },
   enableCache: false,
 };
