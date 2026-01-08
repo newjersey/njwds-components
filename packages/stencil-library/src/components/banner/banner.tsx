@@ -23,7 +23,7 @@ export class Banner {
                             <div class="grid-col-auto">
                                 <div class="text-white">
                                     <ul>
-                                        <li>Governor Phil Murphy &bull; Lt. Governor Tahesha Way</li>
+                                        <li>Governor Mikie Sherrill &bull; Lt. Governor Dr. Dale G. Caldwell</li>
                                         <li>
                                             <a href="https://nj.gov/subscribe/" target="_blank" rel="noreferrer">
                                                 <svg
